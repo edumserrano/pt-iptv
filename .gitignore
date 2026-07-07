@@ -1,1 +1,4 @@
 /claude-gto/
+__pycache__/
+*.py[cod]
+reports/

@@ -1,0 +1,199 @@
+from __future__ import annotations
+
+import argparse
+import csv
+import unicodedata
+from collections import Counter, defaultdict
+from datetime import datetime, timezone
+from pathlib import Path
+
+
+def read_rows(path: Path) -> list[dict[str, str]]:
+    with path.open("r", encoding="utf-8", newline="") as handle:
+        return list(csv.DictReader(handle))
+
+
+def normalize(value: str) -> str:
+    normalized = unicodedata.normalize("NFKD", value or "")
+    without_marks = "".join(ch for ch in normalized if not unicodedata.combining(ch))
+    return " ".join(without_marks.casefold().split())
+
+
+def channel_key(row: dict[str, str]) -> str:
+    tvg_id = (row.get("tvg_id") or "").strip()
+    if tvg_id:
+        return "id:" + normalize(tvg_id.split("@", 1)[0])
+    name = (row.get("name") or "").strip()
+    if name:
+        return "name:" + normalize(name)
+    return ""
+
+
+def summarize(rows: list[dict[str, str]]) -> Counter:
+    return Counter(row.get("verdict", "") or "unknown" for row in rows)
+
+
+def reason_summary(rows: list[dict[str, str]]) -> Counter:
+    return Counter(row.get("reason", "") or "unknown" for row in rows)
+
+
+def escape_cell(value: str, limit: int | None = None) -> str:
+    text = (value or "").replace("|", "\\|").replace("\n", " ")
+    if limit and len(text) > limit:
+        return text[: limit - 1] + "..."
+    return text
+
+
+def write_count_table(handle, counts: Counter) -> None:
+    handle.write("| Status | Count |\n|---|---:|\n")
+    for key, count in counts.most_common():
+        handle.write(f"| {escape_cell(key)} | {count} |\n")
+
+
+def write_failure_table(handle, rows: list[dict[str, str]], limit: int | None = None) -> None:
+    handle.write("| # | Line | Channel | Group | Verdict | Reason | HTTP | Detail |\n")
+    handle.write("|---:|---:|---|---|---|---|---:|---|\n")
+    displayed = rows if limit is None else rows[:limit]
+    for row in displayed:
+        handle.write(
+            "| {index} | {line} | {name} | {group} | {verdict} | {reason} | {http_status} | {detail} |\n".format(
+                index=escape_cell(row.get("index", "")),
+                line=escape_cell(row.get("line", "")),
+                name=escape_cell(row.get("name", "")),
+                group=escape_cell(row.get("group", "")),
+                verdict=escape_cell(row.get("verdict", "")),
+                reason=escape_cell(row.get("reason", "")),
+                http_status=escape_cell(row.get("http_status", "")),
+                detail=escape_cell(row.get("detail", ""), 120),
+            )
+        )
+    if limit is not None and len(rows) > limit:
+        handle.write(f"|  |  | ...and {len(rows) - limit} more |  |  |  |  |  |\n")
+
+
+def build_upstream_success_local_failure(
+    mine_rows: list[dict[str, str]],
+    upstream_rows: list[dict[str, str]],
+) -> list[dict[str, str]]:
+    mine_by_key: dict[str, list[dict[str, str]]] = defaultdict(list)
+    for row in mine_rows:
+        key = channel_key(row)
+        if key:
+            mine_by_key[key].append(row)
+
+    findings: list[dict[str, str]] = []
+    for upstream in upstream_rows:
+        if upstream.get("verdict") != "working":
+            continue
+        key = channel_key(upstream)
+        if not key:
+            continue
+        local_matches = mine_by_key.get(key, [])
+        if any(row.get("verdict") == "working" for row in local_matches):
+            continue
+
+        local = local_matches[0] if local_matches else {}
+        findings.append(
+            {
+                "key": key,
+                "channel": upstream.get("name", ""),
+                "tvg_id": upstream.get("tvg_id", ""),
+                "upstream_line": upstream.get("line", ""),
+                "upstream_reason": upstream.get("reason", ""),
+                "upstream_url": upstream.get("url", ""),
+                "local_line": local.get("line", ""),
+                "local_verdict": local.get("verdict", "missing_in_this_repo"),
+                "local_reason": local.get("reason", "missing_in_this_repo"),
+                "local_url": local.get("url", ""),
+            }
+        )
+    return findings
+
+
+def write_comparison_csv(path: Path, findings: list[dict[str, str]]) -> None:
+    fields = [
+        "channel",
+        "tvg_id",
+        "upstream_line",
+        "upstream_reason",
+        "upstream_url",
+        "local_line",
+        "local_verdict",
+        "local_reason",
+        "local_url",
+    ]
+    with path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fields)
+        writer.writeheader()
+        for row in findings:
+            writer.writerow({field: row.get(field, "") for field in fields})
+
+
+def write_report(
+    path: Path,
+    mine_rows: list[dict[str, str]],
+    upstream_rows: list[dict[str, str]],
+    findings: list[dict[str, str]],
+) -> None:
+    mine_failures = [row for row in mine_rows if row.get("verdict") != "working"]
+    upstream_failures = [row for row in upstream_rows if row.get("verdict") != "working"]
+
+    with path.open("w", encoding="utf-8", newline="\n") as handle:
+        handle.write("# PT IPTV Stream Health Report\n\n")
+        handle.write(f"Generated: {datetime.now(timezone.utc).isoformat(timespec='seconds')}\n\n")
+
+        handle.write("## This Repo Health\n\n")
+        handle.write(f"Entries checked: {len(mine_rows)}\n\n")
+        write_count_table(handle, summarize(mine_rows))
+        handle.write("\n### Reason Summary\n\n")
+        write_count_table(handle, reason_summary(mine_rows))
+
+        handle.write("\n## LITUATUI/M3UPT Health (Radios Excluded)\n\n")
+        handle.write(f"Entries checked: {len(upstream_rows)}\n\n")
+        write_count_table(handle, summarize(upstream_rows))
+        handle.write("\n### Reason Summary\n\n")
+        write_count_table(handle, reason_summary(upstream_rows))
+
+        handle.write("\n## Upstream Working, This Repo Failing\n\n")
+        handle.write(f"Findings: {len(findings)}\n\n")
+        handle.write("| Channel | TVG ID | Upstream Line | Local Line | Local Verdict | Local Reason |\n")
+        handle.write("|---|---|---:|---:|---|---|\n")
+        for row in findings:
+            handle.write(
+                f"| {escape_cell(row['channel'])} | {escape_cell(row['tvg_id'])} | "
+                f"{escape_cell(row['upstream_line'])} | {escape_cell(row['local_line'])} | "
+                f"{escape_cell(row['local_verdict'])} | {escape_cell(row['local_reason'])} |\n"
+            )
+
+        handle.write("\n## This Repo Detailed Failures\n\n")
+        write_failure_table(handle, mine_failures)
+
+        handle.write("\n## LITUATUI/M3UPT Detailed Failures (Radios Excluded)\n\n")
+        write_failure_table(handle, upstream_failures)
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--mine", required=True, type=Path)
+    parser.add_argument("--upstream", required=True, type=Path)
+    parser.add_argument("--output-dir", required=True, type=Path)
+    args = parser.parse_args()
+
+    args.output_dir.mkdir(parents=True, exist_ok=True)
+    mine_rows = read_rows(args.mine)
+    upstream_rows = read_rows(args.upstream)
+    findings = build_upstream_success_local_failure(mine_rows, upstream_rows)
+
+    report_path = args.output_dir / "pt-iptv-stream-health-report.md"
+    comparison_csv_path = args.output_dir / "upstream-working-local-failing.csv"
+    write_report(report_path, mine_rows, upstream_rows, findings)
+    write_comparison_csv(comparison_csv_path, findings)
+
+    print(f"combined_markdown={report_path}")
+    print(f"comparison_csv={comparison_csv_path}")
+    print(f"upstream_working_local_failing={len(findings)}")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

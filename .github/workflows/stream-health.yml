@@ -1,0 +1,125 @@
+name: Stream Health Check
+
+on:
+  workflow_dispatch:
+    inputs:
+      playlist:
+        description: Playlist file to audit
+        required: true
+        default: M3U/M3UPT.m3u
+      workers:
+        description: Parallel stream checks
+        required: true
+        default: "32"
+      timeout:
+        description: Per-request timeout in seconds
+        required: true
+        default: "8"
+  schedule:
+    - cron: "17 4 * * *"
+  push:
+    branches:
+      - main
+    paths:
+      - M3U/**
+      - scripts/audit_streams.py
+      - .github/workflows/stream-health.yml
+  pull_request:
+    paths:
+      - M3U/**
+      - scripts/audit_streams.py
+      - .github/workflows/stream-health.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: stream-health-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    name: Audit IPTV streams
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      PLAYLIST: ${{ inputs.playlist || 'M3U/M3UPT.m3u' }}
+      WORKERS: ${{ inputs.workers || '32' }}
+      REQUEST_TIMEOUT: ${{ inputs.timeout || '8' }}
+      REPORT_DIR: reports/stream-health
+      UPSTREAM_PLAYLIST_URL: https://raw.githubusercontent.com/LITUATUI/M3UPT/main/M3U/M3UPT.m3u
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Audit this repository
+        run: |
+          mkdir -p "$REPORT_DIR/this-repo"
+          python scripts/audit_streams.py \
+            --playlist "$PLAYLIST" \
+            --output-dir "$REPORT_DIR/this-repo" \
+            --workers "$WORKERS" \
+            --timeout "$REQUEST_TIMEOUT"
+
+      - name: Download upstream LITUATUI playlist
+        run: |
+          curl --fail --location --silent --show-error \
+            "$UPSTREAM_PLAYLIST_URL" \
+            --output "$REPORT_DIR/lituatui-m3upt.m3u"
+
+      - name: Audit upstream LITUATUI playlist without radios
+        run: |
+          mkdir -p "$REPORT_DIR/lituatui-m3upt"
+          python scripts/audit_streams.py \
+            --playlist "$REPORT_DIR/lituatui-m3upt.m3u" \
+            --output-dir "$REPORT_DIR/lituatui-m3upt" \
+            --workers "$WORKERS" \
+            --timeout "$REQUEST_TIMEOUT" \
+            --exclude-radio
+
+      - name: Build combined comparison report
+        run: |
+          python scripts/compare_stream_health.py \
+            --mine "$REPORT_DIR/this-repo/pt-iptv-channel-audit.csv" \
+            --upstream "$REPORT_DIR/lituatui-m3upt/pt-iptv-channel-audit.csv" \
+            --output-dir "$REPORT_DIR"
+
+      - name: Upload stream health report
+        id: upload-report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: stream-health-report
+          path: |
+            reports/stream-health/**
+          retention-days: 30
+          if-no-files-found: error
+
+      - name: Add report summary
+        if: always()
+        env:
+          ARTIFACT_URL: ${{ steps.upload-report.outputs.artifact-url }}
+        run: |
+          report="$REPORT_DIR/pt-iptv-stream-health-report.md"
+          if [ ! -f "$report" ]; then
+            echo "No stream health report was generated." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+
+          awk '/^## This Repo Detailed Failures/{exit} {print}' "$report" >> "$GITHUB_STEP_SUMMARY"
+          {
+            echo
+            echo "## Full Report"
+            echo
+            echo "The full Markdown and CSV reports are attached to this run as the \`stream-health-report\` artifact."
+            if [ -n "$ARTIFACT_URL" ]; then
+              echo
+              echo "[Open artifact]($ARTIFACT_URL)"
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
