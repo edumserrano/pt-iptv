@@ -26,4 +26,5 @@ The `Stream Health Check` GitHub Actions workflow can be run manually and also r
 
 - `pt-iptv-stream-health-report.md`
 - `upstream-working-local-failing.csv`
+- `key-channel-comparison.csv`
 - Individual Markdown/CSV audits for this repo and upstream

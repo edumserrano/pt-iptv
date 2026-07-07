@@ -8,6 +8,40 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 
+KEY_CHANNELS = [
+    {
+        "label": "RTP1",
+        "tvg_ids": {"rtp1.pt"},
+        "names": {"rtp 1", "rtp1"},
+    },
+    {
+        "label": "RTP2",
+        "tvg_ids": {"rtp2.pt"},
+        "names": {"rtp 2", "rtp2"},
+    },
+    {
+        "label": "SIC",
+        "tvg_ids": {"sic.pt"},
+        "names": {"sic"},
+    },
+    {
+        "label": "SIC Noticias",
+        "tvg_ids": {"sicnoticias.pt"},
+        "names": {"sic noticias"},
+    },
+    {
+        "label": "CNN Portugal",
+        "tvg_ids": {"cnnportugal.pt"},
+        "names": {"cnn portugal"},
+    },
+    {
+        "label": "TVI",
+        "tvg_ids": {"tvi.pt"},
+        "names": {"tvi"},
+    },
+]
+
+
 def read_rows(path: Path) -> list[dict[str, str]]:
     with path.open("r", encoding="utf-8", newline="") as handle:
         return list(csv.DictReader(handle))
@@ -27,6 +61,89 @@ def channel_key(row: dict[str, str]) -> str:
     if name:
         return "name:" + normalize(name)
     return ""
+
+
+def key_channel_row(rows: list[dict[str, str]], channel: dict[str, object]) -> dict[str, str]:
+    tvg_ids = channel["tvg_ids"]
+    names = channel["names"]
+
+    for row in rows:
+        tvg_id = normalize((row.get("tvg_id") or "").split("@", 1)[0])
+        if tvg_id in tvg_ids:
+            return row
+
+    for row in rows:
+        name = normalize(row.get("name", ""))
+        if name in names:
+            return row
+
+    return {
+        "name": str(channel["label"]),
+        "verdict": "missing",
+        "reason": "missing_from_playlist",
+        "http_status": "",
+        "detail": "no matching channel entry",
+        "line": "",
+        "url": "",
+        "final_url": "",
+    }
+
+
+def status_summary(row: dict[str, str]) -> str:
+    verdict = row.get("verdict", "") or "unknown"
+    reason = row.get("reason", "")
+    if reason:
+        return f"{verdict} ({reason})"
+    return verdict
+
+
+def key_channel_statuses(rows: list[dict[str, str]]) -> list[dict[str, str]]:
+    statuses = []
+    for channel in KEY_CHANNELS:
+        row = key_channel_row(rows, channel)
+        statuses.append(
+            {
+                "label": str(channel["label"]),
+                "name": row.get("name", ""),
+                "line": row.get("line", ""),
+                "verdict": row.get("verdict", ""),
+                "reason": row.get("reason", ""),
+                "http_status": row.get("http_status", ""),
+                "detail": row.get("detail", ""),
+                "url": row.get("url", ""),
+            }
+        )
+    return statuses
+
+
+def key_channel_diff(mine_rows: list[dict[str, str]], upstream_rows: list[dict[str, str]]) -> list[dict[str, str]]:
+    diffs = []
+    for channel in KEY_CHANNELS:
+        mine = key_channel_row(mine_rows, channel)
+        upstream = key_channel_row(upstream_rows, channel)
+        mine_verdict = mine.get("verdict", "") or "unknown"
+        upstream_verdict = upstream.get("verdict", "") or "unknown"
+
+        if mine_verdict == upstream_verdict:
+            diff = "same_verdict"
+        elif upstream_verdict == "working" and mine_verdict != "working":
+            diff = "upstream_working_this_repo_failing"
+        elif mine_verdict == "working" and upstream_verdict != "working":
+            diff = "this_repo_working_upstream_failing"
+        else:
+            diff = "different_failure_status"
+
+        diffs.append(
+            {
+                "label": str(channel["label"]),
+                "this_repo": status_summary(mine),
+                "upstream": status_summary(upstream),
+                "diff": diff,
+                "this_repo_line": mine.get("line", ""),
+                "upstream_line": upstream.get("line", ""),
+            }
+        )
+    return diffs
 
 
 def summarize(rows: list[dict[str, str]]) -> Counter:
@@ -69,6 +186,29 @@ def write_failure_table(handle, rows: list[dict[str, str]], limit: int | None = 
         )
     if limit is not None and len(rows) > limit:
         handle.write(f"|  |  | ...and {len(rows) - limit} more |  |  |  |  |  |\n")
+
+
+def write_key_channel_table(handle, rows: list[dict[str, str]]) -> None:
+    handle.write("| Channel | Playlist Name | Line | Verdict | Reason | HTTP | Detail |\n")
+    handle.write("|---|---|---:|---|---|---:|---|\n")
+    for row in rows:
+        handle.write(
+            f"| {escape_cell(row['label'])} | {escape_cell(row['name'])} | "
+            f"{escape_cell(row['line'])} | {escape_cell(row['verdict'])} | "
+            f"{escape_cell(row['reason'])} | {escape_cell(row['http_status'])} | "
+            f"{escape_cell(row['detail'], 120)} |\n"
+        )
+
+
+def write_key_channel_diff_table(handle, rows: list[dict[str, str]]) -> None:
+    handle.write("| Channel | This Repo | LITUATUI/M3UPT | Diff | This Line | Upstream Line |\n")
+    handle.write("|---|---|---|---|---:|---:|\n")
+    for row in rows:
+        handle.write(
+            f"| {escape_cell(row['label'])} | {escape_cell(row['this_repo'])} | "
+            f"{escape_cell(row['upstream'])} | {escape_cell(row['diff'])} | "
+            f"{escape_cell(row['this_repo_line'])} | {escape_cell(row['upstream_line'])} |\n"
+        )
 
 
 def build_upstream_success_local_failure(
@@ -129,6 +269,15 @@ def write_comparison_csv(path: Path, findings: list[dict[str, str]]) -> None:
             writer.writerow({field: row.get(field, "") for field in fields})
 
 
+def write_key_channel_csv(path: Path, rows: list[dict[str, str]]) -> None:
+    fields = ["label", "this_repo", "upstream", "diff", "this_repo_line", "upstream_line"]
+    with path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fields)
+        writer.writeheader()
+        for row in rows:
+            writer.writerow({field: row.get(field, "") for field in fields})
+
+
 def write_report(
     path: Path,
     mine_rows: list[dict[str, str]],
@@ -137,6 +286,9 @@ def write_report(
 ) -> None:
     mine_failures = [row for row in mine_rows if row.get("verdict") != "working"]
     upstream_failures = [row for row in upstream_rows if row.get("verdict") != "working"]
+    mine_key_statuses = key_channel_statuses(mine_rows)
+    upstream_key_statuses = key_channel_statuses(upstream_rows)
+    key_diffs = key_channel_diff(mine_rows, upstream_rows)
 
     with path.open("w", encoding="utf-8", newline="\n") as handle:
         handle.write("# PT IPTV Stream Health Report\n\n")
@@ -145,16 +297,23 @@ def write_report(
         handle.write("## This Repo Health\n\n")
         handle.write(f"Entries checked: {len(mine_rows)}\n\n")
         write_count_table(handle, summarize(mine_rows))
+        handle.write("\n### Key Channel Status\n\n")
+        write_key_channel_table(handle, mine_key_statuses)
         handle.write("\n### Reason Summary\n\n")
         write_count_table(handle, reason_summary(mine_rows))
 
         handle.write("\n## LITUATUI/M3UPT Health (Radios Excluded)\n\n")
         handle.write(f"Entries checked: {len(upstream_rows)}\n\n")
         write_count_table(handle, summarize(upstream_rows))
+        handle.write("\n### Key Channel Status\n\n")
+        write_key_channel_table(handle, upstream_key_statuses)
         handle.write("\n### Reason Summary\n\n")
         write_count_table(handle, reason_summary(upstream_rows))
 
         handle.write("\n## Upstream Working, This Repo Failing\n\n")
+        handle.write("### Key Channel Comparison\n\n")
+        write_key_channel_diff_table(handle, key_diffs)
+        handle.write("\n### Full Comparison\n\n")
         handle.write(f"Findings: {len(findings)}\n\n")
         handle.write("| Channel | TVG ID | Upstream Line | Local Line | Local Verdict | Local Reason |\n")
         handle.write("|---|---|---:|---:|---|---|\n")
@@ -186,11 +345,15 @@ def main() -> int:
 
     report_path = args.output_dir / "pt-iptv-stream-health-report.md"
     comparison_csv_path = args.output_dir / "upstream-working-local-failing.csv"
+    key_channel_csv_path = args.output_dir / "key-channel-comparison.csv"
+    key_diffs = key_channel_diff(mine_rows, upstream_rows)
     write_report(report_path, mine_rows, upstream_rows, findings)
     write_comparison_csv(comparison_csv_path, findings)
+    write_key_channel_csv(key_channel_csv_path, key_diffs)
 
     print(f"combined_markdown={report_path}")
     print(f"comparison_csv={comparison_csv_path}")
+    print(f"key_channel_csv={key_channel_csv_path}")
     print(f"upstream_working_local_failing={len(findings)}")
     return 0
 
