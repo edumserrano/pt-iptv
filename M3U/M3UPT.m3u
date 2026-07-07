@@ -24,7 +24,7 @@ https://sic.live.impresa.pt/sic1080p.m3u8
 
 #EXTINF:-1 group-title="TV" tvg-id="TVI.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/TVI.png",TVI
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
-https://video-auth6.iol.pt/live_tvi/live_tvi/edge_servers/tvi-720p/chunks.m3u8?wmsAuthSign=c2VydmVyX3RpbWU9Ny83LzIwMjYgOToyNDoxNyBQTSZoYXNoX3ZhbHVlPUltMDFjNlQwM0pRcmsxZk1XejRiQlE9PSZ2YWxpZG1pbnV0ZXM9MTQ0MCZpZD1kMjE0YmZhNS02MGUyLTRkMDItOTEyYi1mNDNiNjU3MDY1MWI=
+https://video-auth6.iol.pt/live_tvi/live_tvi/edge_servers/tvi-720p/chunks.m3u8?wmsAuthSign=c2VydmVyX3RpbWU9Ny83LzIwMjYgOToyNjozNSBQTSZoYXNoX3ZhbHVlPTd4Z2NCc1QrdU02Q3VQcDRtdW9FTVE9PSZ2YWxpZG1pbnV0ZXM9MTQ0MCZpZD05ZGY4ZTczMi00MmVjLTQ3ZjYtYjVmNS0yNzUzNjJhMWY1NDU=
 
 #EXTINF:-1 group-title="TV" tvg-id="RTPNoticias.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/RTP-Notícias.png",RTP Notícias
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
@@ -40,7 +40,7 @@ https://sicnot.live.impresa.pt/sicnot.m3u8
 
 #EXTINF:-1 group-title="TV" tvg-id="CNNPortugal.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/CNN-Portugal.png",CNN Portugal
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
-https://video-auth7.iol.pt/live_cnn/live_cnn/edge_servers/cnn-720p/chunks.m3u8?wmsAuthSign=c2VydmVyX3RpbWU9Ny83LzIwMjYgOToyNDoxNyBQTSZoYXNoX3ZhbHVlPUltMDFjNlQwM0pRcmsxZk1XejRiQlE9PSZ2YWxpZG1pbnV0ZXM9MTQ0MCZpZD1kMjE0YmZhNS02MGUyLTRkMDItOTEyYi1mNDNiNjU3MDY1MWI=
+https://video-auth7.iol.pt/live_cnn/live_cnn/edge_servers/cnn-720p/chunks.m3u8?wmsAuthSign=c2VydmVyX3RpbWU9Ny83LzIwMjYgOToyNjozNSBQTSZoYXNoX3ZhbHVlPTd4Z2NCc1QrdU02Q3VQcDRtdW9FTVE9PSZ2YWxpZG1pbnV0ZXM9MTQ0MCZpZD05ZGY4ZTczMi00MmVjLTQ3ZjYtYjVmNS0yNzUzNjJhMWY1NDU=
 
 #EXTINF:-1 group-title="TV" tvg-id="CNNBrasil.br" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/CNN-Brasil.png",CNN Brasil
 https://d25usgadhphvwi.cloudfront.net/hls/main.m3u8
@@ -3834,5 +3834,6 @@ https://uk2.streamingpulse.com/ssl/vcr1
 
 #EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="https://cdn-profiles.tunein.com/s95144/images/logod.png",Venice Classic Radio - Live
 https://uk2.streamingpulse.com/ssl/vcr2
+
 
 
