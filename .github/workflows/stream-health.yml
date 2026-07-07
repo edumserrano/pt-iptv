@@ -16,7 +16,7 @@ on:
         required: true
         default: "8"
   schedule:
-    - cron: "17 4 * * *"
+    - cron: "17 */5 * * *"
   push:
     branches:
       - main

@@ -22,7 +22,7 @@ The TVI/CNN URLs use IOL `wmsAuthSign` tokens, which expire after 1440 minutes. 
 
 ## Stream health report
 
-The `Stream Health Check` GitHub Actions workflow can be run manually and also runs once per day. Each run checks this playlist, checks the upstream `LITUATUI/M3UPT` playlist without radio entries, and uploads a `stream-health-report` artifact containing:
+The `Stream Health Check` GitHub Actions workflow can be run manually and also runs every 5 hours. Each run checks this playlist, checks the upstream `LITUATUI/M3UPT` playlist without radio entries, and uploads a `stream-health-report` artifact containing:
 
 - `pt-iptv-stream-health-report.md`
 - `upstream-working-local-failing.csv`
