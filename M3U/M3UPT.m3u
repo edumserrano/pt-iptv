@@ -24,7 +24,7 @@ https://sic.live.impresa.pt/sic1080p.m3u8
 
 #EXTINF:-1 group-title="TV" tvg-id="TVI.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/TVI.png",TVI
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
-https://video-auth6.iol.pt/live_tvi/live_tvi/edge_servers/tvi-720p/chunks.m3u8?wmsAuthSign=c2VydmVyX3RpbWU9Ny83LzIwMjYgOToyNjozNSBQTSZoYXNoX3ZhbHVlPTd4Z2NCc1QrdU02Q3VQcDRtdW9FTVE9PSZ2YWxpZG1pbnV0ZXM9MTQ0MCZpZD05ZGY4ZTczMi00MmVjLTQ3ZjYtYjVmNS0yNzUzNjJhMWY1NDU=
+https://video-auth6.iol.pt/live_tvi/live_tvi/edge_servers/tvi-720p/chunks.m3u8?wmsAuthSign=c2VydmVyX3RpbWU9Ny83LzIwMjYgOTo1MDozMSBQTSZoYXNoX3ZhbHVlPUhoZ2pSVit0T2U5WmQxak9yd05VZ2c9PSZ2YWxpZG1pbnV0ZXM9MTQ0MCZpZD1hYmY3ODg0YS05N2I3LTQ5MTgtYTQxMC02YTg3YjgxNzVmNzI=
 
 #EXTINF:-1 group-title="TV" tvg-id="RTPNoticias.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/RTP-Notícias.png",RTP Notícias
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
@@ -40,7 +40,7 @@ https://sicnot.live.impresa.pt/sicnot.m3u8
 
 #EXTINF:-1 group-title="TV" tvg-id="CNNPortugal.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/CNN-Portugal.png",CNN Portugal
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
-https://video-auth7.iol.pt/live_cnn/live_cnn/edge_servers/cnn-720p/chunks.m3u8?wmsAuthSign=c2VydmVyX3RpbWU9Ny83LzIwMjYgOToyNjozNSBQTSZoYXNoX3ZhbHVlPTd4Z2NCc1QrdU02Q3VQcDRtdW9FTVE9PSZ2YWxpZG1pbnV0ZXM9MTQ0MCZpZD05ZGY4ZTczMi00MmVjLTQ3ZjYtYjVmNS0yNzUzNjJhMWY1NDU=
+https://video-auth7.iol.pt/live_cnn/live_cnn/edge_servers/cnn-720p/chunks.m3u8?wmsAuthSign=c2VydmVyX3RpbWU9Ny83LzIwMjYgOTo1MDozMSBQTSZoYXNoX3ZhbHVlPUhoZ2pSVit0T2U5WmQxak9yd05VZ2c9PSZ2YWxpZG1pbnV0ZXM9MTQ0MCZpZD1hYmY3ODg0YS05N2I3LTQ5MTgtYTQxMC02YTg3YjgxNzVmNzI=
 
 #EXTINF:-1 group-title="TV" tvg-id="CNNBrasil.br" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/CNN-Brasil.png",CNN Brasil
 https://d25usgadhphvwi.cloudfront.net/hls/main.m3u8
@@ -55,7 +55,7 @@ https://playout175.livextend.cloud/livenlin4/_definst_/2liveartvpub2/playlist.m3
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #EXTVLCOPT:http-origin=https://www.rtp.pt
 #EXTVLCOPT:http-referrer=https://www.rtp.pt/play/direto/rtpmemoria
-https://streaming-live.rtp.pt/liverepeater/rtpmem.smil/playlist.m3u8
+https://streaming-live.rtp.pt/liverepeater/smil:rtpmem.smil/playlist.m3u8
 
 #EXTINF:-1 group-title="TV" tvg-id="RTPAcores.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/RTP-Açores.png",RTP Açores
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
@@ -83,14 +83,14 @@ https://streaming-live.rtp.pt/liverepeater/rtpi.smil/playlist.m3u8
 
 #EXTINF:-1 group-title="TV" tvg-id="TVIInternacional.pt" tvg-logo="https://github.com/LITUATUI/M3UPT/raw/main/logos/TVI-Internacional.png",TVI Internacional
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
-https://github.com/LITUATUI/M3UPT/raw/main/M3U/TVI_Internacional.m3u8
+https://video-auth6.iol.pt/live_tvi_internacional/live_tvi_internacional/playlist.m3u8?wmsAuthSign=c2VydmVyX3RpbWU9Ny83LzIwMjYgOTo1MDozMSBQTSZoYXNoX3ZhbHVlPUhoZ2pSVit0T2U5WmQxak9yd05VZ2c9PSZ2YWxpZG1pbnV0ZXM9MTQ0MCZpZD1hYmY3ODg0YS05N2I3LTQ5MTgtYTQxMC02YTg3YjgxNzVmNzI=
 
 #EXTINF:-1 group-title="TV" tvg-id="TVIAfrica.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/TVI_África.png",TVI África
 #https://video-auth4.iol.pt/live_tvi_africa/live_tvi_africa/edge_servers/tviafrica-480p/playlist.m3u8
 
 #EXTINF:-1 group-title="TV" tvg-id="VPlusTVI.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/vmaistvi.png",V+ TVI
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
-https://github.com/LITUATUI/M3UPT/raw/main/M3U/Vmais_TVI.m3u8
+https://video-auth2.iol.pt/live_vmais/live_vmais/edge_servers/vmais-720p/playlist.m3u8?wmsAuthSign=c2VydmVyX3RpbWU9Ny83LzIwMjYgOTo1MDozMSBQTSZoYXNoX3ZhbHVlPUhoZ2pSVit0T2U5WmQxak9yd05VZ2c9PSZ2YWxpZG1pbnV0ZXM9MTQ0MCZpZD1hYmY3ODg0YS05N2I3LTQ5MTgtYTQxMC02YTg3YjgxNzVmNzI=
 
 #EXTINF:-1 group-title="TV" tvg-id="TVIFiccao.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/TVI-Ficção.png",TVI Ficção
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
@@ -268,7 +268,7 @@ https://live.france24.com/hls/live/2037222-b/F24_AR_HI_HLS/master_5000.m3u8
 https://vs-hls-push-ww-live.akamaized.net/x=4/i=urn:bbc:pips:service:bbc_news_channel_hd/t=3840/v=pv14/b=5070016/main.m3u8
 
 #EXTINF:-1 group-title="TV" tvg-id="SkyNewsInternational.uk" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/Sky-News.png",Sky News
-https://linear417-gb-hls1-prd-ak.cdn.skycdp.com/100e/Content/HLS_001_1080_30/Live/channel(skynews)/index_1080-30.m3u8
+http://41.205.77.102/SKYNEWS/index.m3u8
 
 #EXTINF:-1 group-title="TV" tvg-id="AfricanewsEnglish.fr" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/Africa_news.png",Africanews
 https://c3c275b999764df8a2dd55ffe2996818.mediatailor.eu-west-1.amazonaws.com/v1/master/0547f18649bd788bec7b67b746e47670f558b6b2/production-LiveChannel-6576/bitok/eyJzdGlkIjoiZjdlNjYzYmUtOTVlNi00MWUxLTg0NjctZjBiNzg2MzZjMjNjIiwibWt0IjoicHQiLCJjaCI6NjU4MywicHRmIjo1fQ%3D%3D/26036/africanews-en.m3u8
@@ -281,6 +281,7 @@ https://d3bp6dwmpbdajl.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68
 
 #EXTINF:-1 group-title="TV" tvg-id="FoxNewsChannel.us" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Fox_News_Channel_logo.svg/512px-Fox_News_Channel_logo.svg.png",Fox News
 #https://stream.livenewsplay.com:9443/hls/foxnews/foxsd.m3u8
+http://138.121.15.230:9002/FOX-NEWS/index.m3u8
 
 #EXTINF:-1 group-title="TV" tvg-id="LiveNOWfromFOX.us" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/LiveNOW_from_Fox.webp",LiveNOW from Fox
 #https://d3tlzddkbbpp5n.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-9uzjfw11uj9nn/LiveNOW_from_FOX.m3u8
@@ -294,7 +295,7 @@ https://cbsn-us.cbsnstream.cbsnews.com/out/v1/55a8648e8f134e82a470f83d562deeca/m
 #EXTINF:-1 group-title="TV" tvg-id="NBCNewsNOW.us" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/NBC-News-Now.png",NBC News Now
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=52e6281b1d3c364c872497e8058977b1:11d6e9a2abb2e241804148713531f64d
-https://live-oneapp-prd-news.akamaized.net/Content/CMAF_OL2-CTR-4s/Live/channel(nnn)/master.mpd
+https://live-oneapp-prd-news.akamaized.net/Content/CMAF_OL2-CTR-4s/Live/channel(nnn)/master.m3u8
 
 #EXTINF:-1 group-title="TV" tvg-id="BloombergTVEurope.uk" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/Bloomberg.png",Bloomberg TV Europe
 #https://86ebec83.wurl.com/manifest/f36d25e7e52f1ba8d7e56eb859c636563214f541/UmFrdXRlblRWLWV1X0Jsb29tYmVyZ1RWUGx1c19ITFM/664c4e83-13c7-4898-ada9-80b89d4c2d2c/5.m3u8
@@ -314,7 +315,7 @@ https://amdlive-ch01-g-ctnd-com.akamaized.net/arirang_1gch/arirang_1gch.smil/pla
 
 #EXTINF:-1 group-title="TV" tvg-id="KBSWorld.kr" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/KBS-World.png",KBS World
 #https://kbsworld-ott.akamaized.net/hls/live/2002341/kbsworld/master.m3u8
-https://liveh12.vtvprime.vn/hls/KBS/index.m3u8
+http://31.148.48.15/KBS_World/index.m3u8
 
 #EXTINF:-1 group-title="TV" tvg-id="CNAInternational.sg" tvg-logo="https://i.imgur.com/xWglicB.png",CNA International
 https://mediacorp-nca-prod-videos-bclive.akamaized.net/6379472319112/ap-southeast-1/6057994443001/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJob3N0IjoicGE2ODB1LmVncmVzcy5wcHRpOHciLCJhY2NvdW50X2lkIjoiNjA1Nzk5NDQ0MzAwMSIsImVobiI6Im1lZGlhY29ycC1uY2EtcHJvZC12aWRlb3MtYmNsaXZlLmFrYW1haXplZC5uZXQiLCJpc3MiOiJibGl2ZS1wbGF5YmFjay1zb3VyY2UtYXBpIiwic3ViIjoicGF0aG1hcHRva2VuIiwiYXVkIjpbIjYwNTc5OTQ0NDMwMDEiXSwianRpIjoiNjM3OTQ3MjMxOTExMiJ9.Cw77amOc6efNO32Sw9nD0SOhjQUc5ewKN8ZWJOPt15Y/playlist-hls.m3u8
@@ -345,6 +346,7 @@ https://live-cdn-stream-euw1.bfmtv.bct.nextradiotv.com/master.m3u8
 
 #EXTINF:-1 group-title="TV" tvg-id="BFMBusiness.fr" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/BFM-Business.png",BFM Business
 #https://ncdn-live-bfm.pfd.sfr.net/shls/LIVE$BFM_BUSINESS/index.m3u8?start=LIVE&end=END
+https://ncdn-live-bfm.pfd.sfr.net/shls/LIVE$BFM_BUSINESS/index.m3u8?end=END&start=LIVE
 
 #EXTINF:-1 group-title="TV" tvg-id="7NN.es" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/7NN-Noticias.png",7NN Noticias
 #https://dxf45ob769xpw.cloudfront.net/out/v1/90ce358337e14be3bb82b6566b50a8b1/index.m3u8
@@ -396,7 +398,7 @@ https://cdn.teveo.cu/live/video/A36pWmuWvZBQskuZ/ngrp:gppfydfzpSUn9Udy.stream/pl
 https://azt-mun.otteravision.com/azt/mun/mun.m3u8
 
 #EXTINF:-1 group-title="TV" tvg-id="RaiNews24.it" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/Rai-News-24.png",Rai News 24
-https://8e7439fdb1694c8da3a0fd63e4dda518.msvdn.net/rainews1/hls/playlist_mo.m3u8
+http://91.146.94.234:10001/play/a135
 
 #EXTINF:-1 group-title="TV" tvg-id="EBSEnglish.kr" tvg-logo="https://i.imgur.com/5wLJzb0.png",EBS English
 https://ebsonair.ebs.co.kr/plus3familypc/familypc1m/playlist.m3u8
@@ -478,6 +480,7 @@ https://xite-rakuten.amagi.tv/playlist.m3u8
 
 #EXTINF:-1 group-title="TV" tvg-id="ClubbingTV.us" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/Clubbing-TV.png",Clubbing TV
 #https://d1j2csarxnwazk.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-uze1m6xh4fiyr-ssai-prd/master.m3u8
+https://a-cdn.klowdtv.com/live3/clubbingtv_720p/playlist.m3u8
 
 #EXTINF:-1 group-title="TV" tvg-id="1HDMusicTelevision.ru" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/1HD.png",1HD Music
 #https://sc.id-tv.kz/1hd.m3u8
@@ -517,6 +520,7 @@ https://rmtv.akamaized.net/hls/live/2043153/rmtv-es-web/master.m3u8
 
 #EXTINF:-1 group-title="TV" tvg-id="FUELTV.at" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/Fuel-TV.png",Fuel TV
 #https://fueltv-fueltv-1.samsung.wurl.com/manifest/playlist.m3u8
+https://amg01074-fueltv-fueltvemeaen-rakuten-b6j62.amagi.tv/hls/amagi_hls_data_rakutenAA-fueltvemeaen/CDN/master.m3u8
 
 #EXTINF:-1 group-title="TV" tvg-id="RedBullTV.at" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/Red-Bull-TV.png",Red Bull TV
 https://rbmn-live.akamaized.net/hls/live/590964/BoRB-AT/master.m3u8
@@ -568,9 +572,11 @@ https://amdici.akamaized.net/hls/live/873426/ICI-Live-Stream/master.m3u8
 
 #EXTINF:-1 group-title="TV" tvg-id="BFMGrandLille.fr" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/Grand-Lille-TV.png",BFM Grand Lille
 #https://ncdn-live-bfm.pfd.sfr.net/shls/LIVE$BFMGRANDLILLE/index.m3u8?start=LIVE&end=END
+https://ncdn-live-bfm.pfd.sfr.net/shls/LIVE$BFMGRANDLILLE/index.m3u8?end=END&start=LIVE
 
 #EXTINF:-1 group-title="TV" tvg-id="BFMGrandLittoral.fr" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/Grand-Littoral-TV.png",BFM Grand Littoral TV
 #https://ncdn-live-bfm.pfd.sfr.net/shls/LIVE$BFMGRANDLITTORAL/index.m3u8?start=LIVE&end=END
+https://ncdn-live-bfm.pfd.sfr.net/shls/LIVE$BFMGRANDLITTORAL/index.m3u8?end=END&start=LIVE
 
 #EXTINF:-1 group-title="TV" tvg-id="DasErste.de" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/Das-Erste.png",Das Erste
 https://daserste-live.ard-mcdn.de/daserste/live/hls/de/master.m3u8
@@ -1200,19 +1206,19 @@ https://video-auth1.iol.pt/beachcam/murtosa/playlist.m3u8
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=b57fd50083e83bfd85bbc31a32cf47e1:3d5f6bcf52c213ac76f5b896ee95be4e
-https://streaming-vod.rtp.pt/drm-dash/nas2.share,/h264/512x384/p12607/p12607_1_20231226161005e001t6542d_lo.mp4,/h264/512x384/p12607/p12607_1_20231226161005e001t6542d.mp4,.urlset/manifest.mpd
+https://streaming-vod.rtp.pt/hls/nas2.share,/h264/512x384/p12607/p12607_1_20231226161005e001t6542d_lo.mp4,/h264/512x384/p12607/p12607_1_20231226161005e001t6542d.mp4,.urlset/master.m3u8
 
 #EXTINF:-1 media="true" group-title="100 ou Mais" tvg-logo="https://cdn-images.rtp.pt/EPG/imagens/44881_70945_50421.jpg?q=100&format=pjpg&auto=webp&v=3&w=900",100 ou Mais - S01E02
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=b57fd50083e83bfd85bbc31a32cf47e1:3d5f6bcf52c213ac76f5b896ee95be4e
-https://streaming-vod.rtp.pt/drm-dash/nas2.share,/h264/512x384/p12607/p12607_1_20231227161006e002t8470d_lo.mp4,/h264/512x384/p12607/p12607_1_20231227161006e002t8470d.mp4,.urlset/manifest.mpd
+https://streaming-vod.rtp.pt/hls/nas2.share,/h264/512x384/p12607/p12607_1_20231227161006e002t8470d_lo.mp4,/h264/512x384/p12607/p12607_1_20231227161006e002t8470d.mp4,.urlset/master.m3u8
 
 #EXTINF:-1 media="true" group-title="100 ou Mais" tvg-logo="https://cdn-images.rtp.pt/EPG/imagens/44881_70945_50421.jpg?q=100&format=pjpg&auto=webp&v=3&w=900",100 ou Mais - S01E03
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=b57fd50083e83bfd85bbc31a32cf47e1:3d5f6bcf52c213ac76f5b896ee95be4e
-https://streaming-vod.rtp.pt/drm-dash/nas2.share,/h264/512x384/p12607/p12607_1_20231228161006e003t8102d_lo.mp4,/h264/512x384/p12607/p12607_1_20231228161006e003t8102d.mp4,.urlset/manifest.mpd
+https://streaming-vod.rtp.pt/hls/nas2.share,/h264/512x384/p12607/p12607_1_20231228161006e003t8102d_lo.mp4,/h264/512x384/p12607/p12607_1_20231228161006e003t8102d.mp4,.urlset/master.m3u8
 
 
 # O Planeta Vivo
@@ -1221,37 +1227,37 @@ https://streaming-vod.rtp.pt/drm-dash/nas2.share,/h264/512x384/p12607/p12607_1_2
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=b57fd50083e83bfd85bbc31a32cf47e1:3d5f6bcf52c213ac76f5b896ee95be4e
-https://streaming-vod.rtp.pt/drm-dash/nas2.share,/pt/h264/512x384/p13613/p13613_20240703090016e001t9267.mp4,.urlset/manifest.mpd
+https://streaming-vod.rtp.pt/hls/nas2.share,/pt/h264/512x384/p13613/p13613_20240703090016e001t9267.mp4,.urlset/master.m3u8
 
 #EXTINF:-1 media="true" group-title="O Planeta Vivo" tvg-logo="https://cdn-images.rtp.pt/EPG/imagens/45929_73117_64439.jpg",O Planeta Vivo - S01E02
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=b57fd50083e83bfd85bbc31a32cf47e1:3d5f6bcf52c213ac76f5b896ee95be4e
-https://streaming-vod.rtp.pt/drm-dash/nas2.share,/pt/h264/512x384/p13613/p13613_1_20240710161003e002t6658d_lo.mp4,/pt/h264/512x384/p13613/p13613_1_20240710161003e002t6658d.mp4,.urlset/manifest.mpd
+https://streaming-vod.rtp.pt/hls/nas2.share,/pt/h264/512x384/p13613/p13613_1_20240710161003e002t6658d_lo.mp4,/pt/h264/512x384/p13613/p13613_1_20240710161003e002t6658d.mp4,.urlset/master.m3u8
 
 #EXTINF:-1 media="true" group-title="O Planeta Vivo" tvg-logo="https://cdn-images.rtp.pt/EPG/imagens/45929_73117_64439.jpg",O Planeta Vivo - S01E03
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=b57fd50083e83bfd85bbc31a32cf47e1:3d5f6bcf52c213ac76f5b896ee95be4e
-https://streaming-vod.rtp.pt/drm-dash/nas2.share,/pt/h264/512x384/p13613/p13613_1_20240717161005e003t1334d_lo.mp4,/pt/h264/512x384/p13613/p13613_1_20240717161005e003t1334d.mp4,.urlset/manifest.mpd
+https://streaming-vod.rtp.pt/hls/nas2.share,/pt/h264/512x384/p13613/p13613_1_20240717161005e003t1334d_lo.mp4,/pt/h264/512x384/p13613/p13613_1_20240717161005e003t1334d.mp4,.urlset/master.m3u8
 
 #EXTINF:-1 media="true" group-title="O Planeta Vivo" tvg-logo="https://cdn-images.rtp.pt/EPG/imagens/45929_73117_64439.jpg",O Planeta Vivo - S01E04
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=b57fd50083e83bfd85bbc31a32cf47e1:3d5f6bcf52c213ac76f5b896ee95be4e
-https://streaming-vod.rtp.pt/drm-dash/nas2.share,/pt/h264/512x384/p13613/p13613_1_20240717161005e003t1334d_lo.mp4,/pt/h264/512x384/p13613/p13613_1_20240717161005e003t1334d.mp4,.urlset/manifest.mpd
+https://streaming-vod.rtp.pt/hls/nas2.share,/pt/h264/512x384/p13613/p13613_1_20240717161005e003t1334d_lo.mp4,/pt/h264/512x384/p13613/p13613_1_20240717161005e003t1334d.mp4,.urlset/master.m3u8
 
 #EXTINF:-1 media="true" group-title="O Planeta Vivo" tvg-logo="https://cdn-images.rtp.pt/EPG/imagens/45929_73117_64439.jpg",O Planeta Vivo - S01E05
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=b57fd50083e83bfd85bbc31a32cf47e1:3d5f6bcf52c213ac76f5b896ee95be4e
-https://streaming-vod.rtp.pt/drm-dash/nas2.share,/pt/h264/512x384/p13613/p13613_1_20240717161005e003t1334d_lo.mp4,/pt/h264/512x384/p13613/p13613_1_20240717161005e003t1334d.mp4,.urlset/manifest.mpd
+https://streaming-vod.rtp.pt/hls/nas2.share,/pt/h264/512x384/p13613/p13613_1_20240717161005e003t1334d_lo.mp4,/pt/h264/512x384/p13613/p13613_1_20240717161005e003t1334d.mp4,.urlset/master.m3u8
 
 #EXTINF:-1 media="true" group-title="O Planeta Vivo" tvg-logo="https://cdn-images.rtp.pt/EPG/imagens/45929_73117_64439.jpg",O Planeta Vivo - S01E06
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=b57fd50083e83bfd85bbc31a32cf47e1:3d5f6bcf52c213ac76f5b896ee95be4e
-https://streaming-vod.rtp.pt/drm-dash/nas2.share,/pt/h264/512x384/p13613/p13613_1_20240717161005e003t1334d_lo.mp4,/pt/h264/512x384/p13613/p13613_1_20240717161005e003t1334d.mp4,.urlset/manifest.mpd
+https://streaming-vod.rtp.pt/hls/nas2.share,/pt/h264/512x384/p13613/p13613_1_20240717161005e003t1334d_lo.mp4,/pt/h264/512x384/p13613/p13613_1_20240717161005e003t1334d.mp4,.urlset/master.m3u8
 
 
 # Debates
@@ -3070,297 +3076,297 @@ https://cdn.jwplayer.com/manifests/v8e6Ytdz.m3u8
 #EXTVLCOPT:http-referrer=https://opto.sic.pt/
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=45dc9fcf4327f30ee9bce3571860df61:09ebc1b668bf9d7d50a4af14f2fa0300
-https://cfvod.kaltura.com/edash/p/4526593/sp/452659300/serveFlavor/entryId/1_zg3ni5ov/v/11/ev/14/flavorId/1_,7i8rds9b,rzjqsjvc,bbj2uovw,k81qelbh,n3zaq5ue,il5pcpbs,/forceproxy/true/name/a.mp4.urlset/manifest.mpd
+https://cdnapi.kaltura.com/p/4526593/sp/452659300/playManifest/entryId/1_zg3ni5ov/format/applehttp/protocol/https/a.m3u8
 
 #EXTINF:-1 media="true" group-title="IEGCQT" tvg-logo="https://upload.wikimedia.org/wikipedia/pt/thumb/8/8a/IeGcQT.png/800px-IeGcQT.png",IEGCQT S13E18 24-5-2026
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #EXTVLCOPT:http-referrer=https://opto.sic.pt/
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=d8d4de2019c2b1398f43bf51e0561795:89334f826f49fb254b0e77512889f823
-https://cfvod.kaltura.com/edash/p/4526593/sp/452659300/serveFlavor/entryId/1_tljoa803/v/11/ev/11/flavorId/1_,ysrdalim,a7hx76bx,xq9cxdea,rilwdqxx,7g9smwgb,/forceproxy/true/name/a.mp4.urlset/manifest.mpd
+https://cdnapi.kaltura.com/p/4526593/sp/452659300/playManifest/entryId/1_tljoa803/format/applehttp/protocol/https/a.m3u8
 
 #EXTINF:-1 media="true" group-title="IEGCQT" tvg-logo="https://upload.wikimedia.org/wikipedia/pt/thumb/8/8a/IeGcQT.png/800px-IeGcQT.png",IEGCQT S13E17 17-5-2026
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #EXTVLCOPT:http-referrer=https://opto.sic.pt/
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=19b4a21305568acba4f5907166f474ca:b7bf900b9d55232fbc83e92fd3e067ad
-https://cfvod.kaltura.com/edash/p/4526593/sp/452659300/serveFlavor/entryId/1_cbeugy13/v/1/ev/7/flavorId/1_,9cbuoho4,s2wj8169,29lbqnox,f5wbsi7n,za6czhcw,6l0gzgqh,/forceproxy/true/name/a.mp4.urlset/manifest.mpd
+https://cdnapi.kaltura.com/p/4526593/sp/452659300/playManifest/entryId/1_cbeugy13/format/applehttp/protocol/https/a.m3u8
 
 #EXTINF:-1 media="true" group-title="IEGCQT" tvg-logo="https://upload.wikimedia.org/wikipedia/pt/thumb/8/8a/IeGcQT.png/800px-IeGcQT.png",IEGCQT S13E16 10-5-2026
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #EXTVLCOPT:http-referrer=https://opto.sic.pt/
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=b87fb46d26510b2fc863b6a8d135fc18:ee31c1d6e4ef7783d5b2c0d35665c7b9
-https://cfvod.kaltura.com/edash/p/4526593/sp/452659300/serveFlavor/entryId/1_xz5gtxg0/v/11/ev/14/flavorId/1_,icpcdz4a,c51y4a5q,ywcwvw5b,u0lj8vn4,n8yn06rt,044gvjdo,/forceproxy/true/name/a.mp4.urlset/manifest.mpd
+https://cdnapi.kaltura.com/p/4526593/sp/452659300/playManifest/entryId/1_xz5gtxg0/format/applehttp/protocol/https/a.m3u8
 
 #EXTINF:-1 media="true" group-title="IEGCQT" tvg-logo="https://upload.wikimedia.org/wikipedia/pt/thumb/8/8a/IeGcQT.png/800px-IeGcQT.png",IEGCQT S13E15 3-5-2026
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #EXTVLCOPT:http-referrer=https://opto.sic.pt/
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=8d8ba0d225aa77e1cea52ab6cd3a56bc:6a118f85383143f63dd3f38ad8d4c14a
-https://cfvod.kaltura.com/edash/p/4526593/sp/452659300/serveFlavor/entryId/1_wznhe8p9/v/11/ev/13/flavorId/1_,vmcka1bl,zamw6hzk,nbf15mck,s0q7rs7z,38pv0o56,eglg97ow,/forceproxy/true/name/a.mp4.urlset/manifest.mpd
+https://cdnapi.kaltura.com/p/4526593/sp/452659300/playManifest/entryId/1_wznhe8p9/format/applehttp/protocol/https/a.m3u8
 
 #EXTINF:-1 media="true" group-title="IEGCQT" tvg-logo="https://upload.wikimedia.org/wikipedia/pt/thumb/8/8a/IeGcQT.png/800px-IeGcQT.png",IEGCQT S13E14 26-4-2026
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #EXTVLCOPT:http-referrer=https://opto.sic.pt/
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=690e23ab0a339de4d0a3e3c154e3321f:4b0c309a2abf40142239baf17238e604
-https://cfvod.kaltura.com/edash/p/4526593/sp/452659300/serveFlavor/entryId/1_q3nuggiz/v/1/ev/7/flavorId/1_,i674ezdl,lw6zqalx,hn7c38jp,uz0sbv0f,27ip7w5k,4r5s2rdd,/forceproxy/true/name/a.mp4.urlset/manifest.mpd
+https://cdnapi.kaltura.com/p/4526593/sp/452659300/playManifest/entryId/1_q3nuggiz/format/applehttp/protocol/https/a.m3u8
 
 #EXTINF:-1 media="true" group-title="IEGCQT" tvg-logo="https://upload.wikimedia.org/wikipedia/pt/thumb/8/8a/IeGcQT.png/800px-IeGcQT.png",IEGCQT S13E13 19-4-2026
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #EXTVLCOPT:http-referrer=https://opto.sic.pt/
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=0fff853dfa2614822ecac7dac33cf57e:b3f3cc0e1839df6a37c73d02e0cddb24
-https://cfvod.kaltura.com/edash/p/4526593/sp/452659300/serveFlavor/entryId/1_tb2pmrcn/v/11/ev/14/flavorId/1_,kbhm91vr,kwg995jp,7m4j06rz,ll197k8o,2odpdqwe,uiclrflf,/forceproxy/true/name/a.mp4.urlset/manifest.mpd
+https://cdnapi.kaltura.com/p/4526593/sp/452659300/playManifest/entryId/1_tb2pmrcn/format/applehttp/protocol/https/a.m3u8
 
 #EXTINF:-1 media="true" group-title="IEGCQT" tvg-logo="https://upload.wikimedia.org/wikipedia/pt/thumb/8/8a/IeGcQT.png/800px-IeGcQT.png",IEGCQT S13E12 12-4-2026
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #EXTVLCOPT:http-referrer=https://opto.sic.pt/
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=b735d3d9cbb892a03697d9aedb4d1fb4:290173f932d96a8d78609de1d71867dc
-https://cfvod.kaltura.com/edash/p/4526593/sp/452659300/serveFlavor/entryId/1_qvzrncv9/v/1/ev/7/flavorId/1_,sn0csjk2,qnszdz0k,nmylolad,cw9lcn2k,m64095f5,1yih6hbd,/forceproxy/true/name/a.mp4.urlset/manifest.mpd
+https://cdnapi.kaltura.com/p/4526593/sp/452659300/playManifest/entryId/1_qvzrncv9/format/applehttp/protocol/https/a.m3u8
 
 #EXTINF:-1 media="true" group-title="IEGCQT" tvg-logo="https://upload.wikimedia.org/wikipedia/pt/thumb/8/8a/IeGcQT.png/800px-IeGcQT.png",IEGCQT S13E11 29-3-2026
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #EXTVLCOPT:http-referrer=https://opto.sic.pt/
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=7fb66c6ce6bc7910bdff5b0ace612c94:7a5064dbce7edac55b48a16164178ac0
-https://cfvod.kaltura.com/edash/p/4526593/sp/452659300/serveFlavor/entryId/1_p5ul8ngb/v/11/ev/14/flavorId/1_,omfh1qdl,tjunpfud,pdv9q250,239d30ic,uwnfp6pm,3cs657d5,/forceproxy/true/name/a.mp4.urlset/manifest.mpd
+https://cdnapi.kaltura.com/p/4526593/sp/452659300/playManifest/entryId/1_p5ul8ngb/format/applehttp/protocol/https/a.m3u8
 
 #EXTINF:-1 media="true" group-title="IEGCQT" tvg-logo="https://upload.wikimedia.org/wikipedia/pt/thumb/8/8a/IeGcQT.png/800px-IeGcQT.png",IEGCQT S13E10 22-3-2026
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #EXTVLCOPT:http-referrer=https://opto.sic.pt/
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=43352e40edd9019a6d7cc2f89d4c2350:9b7bc768e5583a024b01961b801b7e5e
-https://cfvod.kaltura.com/edash/p/4526593/sp/452659300/serveFlavor/entryId/1_bed4qvw9/v/11/ev/14/flavorId/1_,o5wgu7sy,nge0amja,1iwlg1oe,etb4y1wc,gf86jddz,0y65su8n,/forceproxy/true/name/a.mp4.urlset/manifest.mpd
+https://cdnapi.kaltura.com/p/4526593/sp/452659300/playManifest/entryId/1_bed4qvw9/format/applehttp/protocol/https/a.m3u8
 
 #EXTINF:-1 media="true" group-title="IEGCQT" tvg-logo="https://upload.wikimedia.org/wikipedia/pt/thumb/8/8a/IeGcQT.png/800px-IeGcQT.png",IEGCQT S13E09 15-3-2026
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #EXTVLCOPT:http-referrer=https://opto.sic.pt/
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=1c46303db8c04044ec5fbcbb38530695:89f1e3e74c4db263b042fd22eecbcae9
-https://cfvod.kaltura.com/edash/p/4526593/sp/452659300/serveFlavor/entryId/1_kze2icxe/v/11/ev/14/flavorId/1_,8rqth76h,yt7db9q4,v2pvh2gr,lhtxfgi1,0rbbe3q9,75eziz26,/forceproxy/true/name/a.mp4.urlset/manifest.mpd
+https://cdnapi.kaltura.com/p/4526593/sp/452659300/playManifest/entryId/1_kze2icxe/format/applehttp/protocol/https/a.m3u8
 
 #EXTINF:-1 media="true" group-title="IEGCQT" tvg-logo="https://upload.wikimedia.org/wikipedia/pt/thumb/8/8a/IeGcQT.png/800px-IeGcQT.png",IEGCQT S13E08 8-3-2026
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #EXTVLCOPT:http-referrer=https://opto.sic.pt/
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=8538fc9169d1120f9d643f30b09499bd:c61929176383a41b4927996917540c3c
-https://cfvod.kaltura.com/edash/p/4526593/sp/452659300/serveFlavor/entryId/1_7cayc0ol/v/11/ev/14/flavorId/1_,isvvgcrq,oj6iye0u,3t6t6896,d276w3dn,75zznyto,c684davo,/forceproxy/true/name/a.mp4.urlset/manifest.mpd
+https://cdnapi.kaltura.com/p/4526593/sp/452659300/playManifest/entryId/1_7cayc0ol/format/applehttp/protocol/https/a.m3u8
 
 #EXTINF:-1 media="true" group-title="IEGCQT" tvg-logo="https://upload.wikimedia.org/wikipedia/pt/thumb/8/8a/IeGcQT.png/800px-IeGcQT.png",IEGCQT S13E07 1-3-2026
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #EXTVLCOPT:http-referrer=https://opto.sic.pt/
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=e2e093921b1544d6d95bd42a0af23e3a:d744afa5a9326fee0da3bb1b09af7b09
-https://cfvod.kaltura.com/edash/p/4526593/sp/452659300/serveFlavor/entryId/1_c90nt6co/v/11/ev/13/flavorId/1_,eiizcwt7,f85663tf,td01rwfr,qgw8yit2,m6a74151,ss5ofutp,/forceproxy/true/name/a.mp4.urlset/manifest.mpd
+https://cdnapi.kaltura.com/p/4526593/sp/452659300/playManifest/entryId/1_c90nt6co/format/applehttp/protocol/https/a.m3u8
 
 #EXTINF:-1 media="true" group-title="IEGCQT" tvg-logo="https://upload.wikimedia.org/wikipedia/pt/thumb/8/8a/IeGcQT.png/800px-IeGcQT.png",IEGCQT S13E06 22-2-2026
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #EXTVLCOPT:http-referrer=https://opto.sic.pt/
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=aed150fd3146418e16ab342daae5011e:40f848ee880b1f82ceb346baa1bb318b
-https://cfvod.kaltura.com/edash/p/4526593/sp/452659300/serveFlavor/entryId/1_udv6bsb2/v/11/ev/14/flavorId/1_,0gktpz1w,yyhqpfln,jd60vc5d,122r24uw,ssdpgnzw,1pnrmg6p,/forceproxy/true/name/a.mp4.urlset/manifest.mpd
+https://cdnapi.kaltura.com/p/4526593/sp/452659300/playManifest/entryId/1_udv6bsb2/format/applehttp/protocol/https/a.m3u8
 
 #EXTINF:-1 media="true" group-title="IEGCQT" tvg-logo="https://upload.wikimedia.org/wikipedia/pt/thumb/8/8a/IeGcQT.png/800px-IeGcQT.png",IEGCQT S13E05 15-2-2026
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #EXTVLCOPT:http-referrer=https://opto.sic.pt/
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=eec11313eddcc954a571d86a302f55eb:38ab68a684db37cea20d55a0e6211e6f
-https://cfvod.kaltura.com/edash/p/4526593/sp/452659300/serveFlavor/entryId/1_s1yr2k2o/v/1/ev/7/flavorId/1_,maf9jz2s,frhf96yd,8d03tpcx,9g93haw0,e7ymmm6p,04vice9p,/forceproxy/true/name/a.mp4.urlset/manifest.mpd
+https://cdnapi.kaltura.com/p/4526593/sp/452659300/playManifest/entryId/1_s1yr2k2o/format/applehttp/protocol/https/a.m3u8
 
 #EXTINF:-1 media="true" group-title="IEGCQT" tvg-logo="https://upload.wikimedia.org/wikipedia/pt/thumb/8/8a/IeGcQT.png/800px-IeGcQT.png",IEGCQT S13E04 1-2-2026
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #EXTVLCOPT:http-referrer=https://opto.sic.pt/
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=2f854621745fece448721386724f91f8:e0710f56fa1553a132de4503725ca890
-https://cfvod.kaltura.com/edash/p/4526593/sp/452659300/serveFlavor/entryId/1_171ofhmy/v/11/ev/13/flavorId/1_,nemvgqeu,dkdo6vbk,st03d3ez,uga8tsyv,j884kbq1,jute3b8m,/forceproxy/true/name/a.mp4.urlset/manifest.mpd
+https://cdnapi.kaltura.com/p/4526593/sp/452659300/playManifest/entryId/1_171ofhmy/format/applehttp/protocol/https/a.m3u8
 
 #EXTINF:-1 media="true" group-title="IEGCQT" tvg-logo="https://upload.wikimedia.org/wikipedia/pt/thumb/8/8a/IeGcQT.png/800px-IeGcQT.png",IEGCQT S13E03 25-1-2026
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #EXTVLCOPT:http-referrer=https://opto.sic.pt/
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=82822207652b7e1c4314f9980741faab:04ab06fc952256f25538bc42a794fcda
-https://cfvod.kaltura.com/edash/p/4526593/sp/452659300/serveFlavor/entryId/1_3okkvzwr/v/11/ev/14/flavorId/1_,a7z7as7m,zmsneh6t,ab7wbrer,hzkfum26,9he4c5hn,ba50d8rp,/forceproxy/true/name/a.mp4.urlset/manifest.mpd
+https://cdnapi.kaltura.com/p/4526593/sp/452659300/playManifest/entryId/1_3okkvzwr/format/applehttp/protocol/https/a.m3u8
 
 #EXTINF:-1 media="true" group-title="IEGCQT" tvg-logo="https://upload.wikimedia.org/wikipedia/pt/thumb/8/8a/IeGcQT.png/800px-IeGcQT.png",IEGCQT S13E02 11-1-2026
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #EXTVLCOPT:http-referrer=https://opto.sic.pt/
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=1413020081eea7b12978557c0c600042:ea1e9f1defe45e225b423f27924be246
-https://cfvod.kaltura.com/edash/p/4526593/sp/452659300/serveFlavor/entryId/1_f6bff0lj/v/31/ev/26/flavorId/1_,v7buam0k,ow8owuaf,ff47yqvr,3hyv8j65,xk3r413u,12nra5ff,/forceproxy/true/name/a.mp4.urlset/manifest.mpd
+https://cdnapi.kaltura.com/p/4526593/sp/452659300/playManifest/entryId/1_f6bff0lj/format/applehttp/protocol/https/a.m3u8
 
 #EXTINF:-1 media="true" group-title="IEGCQT" tvg-logo="https://upload.wikimedia.org/wikipedia/pt/thumb/8/8a/IeGcQT.png/800px-IeGcQT.png",IEGCQT S13E01 4-1-2026
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #EXTVLCOPT:http-referrer=https://opto.sic.pt/
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=ba8228f7911253f30c6800230866a35b:17aadac94b81aede9b18b8eda97939f6
-https://cfvod.kaltura.com/edash/p/4526593/sp/452659300/serveFlavor/entryId/1_w5b38of7/v/11/ev/13/flavorId/1_,ph3kwv28,35pu5ga7,477sgf86,nsxmee00,e4ht0cf8,5yyjybdi,/forceproxy/true/name/a.mp4.urlset/manifest.mpd
+https://cdnapi.kaltura.com/p/4526593/sp/452659300/playManifest/entryId/1_w5b38of7/format/applehttp/protocol/https/a.m3u8
 
 #EXTINF:-1 media="true" group-title="IEGCQT" tvg-logo="https://upload.wikimedia.org/wikipedia/pt/thumb/8/8a/IeGcQT.png/800px-IeGcQT.png",IEGCQT S12E13 14-12-2025
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #EXTVLCOPT:http-referrer=https://opto.sic.pt/
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=8771f4d53766e19d495b41d3ac926ffc:9e5bc2ab7646fc7c232a4c718a7ba28f
-https://cfvod.kaltura.com/edash/p/4526593/sp/452659300/serveFlavor/entryId/1_m0wbbuop/v/1/ev/7/flavorId/1_,9cxle0ug,y36rr50y,ww6pqp85,8thvsl1a,gk1mlgvq,t8x58sy2,/forceproxy/true/name/a.mp4.urlset/manifest.mpd
+https://cdnapi.kaltura.com/p/4526593/sp/452659300/playManifest/entryId/1_m0wbbuop/format/applehttp/protocol/https/a.m3u8
 
 #EXTINF:-1 media="true" group-title="IEGCQT" tvg-logo="https://upload.wikimedia.org/wikipedia/pt/thumb/8/8a/IeGcQT.png/800px-IeGcQT.png",IEGCQT S12E12 07-12-2025
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #EXTVLCOPT:http-referrer=https://opto.sic.pt/
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=9b7a861a00295b332a443e056bc56b63:7f1f3236bcfe95855ad2694a5ebec351
-https://cfvod.kaltura.com/edash/p/4526593/sp/452659300/serveFlavor/entryId/1_id2m2fkc/v/1/ev/7/flavorId/1_,sa1z8rsl,gg7gjrdr,h2kfx2t0,fngq1kg0,9eaknuiq,py4hfxai,/forceproxy/true/name/a.mp4.urlset/manifest.mpd
+https://cdnapi.kaltura.com/p/4526593/sp/452659300/playManifest/entryId/1_id2m2fkc/format/applehttp/protocol/https/a.m3u8
 
 #EXTINF:-1 media="true" group-title="IEGCQT" tvg-logo="https://upload.wikimedia.org/wikipedia/pt/thumb/8/8a/IeGcQT.png/800px-IeGcQT.png",IEGCQT S12E11 30-11-2025
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #EXTVLCOPT:http-referrer=https://opto.sic.pt/
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=f62456857990114c97abcbabe99fde72:17716571fa201c2fa51ac9627b7231a1
-https://cfvod.kaltura.com/edash/p/4526593/sp/452659300/serveFlavor/entryId/1_u2o68n1f/v/1/ev/7/flavorId/1_,6zg7roui,f4goi1wu,3xyv4rx8,bsnisdbp,jvb9y4a9,a5bd8vz7,/forceproxy/true/name/a.mp4.urlset/manifest.mpd
+https://cdnapi.kaltura.com/p/4526593/sp/452659300/playManifest/entryId/1_u2o68n1f/format/applehttp/protocol/https/a.m3u8
 
 #EXTINF:-1 media="true" group-title="IEGCQT" tvg-logo="https://upload.wikimedia.org/wikipedia/pt/thumb/8/8a/IeGcQT.png/800px-IeGcQT.png",IEGCQT S12E10 23-11-2025
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #EXTVLCOPT:http-referrer=https://opto.sic.pt/
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=acad65607cb28a5a0014c898266716bf:61a54887189855181ddd75894cb7bfd2
-https://cfvod.kaltura.com/edash/p/4526593/sp/452659300/serveFlavor/entryId/1_22u3mfd7/v/1/ev/7/flavorId/1_,ru2uv7xs,4em5d4hc,ipa25dji,witmv73s,d3peereb,4b6ybj7m,/forceproxy/true/name/a.mp4.urlset/manifest.mpd
+https://cdnapi.kaltura.com/p/4526593/sp/452659300/playManifest/entryId/1_22u3mfd7/format/applehttp/protocol/https/a.m3u8
 
 #EXTINF:-1 media="true" group-title="IEGCQT" tvg-logo="https://upload.wikimedia.org/wikipedia/pt/thumb/8/8a/IeGcQT.png/800px-IeGcQT.png",IEGCQT S12E09 16-11-2025
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #EXTVLCOPT:http-referrer=https://opto.sic.pt/
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=a0d5fbfbb928d5826952759ba1720864:fbf4f67d7fcca7f48daafdf1202b00ce
-https://cfvod.kaltura.com/edash/p/4526593/sp/452659300/serveFlavor/entryId/1_my88lrse/v/11/ev/14/flavorId/1_,mvy1fgdu,xv0udc5l,fxq6fb4w,2jxrg4be,88hfqz0g,d3enz20g,/forceproxy/true/name/a.mp4.urlset/manifest.mpd
+https://cdnapi.kaltura.com/p/4526593/sp/452659300/playManifest/entryId/1_my88lrse/format/applehttp/protocol/https/a.m3u8
 
 #EXTINF:-1 media="true" group-title="IEGCQT" tvg-logo="https://upload.wikimedia.org/wikipedia/pt/thumb/8/8a/IeGcQT.png/800px-IeGcQT.png",IEGCQT S12E08 09-11-2025
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #EXTVLCOPT:http-referrer=https://opto.sic.pt/
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=23b51f4a44667af7866ee591cc6cbea6:8eb32aae897419a5ddbfaba27c341132
-https://cfvod.kaltura.com/edash/p/4526593/sp/452659300/serveFlavor/entryId/1_kgt4vfln/v/11/ev/14/flavorId/1_,dkps5x70,ia8frapk,c4gf10zn,4lr7so3s,gvocmlos,6nclf593,/forceproxy/true/name/a.mp4.urlset/manifest.mpd
+https://cdnapi.kaltura.com/p/4526593/sp/452659300/playManifest/entryId/1_kgt4vfln/format/applehttp/protocol/https/a.m3u8
 
 #EXTINF:-1 media="true" group-title="IEGCQT" tvg-logo="https://upload.wikimedia.org/wikipedia/pt/thumb/8/8a/IeGcQT.png/800px-IeGcQT.png",IEGCQT S12E07 02-11-2025
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #EXTVLCOPT:http-referrer=https://opto.sic.pt/
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=d40638daa9e3a55357ca626766c2c344:ab15600d033088698529a9fddd1abf8a
-https://cfvod.kaltura.com/edash/p/4526593/sp/452659300/serveFlavor/entryId/1_talrji96/v/11/ev/13/flavorId/1_,bszvlvk0,9wyafjj5,r1pr77dy,92wvlhic,1roznwlf,pu5tm9c8,/forceproxy/true/name/a.mp4.urlset/manifest.mpd
+https://cdnapi.kaltura.com/p/4526593/sp/452659300/playManifest/entryId/1_talrji96/format/applehttp/protocol/https/a.m3u8
 
 #EXTINF:-1 media="true" group-title="IEGCQT" tvg-logo="https://upload.wikimedia.org/wikipedia/pt/thumb/8/8a/IeGcQT.png/800px-IeGcQT.png",IEGCQT S12E06 26-10-2025
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=e6765890802dec363e6e570e8c54a2df:96dfd34d56f653eaeef4fabdf0ac087e
-https://cfvod.kaltura.com/edash/p/4526593/sp/452659300/serveFlavor/entryId/1_dn0adfwe/v/1/ev/7/flavorId/1_,i75od018,ix40pgm9,3h9v5ich,rnqy0qva,qpzo4ufg,ddde120h,/forceproxy/true/name/a.mp4.urlset/manifest.mpd
+https://cdnapi.kaltura.com/p/4526593/sp/452659300/playManifest/entryId/1_dn0adfwe/format/applehttp/protocol/https/a.m3u8
 
 #EXTINF:-1 media="true" group-title="IEGCQT" tvg-logo="https://upload.wikimedia.org/wikipedia/pt/thumb/8/8a/IeGcQT.png/800px-IeGcQT.png",IEGCQT S12E05 19-10-2025
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=941d093e4547b8a7e3eac453ada7b2bd:b0b04dbd2fa237fe48de3c6687bd5465
-https://cfvod.kaltura.com/edash/p/4526593/sp/452659300/serveFlavor/entryId/1_qkspi573/v/1/ev/2/flavorId/1_3hg23no1/forceproxy/true/name/a.mp4/manifest.mpd
+https://cdnapi.kaltura.com/p/4526593/sp/452659300/playManifest/entryId/1_qkspi573/format/applehttp/protocol/https/a.m3u8
 
 #EXTINF:-1 media="true" group-title="IEGCQT" tvg-logo="https://upload.wikimedia.org/wikipedia/pt/thumb/8/8a/IeGcQT.png/800px-IeGcQT.png",IEGCQT S12E04 05-10-2025
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=132f24400c43a1414f59bf58361b8757:28d27e8898baceb0e057799aa69951ea
-https://cfvod.kaltura.com/edash/p/4526593/sp/452659300/serveFlavor/entryId/1_xp0a1vmx/v/1/ev/7/flavorId/1_,d7ixkg9q,hk32xyb4,kcttso1r,y2kjbefi,s7xnqwup,3x8ii3ir,/forceproxy/true/name/a.mp4.urlset/manifest.mpd
+https://cdnapi.kaltura.com/p/4526593/sp/452659300/playManifest/entryId/1_xp0a1vmx/format/applehttp/protocol/https/a.m3u8
 
 #EXTINF:-1 media="true" group-title="IEGCQT" tvg-logo="https://upload.wikimedia.org/wikipedia/pt/thumb/8/8a/IeGcQT.png/800px-IeGcQT.png",IEGCQT S12E03 21-09-2025
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=49071609752132e703ddf05205d71b89:64092715a0066e562e5befb4473734de
-https://cfvod.kaltura.com/edash/p/4526593/sp/452659300/serveFlavor/entryId/1_n8v68pj6/v/1/ev/7/flavorId/1_,2cu4er5i,wqiw9q06,8tkpvb4o,elevxzfz,i9zpqi8z,9465pv16,/forceproxy/true/name/a.mp4.urlset/manifest.mpd
+https://cdnapi.kaltura.com/p/4526593/sp/452659300/playManifest/entryId/1_n8v68pj6/format/applehttp/protocol/https/a.m3u8
 
 #EXTINF:-1 media="true" group-title="IEGCQT" tvg-logo="https://upload.wikimedia.org/wikipedia/pt/thumb/8/8a/IeGcQT.png/800px-IeGcQT.png",IEGCQT S12E02 14-09-2025
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=88b0d024ce29fa87b162ce0520f5a66c:1bbdc7acf5b18a9ff9479a58d37642f7
-https://cfvod.kaltura.com/edash/p/4526593/sp/452659300/serveFlavor/entryId/1_hjso5unx/v/1/ev/7/flavorId/1_,s34xoolz,49uq6yhe,7g823qez,az2cghib,plzd2b9o,w7lp9eyg,/forceproxy/true/name/a.mp4.urlset/manifest.mpd
+https://cdnapi.kaltura.com/p/4526593/sp/452659300/playManifest/entryId/1_hjso5unx/format/applehttp/protocol/https/a.m3u8
 
 #EXTINF:-1 media="true" group-title="IEGCQT" tvg-logo="https://upload.wikimedia.org/wikipedia/pt/thumb/8/8a/IeGcQT.png/800px-IeGcQT.png",IEGCQT S12E01 07-09-2025
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=af24f1e6fa32ee71998d8299408ca171:77eff917828e3b8128470aacadf3a3c2
-https://cfvod.kaltura.com/edash/p/4526593/sp/452659300/serveFlavor/entryId/1_02je3cd2/v/1/ev/7/flavorId/1_,mycu1tdz,k0hof6o6,4uzlnu6g,x1t3m9qf,a0em2x66,kotspe4j,/forceproxy/true/name/a.mp4.urlset/manifest.mpd
+https://cdnapi.kaltura.com/p/4526593/sp/452659300/playManifest/entryId/1_02je3cd2/format/applehttp/protocol/https/a.m3u8
 
 #EXTINF:-1 media="true" group-title="IEGCQT" tvg-logo="https://upload.wikimedia.org/wikipedia/pt/thumb/8/8a/IeGcQT.png/800px-IeGcQT.png",IEGCQT S11E29 25-05-2025
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=5065852fcfe12731ad2cfa0334950d22:ce352b6bae928318aaeeba3eb573f0a8
-https://cfvod.kaltura.com/edash/p/4526593/sp/452659300/serveFlavor/entryId/1_dari4vmm/v/11/ev/14/flavorId/1_,564sf8jr,q4d1n3z0,tn3ntlll,misq9kfw,28h0b4rd,tvvcvivf,/forceproxy/true/name/a.mp4.urlset/manifest.mpd
+https://cdnapi.kaltura.com/p/4526593/sp/452659300/playManifest/entryId/1_dari4vmm/format/applehttp/protocol/https/a.m3u8
 
 #EXTINF:-1 media="true" group-title="IEGCQT" tvg-logo="https://upload.wikimedia.org/wikipedia/pt/thumb/8/8a/IeGcQT.png/800px-IeGcQT.png",IEGCQT S11E28 16-05-2025
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=a08372b8e8a52762113fe57e1cb2fe3b:c41ffdd6a2224b178b4e2ce67e0007ef
-https://cfvod.kaltura.com/edash/p/4526593/sp/452659300/serveFlavor/entryId/1_3k78cks5/v/11/ev/14/flavorId/1_,qjeecn14,5rorz47p,e3fizcil,pch58j7m,fnsi1qq5,icrp38z3,/forceproxy/true/name/a.mp4.urlset/manifest.mpd
+https://cdnapi.kaltura.com/p/4526593/sp/452659300/playManifest/entryId/1_3k78cks5/format/applehttp/protocol/https/a.m3u8
 
 #EXTINF:-1 media="true" group-title="IEGCQT" tvg-logo="https://upload.wikimedia.org/wikipedia/pt/thumb/8/8a/IeGcQT.png/800px-IeGcQT.png",IEGCQT S11E27 15-05-2025
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=1ddd66355cc62b454ff36632f1e7375b:ab6c86dcec92df769e889c37a3a6b90c
-https://cfvod.kaltura.com/edash/p/4526593/sp/452659300/serveFlavor/entryId/1_z4vwgmve/v/11/ev/14/flavorId/1_,4zp7hsdj,85dm1xtw,ircffabk,v5vlpxuy,igc0vmca,djdxv8ui,/forceproxy/true/name/a.mp4.urlset/manifest.mpd
+https://cdnapi.kaltura.com/p/4526593/sp/452659300/playManifest/entryId/1_z4vwgmve/format/applehttp/protocol/https/a.m3u8
 
 #EXTINF:-1 media="true" group-title="IEGCQT" tvg-logo="https://upload.wikimedia.org/wikipedia/pt/thumb/8/8a/IeGcQT.png/800px-IeGcQT.png",IEGCQT S11E26 14-05-2025
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=5a6b547247d993b5fc1025a634d65954:ec004d997005357181d6d178de047040
-https://cfvod.kaltura.com/edash/p/4526593/sp/452659300/serveFlavor/entryId/1_hep5367y/v/11/ev/14/flavorId/1_,dejl7ifo,rkdd0ndc,v0jqt21k,hphznwaa,qw8ammoc,hhvfonbl,/forceproxy/true/name/a.mp4.urlset/manifest.mpd
+https://cdnapi.kaltura.com/p/4526593/sp/452659300/playManifest/entryId/1_hep5367y/format/applehttp/protocol/https/a.m3u8
 
 #EXTINF:-1 media="true" group-title="IEGCQT" tvg-logo="https://upload.wikimedia.org/wikipedia/pt/thumb/8/8a/IeGcQT.png/800px-IeGcQT.png",IEGCQT S11E25 13-05-2025
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=40cb08d48a21d4414f0cfda69a9ea1f7:568b0b634abf61dbb37d27ab3815cd3b
-https://cfvod.kaltura.com/edash/p/4526593/sp/452659300/serveFlavor/entryId/1_nx0klilm/v/11/ev/14/flavorId/1_,kxwdvc1f,skm9ftg8,of6gbzca,0xgdk3hu,jrikfbz0,te42kz4i,/forceproxy/true/name/a.mp4.urlset/manifest.mpd
+https://cdnapi.kaltura.com/p/4526593/sp/452659300/playManifest/entryId/1_nx0klilm/format/applehttp/protocol/https/a.m3u8
 
 #EXTINF:-1 media="true" group-title="IEGCQT" tvg-logo="https://upload.wikimedia.org/wikipedia/pt/thumb/8/8a/IeGcQT.png/800px-IeGcQT.png",IEGCQT S11E24 12-05-2025
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=92dd20459bebad9a686504d6ca7e53a5:9e32bd988799df1d29364f88e720ebee
-https://cfvod.kaltura.com/edash/p/4526593/sp/452659300/serveFlavor/entryId/1_bd12ukqb/v/11/ev/14/flavorId/1_,cpmtlw58,tclflota,5cp8c9yf,39d1zl1o,8ju4dx0i,u7fd5rdq,/forceproxy/true/name/a.mp4.urlset/manifest.mpd
+https://cdnapi.kaltura.com/p/4526593/sp/452659300/playManifest/entryId/1_bd12ukqb/format/applehttp/protocol/https/a.m3u8
 
 #EXTINF:-1 media="true" group-title="IEGCQT" tvg-logo="https://upload.wikimedia.org/wikipedia/pt/thumb/8/8a/IeGcQT.png/800px-IeGcQT.png",IEGCQT S11E23 11-05-2025
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=0a7bac95bb3fec122acaaa1c29226475:718ed32ff5dbde4ba9d4a04a093f4190
-https://cfvod.kaltura.com/edash/p/4526593/sp/452659300/serveFlavor/entryId/1_lihkwfz8/v/1/ev/7/flavorId/1_,9v4pwwip,ith7dwog,bpi96rvc,468agx8u,er8m7u75,k8r67nwo,/forceproxy/true/name/a.mp4.urlset/manifest.mpd
+https://cdnapi.kaltura.com/p/4526593/sp/452659300/playManifest/entryId/1_lihkwfz8/format/applehttp/protocol/https/a.m3u8
 
 #EXTINF:-1 media="true" group-title="IEGCQT" tvg-logo="https://upload.wikimedia.org/wikipedia/pt/thumb/8/8a/IeGcQT.png/800px-IeGcQT.png",IEGCQT S11E22 09-05-2025
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=e1a271998071cc3c1ce54ef4a3943273:cd02f696671d70d4891d1710c664763e
-https://cfvod.kaltura.com/edash/p/4526593/sp/452659300/serveFlavor/entryId/1_4m1h4elg/v/1/ev/7/flavorId/1_,0lcbt283,vl9qifw5,8r4g0uuk,9ltuyqo1,27i51c2e,fkp0x24y,/forceproxy/true/name/a.mp4.urlset/manifest.mpd
+https://cdnapi.kaltura.com/p/4526593/sp/452659300/playManifest/entryId/1_4m1h4elg/format/applehttp/protocol/https/a.m3u8
 
 #EXTINF:-1 media="true" group-title="IEGCQT" tvg-logo="https://upload.wikimedia.org/wikipedia/pt/thumb/8/8a/IeGcQT.png/800px-IeGcQT.png",IEGCQT S11E21 08-05-2025
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=1a05b700fa43b64f933d39fd06a46092:02ccc9caa984884ac62c81762da007af
-https://cfvod.kaltura.com/edash/p/4526593/sp/452659300/serveFlavor/entryId/1_pkynspra/v/1/ev/7/flavorId/1_,30ek3aqz,s9ips9ii,ugaj6d9e,5zkrzq13,dof1yybn,g7kur4b7,/forceproxy/true/name/a.mp4.urlset/manifest.mpd
+https://cdnapi.kaltura.com/p/4526593/sp/452659300/playManifest/entryId/1_pkynspra/format/applehttp/protocol/https/a.m3u8
 
 #EXTINF:-1 media="true" group-title="IEGCQT" tvg-logo="https://upload.wikimedia.org/wikipedia/pt/thumb/8/8a/IeGcQT.png/800px-IeGcQT.png",IEGCQT S11E20 07-05-2025
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=943d884c956fc3a6aaa89b37d8a727e2:88f13c78fad86324d807b29dcc200f7c
-https://cfvod.kaltura.com/edash/p/4526593/sp/452659300/serveFlavor/entryId/1_1vn5rrl1/v/11/ev/14/flavorId/1_,m8sa22cp,3ik0ac99,jsojlhzc,z06tgg3s,jtq2rjav,6yxfko1i,/forceproxy/true/name/a.mp4.urlset/manifest.mpd
+https://cdnapi.kaltura.com/p/4526593/sp/452659300/playManifest/entryId/1_1vn5rrl1/format/applehttp/protocol/https/a.m3u8
 
 #EXTINF:-1 media="true" group-title="IEGCQT" tvg-logo="https://upload.wikimedia.org/wikipedia/pt/thumb/8/8a/IeGcQT.png/800px-IeGcQT.png",IEGCQT S11E19 06-05-2025
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=b0192aa67b49e09c12c667e234e77175:98e2d544c8c99471871819a949cc9d3c
-https://cfvod.kaltura.com/edash/p/4526593/sp/452659300/serveFlavor/entryId/1_xu2676h8/v/11/ev/14/flavorId/1_,nf8bks5i,8lqkxu39,9crhiqa3,9p91mqg4,5jat4iyj,igu3sfvc,/forceproxy/true/name/a.mp4.urlset/manifest.mpd
+https://cdnapi.kaltura.com/p/4526593/sp/452659300/playManifest/entryId/1_xu2676h8/format/applehttp/protocol/https/a.m3u8
 
 #EXTINF:-1 media="true" group-title="IEGCQT" tvg-logo="https://upload.wikimedia.org/wikipedia/pt/thumb/8/8a/IeGcQT.png/800px-IeGcQT.png",IEGCQT S11E18 05-05-2025
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=39623d297616d819a1443ae6bd7c1f8c:0a4567dcda9f0d4a17a0ba5a2c0a45ad
-https://cfvod.kaltura.com/edash/p/4526593/sp/452659300/serveFlavor/entryId/1_827l94w5/v/11/ev/14/flavorId/1_,mjqf10bs,zqp5hy1u,7foleqvu,rmla47j1,sge3ua0j,hmz1t81g,/forceproxy/true/name/a.mp4.urlset/manifest.mpd
+https://cdnapi.kaltura.com/p/4526593/sp/452659300/playManifest/entryId/1_827l94w5/format/applehttp/protocol/https/a.m3u8
 
 #EXTINF:-1 media="true" group-title="IEGCQT" tvg-logo="https://upload.wikimedia.org/wikipedia/pt/thumb/8/8a/IeGcQT.png/800px-IeGcQT.png",IEGCQT S11E17 04-05-2025
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=18b897a4feeca36616ae888abea3fcd0:cb05b3366b50094862b4604c3fb3bd72
-https://cfvod.kaltura.com/edash/p/4526593/sp/452659300/serveFlavor/entryId/1_c4ygkcxo/v/11/ev/13/flavorId/1_,vmq912nl,1i2lcdl1,zjiwh55b,qkeswq2z,uucscz73,x6tr4i8b,/forceproxy/true/name/a.mp4.urlset/manifest.mpd
+https://cdnapi.kaltura.com/p/4526593/sp/452659300/playManifest/entryId/1_c4ygkcxo/format/applehttp/protocol/https/a.m3u8
 
 #EXTINF:-1 media="true" group-title="IEGCQT" tvg-logo="https://upload.wikimedia.org/wikipedia/pt/thumb/8/8a/IeGcQT.png/800px-IeGcQT.png",IEGCQT S11E16 27-04-2025
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=51d4aa45e0cf6802522f1428b9f40135:823b4e98964b189ad109c3173e6d574c
-https://cfvod.kaltura.com/edash/p/4526593/sp/452659300/serveFlavor/entryId/1_ceea2ubc/v/1/ev/7/flavorId/1_,ktljd44j,jayhh225,ih6jkgqj,a0n6fhf7,fcleen9e,o09fxz5m,/forceproxy/true/name/a.mp4.urlset/manifest.mpd
+https://cdnapi.kaltura.com/p/4526593/sp/452659300/playManifest/entryId/1_ceea2ubc/format/applehttp/protocol/https/a.m3u8
 
 #EXTINF:-1 media="true" group-title="IEGCQT" tvg-logo="https://upload.wikimedia.org/wikipedia/pt/thumb/8/8a/IeGcQT.png/800px-IeGcQT.png",IEGCQT S11E15 13-04-2025
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=f9b1c8cca31b6c6b507a542e4ae6a6fc:8bd382192b7b4bddac580671049c734d
-https://cfvod.kaltura.com/edash/p/4526593/sp/452659300/serveFlavor/entryId/1_cgav0m5k/v/11/ev/14/flavorId/1_,7islhxh6,4bjurmf5,32mjoydd,d4xihvtg,1adz6vl0,untxnfwc,/forceproxy/true/name/a.mp4.urlset/manifest.mpd
+https://cdnapi.kaltura.com/p/4526593/sp/452659300/playManifest/entryId/1_cgav0m5k/format/applehttp/protocol/https/a.m3u8
 
 #EXTINF:-1 media="true" group-title="IEGCQT" tvg-logo="https://upload.wikimedia.org/wikipedia/pt/thumb/8/8a/IeGcQT.png/800px-IeGcQT.png",IEGCQT S11E14 06-04-2025
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=470da075e9a9359a2ddd5bdcdf4b906c:561f579550d903c36af126cac82b4306
-https://cfvod.kaltura.com/edash/p/4526593/sp/452659300/serveFlavor/entryId/1_wswoyrg7/v/11/ev/14/flavorId/1_,5ue499v6,ia5ver6v,inmjlxvs,kzm0uwy5,ccer1n7s,sgyihhud,/forceproxy/true/name/a.mp4.urlset/manifest.mpd
+https://cdnapi.kaltura.com/p/4526593/sp/452659300/playManifest/entryId/1_wswoyrg7/format/applehttp/protocol/https/a.m3u8
 
 #EXTINF:-1 media="true" group-title="IEGCQT" tvg-logo="https://upload.wikimedia.org/wikipedia/pt/thumb/8/8a/IeGcQT.png/800px-IeGcQT.png",IEGCQT S11E13 30-03-2025
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=cd5506c34e70321cf31042cfd268cb81:3bf03fa25f512411d4ce48d63e8a8a1f
-https://cfvod.kaltura.com/edash/p/4526593/sp/452659300/serveFlavor/entryId/1_vp0l1txp/v/11/ev/14/flavorId/1_,764revv9,johyrm2i,mh7ini7k,59txmoh9,yty7a0tv,n0uvl8el,/forceproxy/true/name/a.mp4.urlset/manifest.mpd
+https://cdnapi.kaltura.com/p/4526593/sp/452659300/playManifest/entryId/1_vp0l1txp/format/applehttp/protocol/https/a.m3u8
 
 
 # Sem Moderação
@@ -3556,285 +3562,4 @@ https://cdn.jwplayer.com/manifests/6ipev8fs.m3u8
 
 
 # 📻 Radio stations
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/antena1.png",Rádio RTP Antena 1
-#EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
-#EXTVLCOPT:http-origin=https://www.rtp.pt
-https://streaming-live.rtp.pt/liveradio/antena180a/playlist.m3u8
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/antena2.png",Rádio RTP Antena 2
-#EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
-#EXTVLCOPT:http-origin=https://www.rtp.pt
-https://streaming-live.rtp.pt/liveradio/antena280a/playlist.m3u8
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/antena3.png",Rádio RTP Antena 3
-#EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
-#EXTVLCOPT:http-origin=https://www.rtp.pt
-https://streaming-live.rtp.pt/liveradio/antena380a/playlist.m3u8
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/Antena1-Açores.png",RTP Antena 1 Açores
-#EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
-#EXTVLCOPT:http-origin=https://www.rtp.pt
-https://streaming-live.rtp.pt/liveradio/antena1acores80a/playlist.m3u8
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/Antena1-Madeira.png",RTP Antena 1 Madeira
-#EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
-#EXTVLCOPT:http-origin=https://www.rtp.pt
-https://streaming-live.rtp.pt/liveradio/antena1madeira80a/playlist.m3u8
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/Antena3-Madeira.png",RTP Antena 3 Madeira
-#EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
-#EXTVLCOPT:http-origin=https://www.rtp.pt
-https://streaming-live.rtp.pt/liveradio/antena3madeira80a/playlist.m3u8
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/RTP-Mundo.png",Rádio RTP Mundo
-#EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
-#EXTVLCOPT:http-origin=https://www.rtp.pt
-https://streaming-live.rtp.pt/liveradio/rdpint80a/playlist.m3u8
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/RTP-África.png",Rádio RTP África
-#EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
-#EXTVLCOPT:http-origin=https://www.rtp.pt
-https://streaming-live.rtp.pt/liveradio/rdpafrica80a/playlist.m3u8
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/antena1vida.png",Rádio RTP Vida
-#EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
-#EXTVLCOPT:http-origin=https://www.rtp.pt
-https://streaming-live.rtp.pt/liveradio/vida80a/playlist.m3u8
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/radiolusitania.png",Rádio RTP Lusitânia
-#EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
-#EXTVLCOPT:http-origin=https://www.rtp.pt
-https://streaming-live.rtp.pt/liveradio/lusitania80a/playlist.m3u8
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/antena1fado.png",Rádio RTP Fado
-#EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
-#EXTVLCOPT:http-origin=https://www.rtp.pt
-https://streaming-live.rtp.pt/liveradio/antena1fado80a/playlist.m3u8
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/antena2jazzin.png",Rádio RTP Jazzin'
-#EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
-#EXTVLCOPT:http-origin=https://www.rtp.pt
-https://streaming-live.rtp.pt/liveradio/antena2jazzin80a/playlist.m3u8
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/antena2opera.png",Rádio RTP Ópera
-#EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
-#EXTVLCOPT:http-origin=https://www.rtp.pt
-https://streaming-live.rtp.pt/liveradio/antena2opera80a/playlist.m3u8
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="http://www.amalia.fm/wp-content/uploads/2014/08/radioamalialogo.png",Rádio Amália
-http://link.radios.pt/amalia?1487014253471.mp3
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="https://cidade.iol.pt/images/logo_CIDADE_2020.png",Rádio Cidade FM
-https://stream-hls.bauermedia.pt/cidade.aac/playlist.m3u8
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="https://cidade.iol.pt/images/logo_CIDADE_2020.png",Rádio Cidade Hip Hop
-https://stream-hls.bauermedia.pt/cidhiphop.aac/playlist.m3u8
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="https://cidade.iol.pt/images/logo_CIDADE_2020.png",Rádio Cidade Latina
-https://stream-hls.bauermedia.pt/cidlatina.aac/playlist.m3u8
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="http://radiocomercial.iol.pt/images/logo_big.png",Rádio Comercial
-https://stream-hls.bauermedia.pt/comercial.aac/playlist.m3u8
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="https://static.mytuner.mobi/media/tvos_radios/q6clfyhqvcg5.png",Rádio Comercial Rock
-https://media1.mcr.iol.pt/wrcomercial/rcrock.stream/playlist.m3u8
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="https://static.mytuner.mobi/media/tvos_radios/ybykwjqku6rh.png",Rádio Comercial Dance
-https://stream-hls.bauermedia.pt/rcdance.aac/playlist.m3u8
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="https://radiocomercial.iol.pt/images/noCover.png",Rádio Comercial By Night
-https://stream-hls.bauermedia.pt/rcsoft.aac/playlist.m3u8
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="https://radiocomercial.iol.pt/images/noCover.png",Rádio Comercial One Hit Wonders
-https://stream-hls.bauermedia.pt/rchit.aac/playlist.m3u8?
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/Comercial-Kids.png",Rádio Comercial Kids
-https://stream-hls.bauermedia.pt/rckids.aac/playlist.m3u8
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="https://radiocomercial.iol.pt/images/webradios/wr-portugal.jpg",Rádio Comercial Portugal
-https://stream-hls.bauermedia.pt/rctuga.aac/playlist.m3u8
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="https://radiocomercial.iol.pt/images/webradios/wr-brasil.jpg",Rádio Comercial Brasil
-https://stream-hls.bauermedia.pt/rcbrasil.aac/playlist.m3u8
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="https://radiocomercial.iol.pt/images/webradios/wr-90s.jpg",Rádio Comercial 90s
-https://stream-hls.bauermedia.pt/rcbest90.aac/playlist.m3u8
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="https://radiocomercial.iol.pt/images/webradios/wr-2000s.jpg",Rádio Comercial 2000s
-https://stream-hls.bauermedia.pt/rcbest2000.aac/playlist.m3u8
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="https://cdn-profiles.tunein.com/s81784/images/logod.jpg",Rádio M80
-https://stream-hls.bauermedia.pt/m80.aac/playlist.m3u8
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="http://radiosdeportugal.com/wp-content/uploads/2007/07/logo_megafm_new.png",Rádio Mega Hits
-https://21313.live.streamtheworld.com/MEGA_HITSAAC
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="https://cdn-profiles.tunein.com/s81786/images/logod.png?t=155740",Rádio MEO Music
-http://centova.radios.pt:8495/;listen.pls
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="http://www.radiot.fi/img/channel-logos/radio-nostalgia.png",Rádio Nostalgia
-http://centova.radios.pt:8435
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="http://www.radionovaera.pt/wp-content/uploads/2015/12/logo.png",Rádio Nova Era
-http://centova.radios.pt:9478/
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="https://www.radionova.fm/wp-content/uploads/2023/05/cropped-favicon-180x180.png",Rádio Nova 98.9 FM - Porto
-http://centova.radio.com.pt:9528/
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="https://observador.pt/wp-content/themes/observador-child/assets/build/img/apple-touch-icon.png",Rádio Observador
-https://playerservices.streamtheworld.com/api/livestream-redirect/OBSERVADOR_ADP.m3u8
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="https://cdn-profiles.tunein.com/s15270/images/logod.png",Rádio Orbital
-https://ec2.yesstreaming.net:3025/stream
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="http://cdn-radiotime-logos.tunein.com/s83943q.png",Rádio Oxigénio
-https://proic1.evspt.com/oxigenio_aac
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="https://cdn-profiles.tunein.com/s84192/images/logod.png",Rádio Radar
-https://proic1.evspt.com/radar_aac
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="https://cdn-radiotime-logos.tunein.com/s25179d.png",Rádio Renascença
-https://25643.live.streamtheworld.com/RADIO_RENASCENCAAAC
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="https://cdn-radiotime-logos.tunein.com/s18720d.png",Rádio RFM
-https://21313.live.streamtheworld.com/RFMAAC
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="https://static.radiosdeportugal.pt/img/oitentas.jpg",Rádio RFM Oitentas
-https://22533.live.streamtheworld.com/GR80SRFMAAC
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="https://www.radio.pt/images/broadcasts/09/f1/110226/1/c300.png",Rádio RFM On The Rock
-https://20863.live.streamtheworld.com/RFMONTHEROCKAAC
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="https://static.mytuner.mobi/media/tvos_radios/ggsggrtqba2b.png",Rádio RFM Dancefloor
-https://21273.live.streamtheworld.com/DANCEONTHEFLOORAAC
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="https://static.mytuner.mobi/media/tvos_radios/c4XS6cBFdq.png",Rádio RFM Oceano Pacífico
-https://25533.live.streamtheworld.com/OCEANPACIFICAAC
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="https://cdn-profiles.tunein.com/s16311/images/logod.png",Rádio SBSR
-https://centova.radios.pt/proxy/435?mp=/stream
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="http://dznmkb6al6kqz.cloudfront.net/sites/default/files/radio/logos/logo-smooth-fm_0.png",Rádio Smooth FM
-https://stream-hls.bauermedia.pt/smooth.aac/playlist.m3u8
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="http://www.superfm.com/wp-content/uploads/2015/09/superfmlogo.png",Rádio Super FM
-https://play.radioregional.pt:8210/stream/2/;/stream.mp3
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="http://www.tsf.pt/common/images/logo-tsf.png",Rádio TSF
-http://tsfdirecto.tsf.pt/tsfdirecto.mp3
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="https://batida.fm/images/logo-BATIDAFM-white.svg",batida.fm
-https://stream-hls.bauermedia.pt/batidafm.aac/playlist.m3u8
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="http://www.radiomiudos.pt/img/logo2.png",Rádio Miúdos
-http://radiomiudos.out.airtime.pro:8000/radiomiudos_a
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="http://media.rtp.pt/refresca/wp-content/themes/refresca/includes/img/logo_RadioZigZag.png",Rádio RTP Zig Zag
-https://streaming-live.rtp.pt/liveradio/zigzag80a/playlist.m3u8
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="https://blogger.googleusercontent.com/img/a/AVvXsEj76VV_pUw_LEbQcA4TcNqiiI3LZXS1MijJhx8NUaaLKp3NR9gEY21fUyRidOlDiZDQuTGynD5aGgjb8-lOQzy9XzDSeZnafrSSrxcUJjicT6veTLyi0n05ouBfup0DzU7OGZZH533p6z5BWDi4nfIHYdvQR2lVeRYiBQqSFY83R7CbVzQ3NG215gxa2sU=s294",Rádio Quinta do Conde
-https://sp0.redeaudio.com/8100/stream
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="http://www.liveonlineradio.net/wp-content/uploads/2014/02/Radio-Cascais.jpg",Rádio Cascais
-http://5.9.14.150:9300/;
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="http://www.radiocastelobranco.pt/css/site/img/logo.png",Rádio Castelo Branco
-http://centova.radio.com.pt:9462/;
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="http://www.radioclube-penafiel.pt/i/logo_radioclubepenafiel.png",Rádio Clube Penafiel
-http://centova.radios.pt:9476/;
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="http://www.jm-madeira.pt/dist/images/JM_logo-01.png",JM Madeira
-http://194.38.136.130:8000/?type=http
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="http://www.hiper.fm/images/hiper_logo_red.png",Hiper FM
-http://85.25.73.243:10460/;stream/1
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="http://radiohertz.pt/wp-content/uploads/2015/03/Logo-R%C3%A1dio-Hertz-2015-03-261-300x117.png",Rádio Hertz
-http://213.136.92.8:8030/stream
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="http://www.radiolinear.pt/img/logo.png",Rádio Linear
-http://213.136.92.8:8022/;
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="http://www.marcoensefm.com/wp-content/themes/marcoense-fm/images/logo.png",Marcoense FM
-http://137.74.160.250:8000/;stream/1
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="http://i.imgur.com/tHi5ewx.png",Rádio Monsanto
-http://centova.radio.com.pt:9424/;
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="https://www.radio.net/images/broadcasts/79/00/29566/1/c300.png",Rádio Montemuro
-http://46.105.172.166:9304/;audio.mp3
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="http://radionoar.pt/wp-content/uploads/2017/02/Radio-NoAr_156.png",Rádio NoAr
-http://centova.radio.com.pt:9472/;
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="http://nove3cinco.pt/sv/wp-content/uploads/2015/05/Nove3Cinco-Menu-Logo.png",Nove3Cinco
-http://centova.radios.pt:9522/;
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="http://www.apradiodifusao.pt/xiiicongresso/images/radios/radioportalegre.png",Rádio Portalegre
-http://centova.radios.pt:9492/stream
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="http://radioportuense.com/wp-content/uploads/2017/01/oie_dUXe4SR8xHI0.png",Rádio Portuense
-http://88.198.72.46:9848/;
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="http://i.imgur.com/0vmzhdz.png",Rádio Regional
-http://streaming.radioregional.pt:8002
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="http://i.imgur.com/0vmzhdz.png",Rádio Regional [Alternativa]
-http://streaming.radioregional.pt:8000
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="http://i.imgur.com/tKrKYOR.png",Rádio Regional Rock
-http://streaming.radioregional.pt:8046
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="http://i.imgur.com/hUrEKgu.png",Rádio Regional Dance & DJS
-http://streaming.radioregional.pt:8064
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="http://i.imgur.com/aPZ5joL.png",Rádio Regional Love Songs
-http://streaming.radioregional.pt:8058
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="http://i.imgur.com/1zntJ9S.png",Rádio Regional Oldies
-http://streaming.radioregional.pt:8052
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="http://i.imgur.com/x48qEMX.png",Rádio Regional Portuguesa
-http://streaming.radioregional.pt:8040
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="http://www.radioregionaldearouca.com/site/wp-content/uploads/2015/06/logo-radio1.png",Rádio Regional Arouca
-http://centova.radio.com.pt:8485/
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="https://radiosines.sapo.pt/assets/dist/img/logo.png",Rádio Sines
-https://sp0.redeaudio.com/9580/stream
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="https://fastcast4u.com/player/fama/_user/cover/f/fama/fama.radio.jpg",Fama Rádio
-https://eu10.fastcast4u.com/famaradio
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="http://www.terranova.pt/sites/default/files/logotipoterranova.png",Rádio Terra Nova
-http://centova.radios.pt:9404/stream
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="https://bucket-backblaze.ruc.pt/file/bucket-ruc-pt/wp-content/uploads/2021/02/15233926/Logo-RUC-2020_assinaturas_Prancheta-1-copia.png",Rádio Universitária de Coimbra
-https://stream.ruc.pt/high
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="https://cdn-radiotime-logos.tunein.com/s3095d.png",Rádio Universitária do Minho
-https://centova.radio.com.pt/proxy/558?mp=/stream
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="http://www.radiovaledominho.com/wp-content/uploads/2017/09/logo_rvm-01.png",Rádio Vale do Minho
-http://centova.radio.com.pt:9434/;
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="https://www.radio.pt/images/broadcasts/c5/77/38212/1/c300.png",Rádio Quântica
-https://stream.radioquantica.com:8443/stream
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="https://cdn-profiles.tunein.com/s47489/images/logod.png",Rádio Zero
-https://stream.radiozero.pt/zero128.mp3
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="https://radioavfm.net/wp-content/uploads/2017/06/avfm-logo-horizontal.png,AVFM
-https://uk2.streamingpulse.com/ssl/radioavfm
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="https://cdn-profiles.tunein.com/s95144/images/logod.png",Venice Classic Radio - Auditorium
-https://uk2.streamingpulse.com/ssl/vcr1
-
-#EXTINF:-1 radio="true" group-title="Rádios" tvg-logo="https://cdn-profiles.tunein.com/s95144/images/logod.png",Venice Classic Radio - Live
-https://uk2.streamingpulse.com/ssl/vcr2
-
-
-
 
