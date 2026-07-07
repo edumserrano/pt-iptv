@@ -2,10 +2,10 @@
 
 Minimal copy of the upstream `LITUATUI/M3UPT` playlist with the broken TVI and CNN Portugal stream URLs corrected.
 
-After pushing this repository to GitHub, use this raw playlist URL:
+Raw playlist URL:
 
 ```text
-https://raw.githubusercontent.com/<your-github-user>/<your-repo>/main/M3U/M3UPT.m3u
+https://raw.githubusercontent.com/edumserrano/pt-iptv/main/M3U/M3UPT.m3u
 ```
 
 Raw EPG URL:
