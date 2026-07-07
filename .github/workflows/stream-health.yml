@@ -23,11 +23,13 @@ on:
     paths:
       - M3U/**
       - scripts/audit_streams.py
+      - scripts/compare_stream_health.py
       - .github/workflows/stream-health.yml
   pull_request:
     paths:
       - M3U/**
       - scripts/audit_streams.py
+      - scripts/compare_stream_health.py
       - .github/workflows/stream-health.yml
 
 permissions:
