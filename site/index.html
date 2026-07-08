@@ -404,20 +404,6 @@
       border-color: var(--accent);
     }
 
-    .remember-pass {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 12px;
-      color: #3b4658;
-    }
-
-    .remember-pass input {
-      width: 16px;
-      height: 16px;
-      accent-color: var(--accent);
-    }
-
     .pass-actions {
       display: flex;
       justify-content: flex-end;
@@ -501,10 +487,6 @@
         <span>Pass</span>
         <input id="pass-input" type="password" autocomplete="current-password" autofocus>
       </label>
-      <label class="remember-pass" for="remember-pass">
-        <input id="remember-pass" type="checkbox">
-        <span>Remember this browser</span>
-      </label>
       <div class="pass-actions">
         <button class="primary" type="submit">Unlock</button>
       </div>
@@ -583,8 +565,6 @@
 
   <script>
     const accessHash = "9ed6918805ea2065dc19f92495bebdafbb8ad28293dc0b8b84897f86c6cdfb7e";
-    const accessStorageKey = "pt-iptv-playlist-access-v2";
-    const accessSessionKey = "pt-iptv-playlist-session-access-v2";
 
     const playlistCandidates = [
       "playlist.m3u",
@@ -605,7 +585,6 @@
       passScreen: document.getElementById("pass-screen"),
       passForm: document.getElementById("pass-form"),
       passInput: document.getElementById("pass-input"),
-      rememberPass: document.getElementById("remember-pass"),
       passError: document.getElementById("pass-error"),
       loadNote: document.getElementById("load-note"),
       playlistLink: document.getElementById("playlist-link"),
@@ -634,27 +613,6 @@
       return Array.from(new Uint8Array(hash), (byte) => byte.toString(16).padStart(2, "0")).join("");
     }
 
-    function hasStoredAccess() {
-      try {
-        return localStorage.getItem(accessStorageKey) === "true" || sessionStorage.getItem(accessSessionKey) === "true";
-      } catch {
-        return false;
-      }
-    }
-
-    function storeAccess(remember) {
-      try {
-        sessionStorage.setItem(accessSessionKey, "true");
-        if (remember) {
-          localStorage.setItem(accessStorageKey, "true");
-        } else {
-          localStorage.removeItem(accessStorageKey);
-        }
-      } catch {
-        // Storage can be blocked; the current unlock still works.
-      }
-    }
-
     async function verifyPass(value) {
       if (!globalThis.crypto?.subtle) {
         throw new Error("Pass check requires a secure browser context.");
@@ -671,7 +629,6 @@
 
       try {
         if (await verifyPass(pass)) {
-          storeAccess(el.rememberPass.checked);
           showApp();
           return;
         }
@@ -1140,11 +1097,7 @@
 
     function start() {
       el.passForm.addEventListener("submit", handlePassSubmit);
-      if (hasStoredAccess()) {
-        showApp();
-      } else {
-        showPassScreen();
-      }
+      showPassScreen();
     }
 
     start();
