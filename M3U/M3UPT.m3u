@@ -26,6 +26,12 @@ https://streaming-live.rtp.pt/liverepeater/rtp2.smil/playlist.m3u8
 #EXTVLCOPT:http-referrer=https://sic.pt/
 https://sic.live.impresa.pt/sic1080p.m3u8
 
+#EXTINF:-1 tvg-id="SIC.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/SIC.png",SIC (Alt 1)
+#EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
+#EXTVLCOPT:http-origin=https://sic.pt
+#EXTVLCOPT:http-referrer=https://sic.pt/direto
+https://sic.live.impresa.pt/sic540p.m3u8
+
 #EXTINF:-1 tvg-id="TVI.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/TVI.png",TVI
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 https://video-auth6.iol.pt/live_tvi/live_tvi/edge_servers/tvi-720p/chunks.m3u8?wmsAuthSign=c2VydmVyX3RpbWU9Ny84LzIwMjYgMTozNDo3IEFNJmhhc2hfdmFsdWU9aW5HWGs2UEdqZmRka2VqK2IwSTNJUT09JnZhbGlkbWludXRlcz0xNDQwJmlkPTFhMmFjNWY0LWM2ZDUtNGEzNi1hMTZkLWViMmVlMTcyMzk5OA==
