@@ -743,7 +743,7 @@
 
     <section class="filters" aria-label="Filters">
       <label class="sr-only" for="search">Search channels</label>
-      <input id="search" type="search" autocomplete="off" placeholder="Search name, tvg-id, group, host, or description">
+      <input id="search" type="search" autocomplete="off" placeholder="Search name, tvg-id, quality, host, or description">
 
       <label class="sr-only" for="group-filter">Group</label>
       <select id="group-filter">
@@ -785,10 +785,20 @@
       "../M3U/M3UPT.m3u"
     ];
 
+    const qualityCandidates = [
+      "quality-metadata.json",
+      "site/quality-metadata.json"
+    ];
+
     const state = {
       entries: [],
       filtered: [],
       playlistUrl: "",
+      qualityMetaUrl: "",
+      qualityError: "",
+      qualityCount: 0,
+      qualityByUrl: new Map(),
+      qualityByKey: new Map(),
       origin: location.origin === "null" ? "" : location.origin,
       activeIndex: null,
       currentUrl: ""
@@ -898,6 +908,7 @@
 
       function finish() {
         if (!current) return;
+        current.quality = qualityForEntry(current);
         current.description = describeEntry(current);
         current.searchText = [
           current.name,
@@ -905,7 +916,9 @@
           current.tvgId,
           current.host,
           current.url,
-          current.description
+          current.description,
+          current.quality.summary,
+          ...(current.quality.tags || [])
         ].join(" ").toLowerCase();
         entries.push(current);
         current = null;
@@ -1030,6 +1043,84 @@
       }
 
       return group ? `${group} playlist entry${host ? ` served from ${host}` : ""}.` : `Playlist entry${host ? ` served from ${host}` : ""}.`;
+    }
+
+    function qualityKey(entry) {
+      return [entry.tvgId, entry.name]
+        .map((part) => String(part || "").trim().toLowerCase())
+        .join("|");
+    }
+
+    function normalizeQualityMetadata(item) {
+      return {
+        summary: item.summary || "Unknown",
+        known: Boolean(item.known),
+        bucket: item.bucket || "Unknown",
+        maxHeight: Number(item.maxHeight || 0),
+        maxWidth: Number(item.maxWidth || 0),
+        bandwidthTier: item.bandwidthTier || "",
+        adaptive: Boolean(item.adaptive),
+        source: item.source || "Unknown",
+        note: item.note || "",
+        probeError: item.probeError || "",
+        inferred: Boolean(item.inferred),
+        tags: Array.isArray(item.tags) ? item.tags : []
+      };
+    }
+
+    function indexQualityMetadata(data) {
+      state.qualityByUrl.clear();
+      state.qualityByKey.clear();
+      state.qualityCount = Array.isArray(data.entries) ? data.entries.length : 0;
+
+      for (const item of data.entries || []) {
+        const quality = normalizeQualityMetadata(item);
+        const url = cleanStreamUrl(item.url);
+        if (url) state.qualityByUrl.set(url, quality);
+
+        const key = qualityKey(item);
+        if (key !== "|") state.qualityByKey.set(key, quality);
+      }
+    }
+
+    function qualityForEntry(entry) {
+      const url = cleanStreamUrl(entry.url);
+      const quality = state.qualityByUrl.get(url) || state.qualityByKey.get(qualityKey(entry));
+      return quality || {
+        summary: "Unknown",
+        known: false,
+        bucket: "Unknown",
+        maxHeight: 0,
+        maxWidth: 0,
+        bandwidthTier: "",
+        adaptive: false,
+        source: "Unknown",
+        note: "",
+        probeError: "",
+        inferred: false,
+        tags: ["Unknown"]
+      };
+    }
+
+    async function loadQualityMetadata() {
+      state.qualityMetaUrl = "";
+      state.qualityError = "";
+
+      for (const candidate of qualityCandidates) {
+        try {
+          const response = await fetch(candidate, { cache: "no-store" });
+          if (!response.ok) {
+            state.qualityError = `${candidate}: HTTP ${response.status}`;
+            continue;
+          }
+          const data = await response.json();
+          indexQualityMetadata(data);
+          state.qualityMetaUrl = new URL(candidate, location.href).href;
+          return;
+        } catch (error) {
+          state.qualityError = `${candidate}: ${error.message}`;
+        }
+      }
     }
 
     async function loadPlaylist() {
@@ -1230,7 +1321,11 @@
 
     function setPlayerDetails(entry, url) {
       el.playerTitle.textContent = entry.name;
-      el.playerSource.textContent = `${entry.group ? `${entry.group} - ` : ""}${streamHost(url)}`;
+      const source = `${entry.group ? `${entry.group} - ` : ""}${streamHost(url)}`;
+      const quality = entry.quality?.summary && entry.quality.summary !== "Unknown"
+        ? ` - ${entry.quality.summary}`
+        : "";
+      el.playerSource.textContent = `${source}${quality}`;
       el.playerOpen.href = url;
       el.playerOpen.hidden = false;
       el.playerCopy.disabled = false;
@@ -1545,7 +1640,9 @@
         tvg.innerHTML = `tvg-id: <code>${escapeHtml(entry.tvgId || "none")}</code>`;
         const host = document.createElement("div");
         host.innerHTML = `source: <code>${escapeHtml(entry.host || "none")}</code>`;
-        meta.append(tvg, host);
+        const quality = document.createElement("div");
+        quality.innerHTML = `quality: <code>${escapeHtml(entry.quality?.summary || "Unknown")}</code>`;
+        meta.append(tvg, host, quality);
         main.append(meta);
 
         const actions = document.createElement("div");
@@ -1581,6 +1678,7 @@
         copyInfo.addEventListener("click", () => copyText([
           entry.name,
           `tvg-id: ${entry.tvgId || "none"}`,
+          `quality: ${entry.quality?.summary || "Unknown"}`,
           `group: ${entry.group || "none"}`,
           `url: ${entry.url || "none"}`,
           `description: ${entry.description}`
@@ -1643,8 +1741,12 @@
       setPublishedLinks();
       bindEvents();
       try {
+        await loadQualityMetadata();
         await loadPlaylist();
-        el.loadNote.textContent = `Loaded ${state.entries.length.toLocaleString()} entries from ${state.playlistUrl}.`;
+        const qualityNote = state.qualityMetaUrl
+          ? ` Quality metadata: ${state.qualityCount.toLocaleString()} entries.`
+          : " Quality metadata unavailable.";
+        el.loadNote.textContent = `Loaded ${state.entries.length.toLocaleString()} entries from ${state.playlistUrl}.${qualityNote}`;
         updateStats();
         populateGroupFilter();
         applyFilters();
