@@ -887,7 +887,7 @@ https://video-auth1.iol.pt/beachcam/saojoaodoestoril/playlist.m3u8
 https://video-auth1.iol.pt/beachcam/saopedroestoria/playlist.m3u8
 
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/Meo-Beachcam.png" group-title="Beachcam",São Pedro do Estoril
-http://video-auth1.iol.pt:1935/beachcam/saopedroestoria/playlist.m3u8
+https://video-auth1.iol.pt/beachcam/saopedroestoria/playlist.m3u8
 
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/Meo-Beachcam.png" group-title="Beachcam",São Pedro do Estoril | Bico Estática
 https://video-auth1.iol.pt/beachcam/bcsaopedrofixa/playlist.m3u8
