@@ -24,16 +24,19 @@ on:
       - M3U/**
       - scripts/audit_streams.py
       - scripts/compare_stream_health.py
+      - scripts/apply_upstream_working_streams.py
       - .github/workflows/stream-health.yml
   pull_request:
     paths:
       - M3U/**
       - scripts/audit_streams.py
       - scripts/compare_stream_health.py
+      - scripts/apply_upstream_working_streams.py
       - .github/workflows/stream-health.yml
 
 permissions:
-  contents: read
+  contents: write
+  pull-requests: write
 
 concurrency:
   group: stream-health-${{ github.ref }}
@@ -50,6 +53,7 @@ jobs:
       REQUEST_TIMEOUT: ${{ inputs.timeout || '8' }}
       REPORT_DIR: reports/stream-health
       UPSTREAM_PLAYLIST_URL: https://raw.githubusercontent.com/LITUATUI/M3UPT/main/M3U/M3UPT.m3u
+      GH_TOKEN: ${{ github.token }}
 
     steps:
       - name: Checkout repository
@@ -92,6 +96,55 @@ jobs:
             --upstream "$REPORT_DIR/lituatui-m3upt/pt-iptv-channel-audit.csv" \
             --output-dir "$REPORT_DIR"
 
+      - name: Apply working upstream stream fixes
+        id: upstream_fixes
+        if: github.event_name != 'pull_request'
+        run: |
+          python scripts/apply_upstream_working_streams.py \
+            --local-playlist "$PLAYLIST" \
+            --upstream-playlist "$REPORT_DIR/lituatui-m3upt.m3u" \
+            --mine-audit "$REPORT_DIR/this-repo/pt-iptv-channel-audit.csv" \
+            --upstream-audit "$REPORT_DIR/lituatui-m3upt/pt-iptv-channel-audit.csv" \
+            --output-dir "$REPORT_DIR/upstream-auto-update"
+
+      - name: Create or update upstream fixes PR
+        if: github.event_name != 'pull_request' && steps.upstream_fixes.outputs.changed_count != '0'
+        run: |
+          set -euo pipefail
+
+          branch="automation/apply-working-upstream-streams"
+          title="Update streams from working upstream entries"
+          body_file="$(mktemp)"
+
+          cat > "$body_file" <<BODY
+          Updates local stream URLs/options where the Stream Health Check found a matching upstream LITUATUI/M3UPT entry working while this repo's matching entry failed.
+
+          Updated entries:
+          ${CHANGED_NAMES}
+
+          This PR was created automatically by the Stream Health Check workflow.
+          BODY
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin "$branch:refs/remotes/origin/$branch" || true
+          git checkout -B "$branch"
+          git add "$PLAYLIST"
+          git commit -m "$title"
+          git push --force-with-lease --set-upstream origin "$branch"
+
+          pr_number="$(gh pr list --state open --head "${GITHUB_REPOSITORY_OWNER}:${branch}" --json number --jq '.[0].number // ""')"
+          if [ -n "$pr_number" ]; then
+            gh pr edit "$pr_number" --title "$title" --body-file "$body_file"
+            pr_url="$(gh pr view "$pr_number" --json url --jq '.url')"
+          else
+            pr_url="$(gh pr create --base main --head "$branch" --title "$title" --body-file "$body_file")"
+          fi
+
+          gh pr merge "$pr_url" --auto --squash --delete-branch
+        env:
+          CHANGED_NAMES: ${{ steps.upstream_fixes.outputs.changed_names }}
+
       - name: Upload stream health report
         id: upload-report
         if: always()
@@ -120,8 +173,12 @@ jobs:
             echo "## Full Report"
             echo
             echo "The full Markdown and CSV reports are attached to this run as the \`stream-health-report\` artifact."
+            echo
+            echo "Upstream auto-update candidates changed: ${UPSTREAM_FIX_COUNT:-not-run}"
             if [ -n "$ARTIFACT_URL" ]; then
               echo
               echo "[Open artifact]($ARTIFACT_URL)"
             fi
           } >> "$GITHUB_STEP_SUMMARY"
+        env:
+          UPSTREAM_FIX_COUNT: ${{ steps.upstream_fixes.outputs.changed_count }}

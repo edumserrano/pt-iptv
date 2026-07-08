@@ -30,3 +30,5 @@ The `Stream Health Check` GitHub Actions workflow can be run manually and also r
 - `upstream-working-local-failing.csv`
 - `key-channel-comparison.csv`
 - Individual Markdown/CSV audits for this repo and upstream
+
+If a matching upstream stream is working while this repo's stream is failing, and the upstream URL/options differ, the workflow opens or updates an automated PR and enables squash auto-merge.
