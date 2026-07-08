@@ -53,11 +53,12 @@ jobs:
       REQUEST_TIMEOUT: ${{ inputs.timeout || '8' }}
       REPORT_DIR: reports/stream-health
       UPSTREAM_PLAYLIST_URL: https://raw.githubusercontent.com/LITUATUI/M3UPT/main/M3U/M3UPT.m3u
-      GH_TOKEN: ${{ github.token }}
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
+        with:
+          token: ${{ secrets.PT_IPTV_AUTOMATION_TOKEN || github.token }}
 
       - name: Set up Python
         uses: actions/setup-python@v6
@@ -130,20 +131,34 @@ jobs:
           git fetch origin "$branch:refs/remotes/origin/$branch" || true
           git checkout -B "$branch"
           git add "$PLAYLIST"
+          if git diff --cached --quiet; then
+            echo "The upstream updater reported changes, but no playlist diff remains to commit."
+            exit 0
+          fi
           git commit -m "$title"
-          git push --force-with-lease --set-upstream origin "$branch"
+          git push --force --set-upstream origin "$branch"
 
           pr_number="$(gh pr list --state open --head "${GITHUB_REPOSITORY_OWNER}:${branch}" --json number --jq '.[0].number // ""')"
           if [ -n "$pr_number" ]; then
             gh pr edit "$pr_number" --title "$title" --body-file "$body_file"
             pr_url="$(gh pr view "$pr_number" --json url --jq '.url')"
           else
-            pr_url="$(gh pr create --base main --head "$branch" --title "$title" --body-file "$body_file")"
+            if ! pr_url="$(gh pr create --base main --head "$branch" --title "$title" --body-file "$body_file")"; then
+              echo "::error title=Unable to create upstream fixes PR::The playlist update branch was pushed, but GitHub rejected PR creation. Enable 'Allow GitHub Actions to create and approve pull requests' for this repository, or add a PT_IPTV_AUTOMATION_TOKEN secret with contents and pull-requests write access."
+              exit 1
+            fi
           fi
 
-          gh pr merge "$pr_url" --auto --squash --delete-branch
+          echo "Upstream fixes PR: $pr_url" >> "$GITHUB_STEP_SUMMARY"
+          if gh pr merge "$pr_url" --auto --squash --delete-branch; then
+            echo "Auto squash merge requested for $pr_url" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "::warning title=Auto-merge not enabled::Created or updated $pr_url, but GitHub rejected the auto squash merge request. Check that auto-merge is enabled for the repository and that the workflow token has permission to manage pull requests."
+            echo "Auto squash merge could not be enabled for $pr_url" >> "$GITHUB_STEP_SUMMARY"
+          fi
         env:
           CHANGED_NAMES: ${{ steps.upstream_fixes.outputs.changed_names }}
+          GH_TOKEN: ${{ secrets.PT_IPTV_AUTOMATION_TOKEN || github.token }}
 
       - name: Upload stream health report
         id: upload-report
