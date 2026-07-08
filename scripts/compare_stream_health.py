@@ -42,27 +42,27 @@ KEY_CHANNELS = [
     {
         "label": "Sport TV 1",
         "tvg_ids": {"sporttv1.pt", "sporttv.pt"},
-        "names": {"sport tv 1", "sport tv1", "sporttv 1", "sporttv1"},
+        "names": {"sport tv 1", "sport tv1", "sporttv 1", "sporttv1", "sport tv 1 pt", "sport tv1 pt"},
     },
     {
         "label": "Sport TV 2",
         "tvg_ids": {"sporttv2.pt"},
-        "names": {"sport tv 2", "sport tv2", "sporttv 2", "sporttv2"},
+        "names": {"sport tv 2", "sport tv2", "sporttv 2", "sporttv2", "sport tv 2 pt", "sport tv2 pt"},
     },
     {
         "label": "Sport TV 3",
         "tvg_ids": {"sporttv3.pt"},
-        "names": {"sport tv 3", "sport tv3", "sporttv 3", "sporttv3"},
+        "names": {"sport tv 3", "sport tv3", "sporttv 3", "sporttv3", "sport tv 3 pt", "sport tv3 pt"},
     },
     {
         "label": "Sport TV 4",
         "tvg_ids": {"sporttv4.pt"},
-        "names": {"sport tv 4", "sport tv4", "sporttv 4", "sporttv4"},
+        "names": {"sport tv 4", "sport tv4", "sporttv 4", "sporttv4", "sport tv 4 pt", "sport tv4 pt"},
     },
     {
         "label": "Sport TV 5",
         "tvg_ids": {"sporttv5.pt"},
-        "names": {"sport tv 5", "sport tv5", "sporttv 5", "sporttv5"},
+        "names": {"sport tv 5", "sport tv5", "sporttv 5", "sporttv5", "sport tv 5 pt", "sport tv5 pt"},
     },
 ]
 
@@ -118,6 +118,10 @@ def is_missing_from_playlist(row: dict[str, str]) -> bool:
     return row.get("verdict") == "missing" and row.get("reason") == "missing_from_playlist"
 
 
+def key_channels_present_in(rows: list[dict[str, str]]) -> list[dict[str, object]]:
+    return [channel for channel in KEY_CHANNELS if not is_missing_from_playlist(key_channel_row(rows, channel))]
+
+
 def status_summary(row: dict[str, str]) -> str:
     verdict = row.get("verdict", "") or "unknown"
     reason = row.get("reason", "")
@@ -126,9 +130,13 @@ def status_summary(row: dict[str, str]) -> str:
     return verdict
 
 
-def key_channel_statuses(rows: list[dict[str, str]]) -> list[dict[str, str]]:
+def key_channel_statuses(
+    rows: list[dict[str, str]],
+    channels: list[dict[str, object]] | None = None,
+) -> list[dict[str, str]]:
     statuses = []
-    for channel in KEY_CHANNELS:
+    active_channels = KEY_CHANNELS if channels is None else channels
+    for channel in active_channels:
         row = key_channel_row(rows, channel)
         statuses.append(
             {
@@ -145,9 +153,14 @@ def key_channel_statuses(rows: list[dict[str, str]]) -> list[dict[str, str]]:
     return statuses
 
 
-def key_channel_diff(mine_rows: list[dict[str, str]], upstream_rows: list[dict[str, str]]) -> list[dict[str, str]]:
+def key_channel_diff(
+    mine_rows: list[dict[str, str]],
+    upstream_rows: list[dict[str, str]],
+    channels: list[dict[str, object]] | None = None,
+) -> list[dict[str, str]]:
     diffs = []
-    for channel in KEY_CHANNELS:
+    active_channels = key_channels_present_in(mine_rows) if channels is None else channels
+    for channel in active_channels:
         mine = key_channel_row(mine_rows, channel)
         upstream = key_channel_row(upstream_rows, channel)
         mine_verdict = mine.get("verdict", "") or "unknown"
@@ -319,9 +332,10 @@ def write_report(
 ) -> None:
     mine_failures = [row for row in mine_rows if row.get("verdict") != "working"]
     upstream_failures = [row for row in upstream_rows if row.get("verdict") != "working"]
-    mine_key_statuses = key_channel_statuses(mine_rows)
-    upstream_key_statuses = key_channel_statuses(upstream_rows)
-    key_diffs = key_channel_diff(mine_rows, upstream_rows)
+    report_key_channels = key_channels_present_in(mine_rows)
+    mine_key_statuses = key_channel_statuses(mine_rows, report_key_channels)
+    upstream_key_statuses = key_channel_statuses(upstream_rows, report_key_channels)
+    key_diffs = key_channel_diff(mine_rows, upstream_rows, report_key_channels)
 
     with path.open("w", encoding="utf-8", newline="\n") as handle:
         handle.write("# PT IPTV Stream Health Report\n\n")
