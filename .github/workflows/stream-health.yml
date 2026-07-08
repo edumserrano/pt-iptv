@@ -153,8 +153,13 @@ jobs:
           if gh pr merge "$pr_url" --auto --squash --delete-branch; then
             echo "Auto squash merge requested for $pr_url" >> "$GITHUB_STEP_SUMMARY"
           else
-            echo "::warning title=Auto-merge not enabled::Created or updated $pr_url, but GitHub rejected the auto squash merge request. Check that auto-merge is enabled for the repository and that the workflow token has permission to manage pull requests."
-            echo "Auto squash merge could not be enabled for $pr_url" >> "$GITHUB_STEP_SUMMARY"
+            echo "::notice title=Auto-merge unavailable::GitHub rejected auto-merge for $pr_url. Trying an immediate squash merge instead."
+            if gh pr merge "$pr_url" --squash --delete-branch; then
+              echo "Squash merged $pr_url immediately." >> "$GITHUB_STEP_SUMMARY"
+            else
+              echo "::warning title=Unable to squash merge upstream fixes PR::Created or updated $pr_url, but GitHub rejected both auto-merge and immediate squash merge."
+              echo "Squash merge could not be completed for $pr_url" >> "$GITHUB_STEP_SUMMARY"
+            fi
           fi
         env:
           CHANGED_NAMES: ${{ steps.upstream_fixes.outputs.changed_names }}
