@@ -117,16 +117,52 @@
       gap: 8px;
     }
 
+    .published-link {
+      display: inline-flex;
+      align-items: stretch;
+      max-width: 100%;
+      min-width: 0;
+    }
+
     .link-strip code {
       display: inline-flex;
       align-items: center;
       min-height: 32px;
       padding: 5px 8px;
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: 8px 0 0 8px;
       background: var(--code);
       color: #263244;
       white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .icon-button {
+      display: inline-grid;
+      place-items: center;
+      width: 34px;
+      min-width: 34px;
+      min-height: 32px;
+      margin-left: -1px;
+      padding: 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .icon-button svg {
+      width: 16px;
+      height: 16px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .icon-button.copied {
+      border-color: var(--good);
+      background: var(--good);
+      color: #fff;
     }
 
     .stats {
@@ -388,8 +424,24 @@
         <div class="subtitle" id="load-note">Loading the current playlist from this published site.</div>
       </div>
       <div class="link-strip" aria-label="Published links">
-        <code id="playlist-link">playlist: p.m3u</code>
-        <code id="epg-link">epg: e.xml.xz</code>
+        <div class="published-link">
+          <code id="playlist-link">playlist: p.m3u</code>
+          <button class="icon-button" id="copy-playlist-link" type="button" aria-label="Copy playlist URL" title="Copy playlist URL">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="8" y="8" width="11" height="11" rx="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v1"></path>
+            </svg>
+          </button>
+        </div>
+        <div class="published-link">
+          <code id="epg-link">epg: e.xml.xz</code>
+          <button class="icon-button" id="copy-epg-link" type="button" aria-label="Copy EPG URL" title="Copy EPG URL">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="8" y="8" width="11" height="11" rx="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v1"></path>
+            </svg>
+          </button>
+        </div>
       </div>
     </section>
 
@@ -453,6 +505,8 @@
       loadNote: document.getElementById("load-note"),
       playlistLink: document.getElementById("playlist-link"),
       epgLink: document.getElementById("epg-link"),
+      copyPlaylistLink: document.getElementById("copy-playlist-link"),
+      copyEpgLink: document.getElementById("copy-epg-link"),
       total: document.getElementById("stat-total"),
       playable: document.getElementById("stat-playable"),
       groups: document.getElementById("stat-groups"),
@@ -644,6 +698,8 @@
       el.epgLink.textContent = `epg: ${epg}`;
       el.playlistLink.title = playlist;
       el.epgLink.title = epg;
+      el.copyPlaylistLink.dataset.copyValue = playlist;
+      el.copyEpgLink.dataset.copyValue = epg;
     }
 
     function updateStats() {
@@ -731,14 +787,35 @@
       return div;
     }
 
+    function showCopied(button) {
+      if (button.classList.contains("icon-button")) {
+        const originalLabel = button.getAttribute("aria-label");
+        const originalTitle = button.getAttribute("title");
+        button.classList.add("copied");
+        button.setAttribute("aria-label", "Copied");
+        button.title = "Copied";
+        window.setTimeout(() => {
+          button.classList.remove("copied");
+          button.setAttribute("aria-label", originalLabel);
+          button.title = originalTitle;
+        }, 900);
+        return;
+      }
+
+      const original = button.textContent;
+      button.textContent = "Copied";
+      window.setTimeout(() => {
+        button.textContent = original;
+      }, 900);
+    }
+
     function copyText(value, button) {
       if (!value) return;
-      navigator.clipboard.writeText(value).then(() => {
-        const original = button.textContent;
-        button.textContent = "Copied";
-        window.setTimeout(() => {
-          button.textContent = original;
-        }, 900);
+      const write = navigator.clipboard?.writeText
+        ? navigator.clipboard.writeText(value)
+        : Promise.reject(new Error("Clipboard API unavailable"));
+      write.then(() => {
+        showCopied(button);
       }).catch(() => {
         window.prompt("Copy this value", value);
       });
@@ -855,6 +932,12 @@
         el.type.value = "";
         el.sort.value = "playlist";
         applyFilters();
+      });
+      el.copyPlaylistLink.addEventListener("click", () => {
+        copyText(el.copyPlaylistLink.dataset.copyValue, el.copyPlaylistLink);
+      });
+      el.copyEpgLink.addEventListener("click", () => {
+        copyText(el.copyEpgLink.dataset.copyValue, el.copyEpgLink);
       });
     }
 
