@@ -45,6 +45,14 @@ concurrency:
 jobs:
   audit:
     name: Audit IPTV streams
+    if: >-
+      ${{
+        github.event_name != 'pull_request' ||
+        (
+          github.head_ref != 'automation/apply-working-upstream-streams' &&
+          github.head_ref != 'automation/refresh-iol-tokens'
+        )
+      }}
     runs-on: ubuntu-latest
     timeout-minutes: 35
     env:
