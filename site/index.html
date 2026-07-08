@@ -69,6 +69,16 @@
       background: #f8fafc;
     }
 
+    button:disabled {
+      cursor: not-allowed;
+      opacity: 0.55;
+    }
+
+    button:disabled:hover {
+      border-color: var(--border);
+      background: var(--panel);
+    }
+
     button.primary {
       border-color: var(--accent);
       background: var(--accent);
@@ -194,6 +204,97 @@
       font-weight: 700;
     }
 
+    .player {
+      display: grid;
+      grid-template-columns: minmax(280px, 1.25fr) minmax(260px, 0.75fr);
+      gap: 14px;
+      align-items: stretch;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      padding: 12px;
+      margin-bottom: 14px;
+    }
+
+    .player-video-wrap {
+      display: grid;
+      align-items: center;
+      min-width: 0;
+      border-radius: 8px;
+      background: #0f172a;
+      overflow: hidden;
+    }
+
+    .player-video {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      max-height: 520px;
+      background: #0f172a;
+    }
+
+    .player-info {
+      display: grid;
+      align-content: start;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .player-kicker {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .player-title {
+      margin: 0;
+      font-size: 20px;
+      line-height: 1.2;
+      letter-spacing: 0;
+      overflow-wrap: anywhere;
+    }
+
+    .player-source {
+      color: var(--muted);
+      overflow-wrap: anywhere;
+    }
+
+    .player-status {
+      min-height: 44px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: #f8fafc;
+      color: var(--muted);
+      padding: 10px;
+      overflow-wrap: anywhere;
+    }
+
+    .player-status.good {
+      border-color: rgba(4, 120, 87, 0.28);
+      background: rgba(4, 120, 87, 0.08);
+      color: var(--good);
+    }
+
+    .player-status.warn {
+      border-color: rgba(161, 98, 7, 0.28);
+      background: rgba(161, 98, 7, 0.08);
+      color: var(--warn);
+    }
+
+    .player-status.bad {
+      border-color: rgba(180, 35, 24, 0.28);
+      background: rgba(180, 35, 24, 0.08);
+      color: var(--bad);
+    }
+
+    .player-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
     .filters {
       display: grid;
       grid-template-columns: minmax(220px, 1fr) 190px 160px 160px auto;
@@ -252,6 +353,11 @@
       padding: 12px;
       box-shadow: 0 8px 20px rgba(15, 23, 42, 0.05);
       min-width: 0;
+    }
+
+    .channel.active {
+      border-color: rgba(15, 118, 110, 0.58);
+      box-shadow: 0 10px 24px rgba(15, 118, 110, 0.14);
     }
 
     .logo {
@@ -446,6 +552,10 @@
         grid-template-columns: repeat(2, minmax(130px, 1fr));
       }
 
+      .player {
+        grid-template-columns: 1fr;
+      }
+
       .filters {
         grid-template-columns: 1fr 1fr;
       }
@@ -530,6 +640,23 @@
       <div class="stat"><span class="label">Missing URLs</span><span class="value" id="stat-missing">0</span></div>
     </section>
 
+    <section class="player" id="player" aria-labelledby="player-title">
+      <div class="player-video-wrap">
+        <video class="player-video" id="player-video" controls playsinline preload="metadata"></video>
+      </div>
+      <div class="player-info">
+        <div class="player-kicker">Web IPTV player</div>
+        <h2 class="player-title" id="player-title">No channel selected</h2>
+        <div class="player-source" id="player-source">Ready</div>
+        <div class="player-status" id="player-status" role="status" aria-live="polite">Waiting for a stream.</div>
+        <div class="player-actions">
+          <button id="player-stop" type="button" disabled>Stop</button>
+          <button id="player-copy" type="button" disabled>Copy URL</button>
+          <a id="player-open" href="#" target="_blank" rel="noreferrer" hidden><button type="button">Open source</button></a>
+        </div>
+      </div>
+    </section>
+
     <section class="filters" aria-label="Filters">
       <label class="sr-only" for="search">Search channels</label>
       <input id="search" type="search" autocomplete="off" placeholder="Search name, tvg-id, group, host, or description">
@@ -563,6 +690,7 @@
     <section class="grid" id="channels" aria-label="Playlist entries"></section>
   </main>
 
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@1/dist/hls.min.js"></script>
   <script>
     const accessHash = "9ed6918805ea2065dc19f92495bebdafbb8ad28293dc0b8b84897f86c6cdfb7e";
 
@@ -577,7 +705,9 @@
       entries: [],
       filtered: [],
       playlistUrl: "",
-      origin: location.origin === "null" ? "" : location.origin
+      origin: location.origin === "null" ? "" : location.origin,
+      activeIndex: null,
+      currentUrl: ""
     };
 
     const el = {
@@ -591,6 +721,14 @@
       epgLink: document.getElementById("epg-link"),
       copyPlaylistLink: document.getElementById("copy-playlist-link"),
       copyEpgLink: document.getElementById("copy-epg-link"),
+      player: document.getElementById("player"),
+      playerVideo: document.getElementById("player-video"),
+      playerTitle: document.getElementById("player-title"),
+      playerSource: document.getElementById("player-source"),
+      playerStatus: document.getElementById("player-status"),
+      playerStop: document.getElementById("player-stop"),
+      playerCopy: document.getElementById("player-copy"),
+      playerOpen: document.getElementById("player-open"),
       total: document.getElementById("stat-total"),
       playable: document.getElementById("stat-playable"),
       groups: document.getElementById("stat-groups"),
@@ -606,6 +744,9 @@
     };
 
     let initialized = false;
+    let playerHls = null;
+    let playerPlayToken = 0;
+    let playerRecoveredMediaError = false;
 
     async function sha256(value) {
       const data = new TextEncoder().encode(value);
@@ -956,6 +1097,309 @@
       });
     }
 
+    function cleanStreamUrl(value) {
+      const raw = String(value || "").split("|")[0].trim();
+      if (!raw) return "";
+      try {
+        return new URL(raw, state.playlistUrl || location.href).href;
+      } catch {
+        return raw;
+      }
+    }
+
+    function isHlsUrl(url) {
+      return /\.m3u8(?:$|[?#])/i.test(url);
+    }
+
+    function isPlainM3uUrl(url) {
+      return /\.m3u(?:$|[?#])/i.test(url) && !isHlsUrl(url);
+    }
+
+    function streamHost(url) {
+      try {
+        return new URL(url).hostname.replace(/^www\./, "");
+      } catch {
+        return "unknown source";
+      }
+    }
+
+    function canPlayNativeHls() {
+      return Boolean(
+        el.playerVideo.canPlayType("application/vnd.apple.mpegurl") ||
+        el.playerVideo.canPlayType("application/x-mpegURL")
+      );
+    }
+
+    function setPlayerStatus(message, kind = "") {
+      el.playerStatus.className = `player-status ${kind}`.trim();
+      el.playerStatus.textContent = message;
+    }
+
+    function setPlayerDetails(entry, url) {
+      el.playerTitle.textContent = entry.name;
+      el.playerSource.textContent = `${entry.group || "Ungrouped"} - ${streamHost(url)}`;
+      el.playerOpen.href = url;
+      el.playerOpen.hidden = false;
+      el.playerCopy.disabled = false;
+      el.playerStop.disabled = false;
+      if (entry.logo) {
+        el.playerVideo.poster = entry.logo;
+      } else {
+        el.playerVideo.removeAttribute("poster");
+      }
+    }
+
+    function destroyPlayerHls() {
+      if (playerHls) {
+        playerHls.destroy();
+        playerHls = null;
+      }
+    }
+
+    function resetPlayerVideo(clearPoster = true) {
+      el.playerVideo.pause();
+      el.playerVideo.removeAttribute("src");
+      if (clearPoster) {
+        el.playerVideo.removeAttribute("poster");
+      }
+      el.playerVideo.load();
+    }
+
+    function stopPlayback() {
+      playerPlayToken += 1;
+      destroyPlayerHls();
+      state.activeIndex = null;
+      state.currentUrl = "";
+      resetPlayerVideo();
+      el.playerTitle.textContent = "No channel selected";
+      el.playerSource.textContent = "Ready";
+      el.playerOpen.hidden = true;
+      el.playerOpen.removeAttribute("href");
+      el.playerCopy.disabled = true;
+      el.playerStop.disabled = true;
+      setPlayerStatus("Playback stopped.", "warn");
+      updateActiveChannel();
+    }
+
+    function updateActiveChannel() {
+      el.channels.querySelectorAll(".channel").forEach((card) => {
+        card.classList.toggle("active", Number(card.dataset.entryIndex) === state.activeIndex);
+      });
+    }
+
+    function explainPreflightIssue(url) {
+      let parsed;
+      try {
+        parsed = new URL(url);
+      } catch {
+        return "This entry does not contain a valid URL, so the browser cannot load it.";
+      }
+
+      if (!/^https?:$/.test(parsed.protocol)) {
+        return `This stream uses the ${parsed.protocol.replace(":", "")} protocol, which the web player cannot load.`;
+      }
+
+      if (location.protocol === "https:" && parsed.protocol === "http:") {
+        return "This stream uses HTTP while the page is HTTPS, so the browser is likely blocking it as mixed content. It may still work in an IPTV app.";
+      }
+
+      if (/youtube\.com|youtu\.be|vimeo\.com/i.test(parsed.hostname)) {
+        return "This looks like a video webpage URL rather than a direct media stream. The browser video player needs a direct HLS or media file URL.";
+      }
+
+      if (isPlainM3uUrl(url)) {
+        return "This points to another M3U playlist, not a direct HLS media stream. Open or copy it into an IPTV app instead.";
+      }
+
+      return "";
+    }
+
+    function explainMediaElementError() {
+      const error = el.playerVideo.error;
+      if (!error) {
+        return "The browser reported a playback failure but did not expose a media error code.";
+      }
+
+      if (error.code === 1) {
+        return "Playback was aborted by the browser or by a new stream selection.";
+      }
+
+      if (error.code === 2) {
+        return "The browser lost access to the stream while loading it. CORS, token expiry, geoblocking, or network blocking are common causes.";
+      }
+
+      if (error.code === 3) {
+        return "The browser received media data but could not decode it. The stream may use an unsupported codec or malformed segments.";
+      }
+
+      if (error.code === 4) {
+        return "The browser does not support this stream source or the server did not provide a playable media response.";
+      }
+
+      return "The browser could not play this stream, but it did not provide a specific reason.";
+    }
+
+    function explainHlsError(data) {
+      const responseCode = data?.response?.code;
+      const responseText = data?.response?.text;
+      const status = responseCode ? ` The server returned HTTP ${responseCode}${responseText ? ` (${responseText})` : ""}.` : "";
+      const details = data?.details || "";
+
+      if (/manifestLoad/i.test(details)) {
+        return `The HLS manifest could not be loaded.${status} This is often CORS, token expiry, geoblocking, or the provider blocking hotlinks.`;
+      }
+
+      if (/manifestParsing/i.test(details)) {
+        return `The URL loaded, but it was not a valid HLS manifest.${status} The server may be returning HTML, an error page, or an expired token response.`;
+      }
+
+      if (/levelLoad|fragLoad/i.test(details)) {
+        return `The HLS manifest loaded, but one or more video segments could not be fetched.${status} Segment CORS rules, expired tokens, or provider restrictions are likely.`;
+      }
+
+      if (/keyLoad/i.test(details)) {
+        return `The stream appears encrypted and the browser could not load the decryption key.${status}`;
+      }
+
+      if (/buffer|append|stalled/i.test(details)) {
+        return "The stream reached the browser but could not be buffered or decoded cleanly. Unsupported codecs or malformed HLS segments are likely.";
+      }
+
+      if (data?.type === globalThis.Hls?.ErrorTypes?.NETWORK_ERROR) {
+        return `The browser could not fetch part of the HLS stream.${status} CORS, network blocking, token expiry, or geoblocking are likely.`;
+      }
+
+      if (data?.type === globalThis.Hls?.ErrorTypes?.MEDIA_ERROR) {
+        return "The browser hit a media decode or buffer error while playing this HLS stream.";
+      }
+
+      return `HLS playback failed${details ? ` at ${details}` : ""}.${status}`;
+    }
+
+    async function probeStreamUrl(url, token, context, baseMessage) {
+      if (!/^https?:\/\//i.test(url)) return;
+
+      try {
+        const response = await fetch(url, {
+          method: context === "hls" ? "GET" : "HEAD",
+          cache: "no-store"
+        });
+        if (token !== playerPlayToken || state.currentUrl !== url) return;
+
+        const contentType = response.headers.get("content-type") || "unknown content type";
+        if (!response.ok) {
+          setPlayerStatus(`${baseMessage} The browser can reach the URL, but the server answered HTTP ${response.status}.`, "bad");
+          return;
+        }
+
+        if (context === "hls" && !/mpegurl|vnd\.apple|text\/plain|application\/octet-stream/i.test(contentType)) {
+          setPlayerStatus(`${baseMessage} A follow-up fetch succeeded, but the response was ${contentType}, not an HLS playlist.`, "bad");
+          return;
+        }
+
+        setPlayerStatus(`${baseMessage} A follow-up fetch succeeded (${contentType}), so the remaining likely causes are codec support, segment-level CORS, encryption, or provider playback policy.`, "bad");
+      } catch (error) {
+        if (token !== playerPlayToken || state.currentUrl !== url) return;
+        setPlayerStatus(`${baseMessage} A follow-up browser fetch also failed (${error.name}). That usually points to CORS, network blocking, mixed content, an expired token, or the provider rejecting GitHub Pages.`, "bad");
+      }
+    }
+
+    function handleVideoError() {
+      const url = state.currentUrl;
+      if (!url) return;
+      const token = playerPlayToken;
+      const context = isHlsUrl(url) ? "hls" : "direct";
+      const message = explainMediaElementError();
+      setPlayerStatus(`${message} Checking what the browser can see...`, "bad");
+      probeStreamUrl(url, token, context, message);
+    }
+
+    function handleHlsError(data, token, url) {
+      if (token !== playerPlayToken || state.currentUrl !== url || !data?.fatal) return;
+
+      if (data.type === globalThis.Hls?.ErrorTypes?.MEDIA_ERROR && !playerRecoveredMediaError && playerHls) {
+        playerRecoveredMediaError = true;
+        setPlayerStatus("The HLS stream hit a media error. Trying one browser-side recovery.", "warn");
+        playerHls.recoverMediaError();
+        return;
+      }
+
+      const message = explainHlsError(data);
+      setPlayerStatus(`${message} Checking what the browser can see...`, "bad");
+      probeStreamUrl(url, token, "hls", message);
+    }
+
+    function attemptPlayerPlay(token) {
+      const playPromise = el.playerVideo.play();
+      if (!playPromise?.catch) return;
+
+      playPromise.catch((error) => {
+        if (token !== playerPlayToken || !state.currentUrl) return;
+        setPlayerStatus(`The stream loaded, but autoplay did not start (${error.name}). Use the video controls to start playback.`, "warn");
+      });
+    }
+
+    function playEntry(entry) {
+      if (!entry.url) return;
+
+      const url = cleanStreamUrl(entry.url);
+      const token = playerPlayToken + 1;
+      playerPlayToken = token;
+      playerRecoveredMediaError = false;
+      destroyPlayerHls();
+      state.currentUrl = "";
+      resetPlayerVideo(false);
+
+      state.activeIndex = entry.index;
+      state.currentUrl = url;
+      setPlayerDetails(entry, url);
+      updateActiveChannel();
+      el.player.scrollIntoView({ block: "start", behavior: "smooth" });
+
+      const preflightIssue = explainPreflightIssue(url);
+      if (preflightIssue) {
+        setPlayerStatus(preflightIssue, "bad");
+        return;
+      }
+
+      const Hls = globalThis.Hls;
+      if (isHlsUrl(url)) {
+        if (canPlayNativeHls()) {
+          setPlayerStatus(`Loading native HLS from ${streamHost(url)}.`, "warn");
+          el.playerVideo.src = url;
+          el.playerVideo.load();
+          attemptPlayerPlay(token);
+          return;
+        }
+
+        if (Hls?.isSupported()) {
+          setPlayerStatus(`Loading HLS from ${streamHost(url)}.`, "warn");
+          playerHls = new Hls({
+            enableWorker: true,
+            lowLatencyMode: true,
+            backBufferLength: 90
+          });
+          playerHls.on(Hls.Events.MANIFEST_PARSED, () => {
+            if (token !== playerPlayToken || state.currentUrl !== url) return;
+            setPlayerStatus("HLS manifest loaded. Starting playback.", "good");
+            attemptPlayerPlay(token);
+          });
+          playerHls.on(Hls.Events.ERROR, (_event, data) => handleHlsError(data, token, url));
+          playerHls.loadSource(url);
+          playerHls.attachMedia(el.playerVideo);
+          return;
+        }
+
+        setPlayerStatus("This browser cannot play HLS streams here because native HLS and HLS.js MediaSource support are unavailable.", "bad");
+        return;
+      }
+
+      setPlayerStatus(`Loading direct media from ${streamHost(url)}.`, "warn");
+      el.playerVideo.src = url;
+      el.playerVideo.load();
+      attemptPlayerPlay(token);
+    }
+
     function render() {
       const rows = state.filtered;
       el.status.textContent = `${rows.length.toLocaleString()} entries shown from ${state.entries.length.toLocaleString()} total. Source: ${state.playlistUrl || "not loaded"}`;
@@ -973,6 +1417,7 @@
       for (const entry of rows) {
         const card = document.createElement("article");
         card.className = "channel";
+        card.dataset.entryIndex = String(entry.index);
         card.append(createLogo(entry));
 
         const main = document.createElement("div");
@@ -1013,6 +1458,13 @@
         const actions = document.createElement("div");
         actions.className = "actions";
         if (entry.url) {
+          const play = document.createElement("button");
+          play.type = "button";
+          play.className = "primary";
+          play.textContent = "Play";
+          play.addEventListener("click", () => playEntry(entry));
+          actions.append(play);
+
           const open = document.createElement("a");
           open.href = entry.url;
           open.target = "_blank";
@@ -1047,6 +1499,7 @@
         fragment.append(card);
       }
       el.channels.append(fragment);
+      updateActiveChannel();
     }
 
     function escapeHtml(value) {
@@ -1073,6 +1526,23 @@
       });
       el.copyEpgLink.addEventListener("click", () => {
         copyText(el.copyEpgLink.dataset.copyValue, el.copyEpgLink);
+      });
+      el.playerStop.addEventListener("click", stopPlayback);
+      el.playerCopy.addEventListener("click", () => {
+        copyText(state.currentUrl, el.playerCopy);
+      });
+      el.playerVideo.addEventListener("error", handleVideoError);
+      el.playerVideo.addEventListener("playing", () => {
+        if (!state.currentUrl) return;
+        setPlayerStatus("Playing.", "good");
+      });
+      el.playerVideo.addEventListener("waiting", () => {
+        if (!state.currentUrl) return;
+        setPlayerStatus("The stream is buffering.", "warn");
+      });
+      el.playerVideo.addEventListener("stalled", () => {
+        if (!state.currentUrl) return;
+        setPlayerStatus("The stream stalled while loading. The provider may be slow, blocking segments, or limiting this connection.", "warn");
       });
     }
 
