@@ -1,8 +1,16 @@
+param(
+    [switch]$ShowDecodedToken
+)
+
 $ErrorActionPreference = 'Stop'
 
 $root = Split-Path -Parent $PSScriptRoot
 $userAgent = 'Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0'
-$token = (curl.exe -L -s -A $userAgent 'https://services.iol.pt/matrix?userId=').Trim()
+$tokenResponse = Invoke-WebRequest `
+    -Uri 'https://services.iol.pt/matrix?userId=' `
+    -Headers @{ 'User-Agent' = $userAgent } `
+    -UseBasicParsing
+$token = ([string]$tokenResponse.Content).Trim()
 
 if (-not $token -or $token.Length -lt 50) {
     throw 'Failed to fetch a valid IOL token.'
@@ -43,4 +51,8 @@ Set-Content -LiteralPath (Join-Path $root 'M3U/TVI_Internacional.m3u8') -Value (
 Set-Content -LiteralPath (Join-Path $root 'M3U/Vmais_TVI.m3u8') -Value (($tviSidecar -replace [regex]::Escape($tviUrl), $vmaisUrl) -replace 'BANDWIDTH=2480050', 'BANDWIDTH=1732503') -Encoding utf8NoBOM
 
 $decoded = [Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($token))
-Write-Host "Updated IOL token: $decoded"
+if ($ShowDecodedToken) {
+    Write-Host "Updated IOL token: $decoded"
+} else {
+    Write-Host 'Updated IOL token.'
+}

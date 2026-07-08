@@ -20,6 +20,8 @@ The TVI/CNN URLs use IOL `wmsAuthSign` tokens, which expire after 1440 minutes. 
 .\scripts\Update-IolToken.ps1
 ```
 
+The `Refresh IOL Tokens` GitHub Actions workflow also runs every 5 hours. If the IOL-token streams are broken and `Update-IolToken.ps1` fixes them, it opens or updates an automated PR and enables squash auto-merge.
+
 ## Stream health report
 
 The `Stream Health Check` GitHub Actions workflow can be run manually and also runs every 5 hours. Each run checks this playlist, checks the upstream `LITUATUI/M3UPT` playlist without radio entries, and uploads a `stream-health-report` artifact containing:

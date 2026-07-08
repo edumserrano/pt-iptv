@@ -1,0 +1,139 @@
+name: Refresh IOL Tokens
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "42 */5 * * *"
+  push:
+    branches:
+      - main
+    paths:
+      - M3U/**
+      - scripts/Update-IolToken.ps1
+      - scripts/audit_streams.py
+      - scripts/check_iol_streams.py
+      - .github/workflows/refresh-iol-tokens.yml
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: refresh-iol-tokens
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    name: Refresh expired IOL tokens
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Check IOL streams before refresh
+        id: before
+        run: |
+          python scripts/check_iol_streams.py \
+            --playlist M3U/M3UPT.m3u \
+            --output-dir reports/iol-token-refresh/before \
+            --timeout 8
+
+      - name: Refresh IOL token
+        if: steps.before.outputs.broken_count != '0'
+        shell: pwsh
+        run: ./scripts/Update-IolToken.ps1
+
+      - name: Check IOL streams after refresh
+        if: steps.before.outputs.broken_count != '0'
+        id: after
+        run: |
+          python scripts/check_iol_streams.py \
+            --playlist M3U/M3UPT.m3u \
+            --output-dir reports/iol-token-refresh/after \
+            --timeout 8
+
+      - name: Detect token changes
+        if: steps.before.outputs.broken_count != '0'
+        id: changes
+        run: |
+          if git diff --quiet -- M3U/M3UPT.m3u M3U/TVI.m3u8 M3U/CNN_Portugal.m3u8 M3U/TVI_Internacional.m3u8 M3U/Vmais_TVI.m3u8; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create or update PR and enable auto-merge
+        if: steps.before.outputs.broken_count != '0' && steps.after.outputs.broken_count == '0' && steps.changes.outputs.changed == 'true'
+        run: |
+          set -euo pipefail
+
+          branch="automation/refresh-iol-tokens"
+          title="Refresh IOL stream tokens"
+          body_file="$(mktemp)"
+
+          cat > "$body_file" <<BODY
+          Refreshes the IOL \`wmsAuthSign\` tokens after the affected streams failed health checks.
+
+          Broken before refresh:
+          ${BROKEN_BEFORE}
+
+          Verification after refresh:
+          all affected IOL streams are working.
+
+          This PR was created automatically by the Refresh IOL Tokens workflow.
+          BODY
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin "$branch:refs/remotes/origin/$branch" || true
+          git checkout -B "$branch"
+          git add M3U/M3UPT.m3u M3U/TVI.m3u8 M3U/CNN_Portugal.m3u8 M3U/TVI_Internacional.m3u8 M3U/Vmais_TVI.m3u8
+          git commit -m "$title"
+          git push --force-with-lease --set-upstream origin "$branch"
+
+          pr_number="$(gh pr list --state open --head "${GITHUB_REPOSITORY_OWNER}:${branch}" --json number --jq '.[0].number // ""')"
+          if [ -n "$pr_number" ]; then
+            gh pr edit "$pr_number" --title "$title" --body-file "$body_file"
+            pr_url="$(gh pr view "$pr_number" --json url --jq '.url')"
+          else
+            pr_url="$(gh pr create --base main --head "$branch" --title "$title" --body-file "$body_file")"
+          fi
+
+          gh pr merge "$pr_url" --auto --squash --delete-branch
+        env:
+          BROKEN_BEFORE: ${{ steps.before.outputs.broken_names }}
+
+      - name: Upload IOL refresh check reports
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: iol-token-refresh-check
+          path: reports/iol-token-refresh/**
+          retention-days: 30
+          if-no-files-found: ignore
+
+      - name: Summarize refresh decision
+        if: always()
+        run: |
+          {
+            echo "## IOL Token Refresh"
+            echo
+            echo "- Broken before refresh: ${BROKEN_BEFORE_COUNT:-0}"
+            echo "- Broken streams before refresh: ${BROKEN_BEFORE_NAMES:-}"
+            echo "- Broken after refresh: ${BROKEN_AFTER_COUNT:-not-run}"
+            echo "- Token files changed: ${TOKEN_FILES_CHANGED:-not-run}"
+          } >> "$GITHUB_STEP_SUMMARY"
+        env:
+          BROKEN_BEFORE_COUNT: ${{ steps.before.outputs.broken_count }}
+          BROKEN_BEFORE_NAMES: ${{ steps.before.outputs.broken_names }}
+          BROKEN_AFTER_COUNT: ${{ steps.after.outputs.broken_count }}
+          TOKEN_FILES_CHANGED: ${{ steps.changes.outputs.changed }}
