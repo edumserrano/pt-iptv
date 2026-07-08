@@ -924,7 +924,7 @@
             index: entries.length + 1,
             line: lineIndex + 1,
             name,
-            group: attrs["group-title"] || "Ungrouped",
+            group: attrs["group-title"] || "",
             tvgId: attrs["tvg-id"] || "",
             logo: attrs["tvg-logo"] || "",
             media: String(attrs.media || "").toLowerCase() === "true",
@@ -971,7 +971,7 @@
 
     function describeEntry(entry) {
       const name = entry.name;
-      const group = entry.group || "Ungrouped";
+      const group = entry.group;
       const host = entry.host;
       const id = entry.tvgId;
 
@@ -984,7 +984,9 @@
       }
 
       if (entry.media) {
-        return `On-demand media item in the ${group} collection${host ? `, served from ${host}` : ""}.`;
+        return group
+          ? `On-demand media item in the ${group} collection${host ? `, served from ${host}` : ""}.`
+          : `On-demand media item${host ? ` served from ${host}` : ""}.`;
       }
 
       if (/beachcam/i.test(group) || /beachcam/i.test(name)) {
@@ -1027,7 +1029,7 @@
         return `CDN-backed live stream${host ? ` from ${host}` : ""}.`;
       }
 
-      return `${group} playlist entry${host ? ` served from ${host}` : ""}.`;
+      return group ? `${group} playlist entry${host ? ` served from ${host}` : ""}.` : `Playlist entry${host ? ` served from ${host}` : ""}.`;
     }
 
     async function loadPlaylist() {
@@ -1073,8 +1075,15 @@
     }
 
     function populateGroupFilter() {
-      const groups = [...new Set(state.entries.map((entry) => entry.group || "Ungrouped"))]
+      const groups = [...new Set(state.entries.map((entry) => entry.group).filter(Boolean))]
         .sort((a, b) => a.localeCompare(b));
+      if (!groups.length) {
+        el.group.options[0].textContent = "No groups";
+        el.group.disabled = true;
+        return;
+      }
+      el.group.options[0].textContent = "All groups";
+      el.group.disabled = false;
       for (const group of groups) {
         const option = document.createElement("option");
         option.value = group;
@@ -1221,7 +1230,7 @@
 
     function setPlayerDetails(entry, url) {
       el.playerTitle.textContent = entry.name;
-      el.playerSource.textContent = `${entry.group || "Ungrouped"} - ${streamHost(url)}`;
+      el.playerSource.textContent = `${entry.group ? `${entry.group} - ` : ""}${streamHost(url)}`;
       el.playerOpen.href = url;
       el.playerOpen.hidden = false;
       el.playerCopy.disabled = false;
@@ -1522,7 +1531,7 @@
         if (entry.isAlt) badges.append(badge("alternate", "good"));
         if (entry.media) badges.append(badge("media"));
         if (entry.radio) badges.append(badge("radio"));
-        badges.append(badge(entry.group || "Ungrouped"));
+        if (entry.group) badges.append(badge(entry.group));
         main.append(badges);
 
         const description = document.createElement("div");
@@ -1572,7 +1581,7 @@
         copyInfo.addEventListener("click", () => copyText([
           entry.name,
           `tvg-id: ${entry.tvgId || "none"}`,
-          `group: ${entry.group}`,
+          `group: ${entry.group || "none"}`,
           `url: ${entry.url || "none"}`,
           `description: ${entry.description}`
         ].join("\n"), copyInfo));
