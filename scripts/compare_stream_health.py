@@ -114,6 +114,10 @@ def key_channel_row(rows: list[dict[str, str]], channel: dict[str, object]) -> d
     }
 
 
+def is_missing_from_playlist(row: dict[str, str]) -> bool:
+    return row.get("verdict") == "missing" and row.get("reason") == "missing_from_playlist"
+
+
 def status_summary(row: dict[str, str]) -> str:
     verdict = row.get("verdict", "") or "unknown"
     reason = row.get("reason", "")
@@ -151,6 +155,8 @@ def key_channel_diff(mine_rows: list[dict[str, str]], upstream_rows: list[dict[s
 
         if mine_verdict == upstream_verdict:
             diff = "same_verdict"
+        elif is_missing_from_playlist(mine):
+            diff = "not_in_this_repo"
         elif upstream_verdict == "working" and mine_verdict != "working":
             diff = "upstream_working_this_repo_failing"
         elif mine_verdict == "working" and upstream_verdict != "working":
@@ -254,10 +260,12 @@ def build_upstream_success_local_failure(
         if not key:
             continue
         local_matches = mine_by_key.get(key, [])
+        if not local_matches:
+            continue
         if any(row.get("verdict") == "working" for row in local_matches):
             continue
 
-        local = local_matches[0] if local_matches else {}
+        local = local_matches[0]
         findings.append(
             {
                 "key": key,
@@ -267,8 +275,8 @@ def build_upstream_success_local_failure(
                 "upstream_reason": upstream.get("reason", ""),
                 "upstream_url": upstream.get("url", ""),
                 "local_line": local.get("line", ""),
-                "local_verdict": local.get("verdict", "missing_in_this_repo"),
-                "local_reason": local.get("reason", "missing_in_this_repo"),
+                "local_verdict": local.get("verdict", ""),
+                "local_reason": local.get("reason", ""),
                 "local_url": local.get("url", ""),
             }
         )
