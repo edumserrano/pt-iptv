@@ -43,6 +43,8 @@ The `Stream Health Check` GitHub Actions workflow can be run manually and also r
 - `key-channel-comparison.csv`
 - Individual Markdown/CSV audits for this repo and upstream
 
-The key-channel comparison explicitly calls out RTP1, RTP2, SIC, SIC Noticias, CNN Portugal, TVI, and Sport TV 1-5 for this repo, upstream, and the diff section.
+By default, each stream gets three sequential attempts with a 20-second per-request timeout. Mixed successful and failed attempts are reported as `flaky`, and the CSV/Markdown reports include the fastest successful health-check time plus an attempt summary.
+
+The key-channel comparison explicitly calls out RTP1, RTP2, SIC, SIC Noticias, CNN Portugal, TVI, and Sport TV 1-5 for this repo, upstream, and the diff section. Missing key channels, such as Sport TV 1 and Sport TV 2 when no authorized stream URL is present in this playlist, are shown as missing instead of being omitted.
 
 If a matching upstream stream is working while this repo's stream is failing, and the upstream URL/options differ, the workflow opens or updates an automated PR and enables squash auto-merge.

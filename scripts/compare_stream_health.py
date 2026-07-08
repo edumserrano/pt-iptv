@@ -125,8 +125,10 @@ def key_channels_present_in(rows: list[dict[str, str]]) -> list[dict[str, object
 def status_summary(row: dict[str, str]) -> str:
     verdict = row.get("verdict", "") or "unknown"
     reason = row.get("reason", "")
+    success_elapsed = row.get("success_elapsed_seconds", "")
+    timing = f", {success_elapsed}s" if success_elapsed else ""
     if reason:
-        return f"{verdict} ({reason})"
+        return f"{verdict} ({reason}{timing})"
     return verdict
 
 
@@ -146,6 +148,9 @@ def key_channel_statuses(
                 "verdict": row.get("verdict", ""),
                 "reason": row.get("reason", ""),
                 "http_status": row.get("http_status", ""),
+                "success_elapsed_seconds": row.get("success_elapsed_seconds", ""),
+                "attempts": row.get("attempts", ""),
+                "successful_attempts": row.get("successful_attempts", ""),
                 "detail": row.get("detail", ""),
                 "url": row.get("url", ""),
             }
@@ -159,7 +164,7 @@ def key_channel_diff(
     channels: list[dict[str, object]] | None = None,
 ) -> list[dict[str, str]]:
     diffs = []
-    active_channels = key_channels_present_in(mine_rows) if channels is None else channels
+    active_channels = KEY_CHANNELS if channels is None else channels
     for channel in active_channels:
         mine = key_channel_row(mine_rows, channel)
         upstream = key_channel_row(upstream_rows, channel)
@@ -185,6 +190,12 @@ def key_channel_diff(
                 "diff": diff,
                 "this_repo_line": mine.get("line", ""),
                 "upstream_line": upstream.get("line", ""),
+                "this_repo_success_elapsed_seconds": mine.get("success_elapsed_seconds", ""),
+                "upstream_success_elapsed_seconds": upstream.get("success_elapsed_seconds", ""),
+                "this_repo_attempts": mine.get("attempts", ""),
+                "upstream_attempts": upstream.get("attempts", ""),
+                "this_repo_successful_attempts": mine.get("successful_attempts", ""),
+                "upstream_successful_attempts": upstream.get("successful_attempts", ""),
             }
         )
     return diffs
@@ -212,12 +223,15 @@ def write_count_table(handle, counts: Counter) -> None:
 
 
 def write_failure_table(handle, rows: list[dict[str, str]], limit: int | None = None) -> None:
-    handle.write("| # | Line | Channel | Group | Verdict | Reason | HTTP | Detail |\n")
-    handle.write("|---:|---:|---|---|---|---|---:|---|\n")
+    handle.write("| # | Line | Channel | Group | Verdict | Reason | HTTP | Success s | Attempts | Detail |\n")
+    handle.write("|---:|---:|---|---|---|---|---:|---:|---:|---|\n")
     displayed = rows if limit is None else rows[:limit]
     for row in displayed:
+        attempts = row.get("attempts", "")
+        successes = row.get("successful_attempts", "")
+        attempts_summary = f"{successes}/{attempts}" if attempts else ""
         handle.write(
-            "| {index} | {line} | {name} | {group} | {verdict} | {reason} | {http_status} | {detail} |\n".format(
+            "| {index} | {line} | {name} | {group} | {verdict} | {reason} | {http_status} | {success_elapsed} | {attempts} | {detail} |\n".format(
                 index=escape_cell(row.get("index", "")),
                 line=escape_cell(row.get("line", "")),
                 name=escape_cell(row.get("name", "")),
@@ -225,6 +239,8 @@ def write_failure_table(handle, rows: list[dict[str, str]], limit: int | None = 
                 verdict=escape_cell(row.get("verdict", "")),
                 reason=escape_cell(row.get("reason", "")),
                 http_status=escape_cell(row.get("http_status", "")),
+                success_elapsed=escape_cell(row.get("success_elapsed_seconds", "")),
+                attempts=escape_cell(attempts_summary),
                 detail=escape_cell(row.get("detail", ""), 120),
             )
         )
@@ -233,13 +249,17 @@ def write_failure_table(handle, rows: list[dict[str, str]], limit: int | None = 
 
 
 def write_key_channel_table(handle, rows: list[dict[str, str]]) -> None:
-    handle.write("| Channel | Playlist Name | Line | Verdict | Reason | HTTP | Detail |\n")
-    handle.write("|---|---|---:|---|---|---:|---|\n")
+    handle.write("| Channel | Playlist Name | Line | Verdict | Reason | HTTP | Success s | Attempts | Detail |\n")
+    handle.write("|---|---|---:|---|---|---:|---:|---:|---|\n")
     for row in rows:
+        attempts = row.get("attempts", "")
+        successes = row.get("successful_attempts", "")
+        attempts_summary = f"{successes}/{attempts}" if attempts else ""
         handle.write(
             f"| {escape_cell(row['label'])} | {escape_cell(row['name'])} | "
             f"{escape_cell(row['line'])} | {escape_cell(row['verdict'])} | "
             f"{escape_cell(row['reason'])} | {escape_cell(row['http_status'])} | "
+            f"{escape_cell(row.get('success_elapsed_seconds', ''))} | {escape_cell(attempts_summary)} | "
             f"{escape_cell(row['detail'], 120)} |\n"
         )
 
@@ -316,7 +336,20 @@ def write_comparison_csv(path: Path, findings: list[dict[str, str]]) -> None:
 
 
 def write_key_channel_csv(path: Path, rows: list[dict[str, str]]) -> None:
-    fields = ["label", "this_repo", "upstream", "diff", "this_repo_line", "upstream_line"]
+    fields = [
+        "label",
+        "this_repo",
+        "upstream",
+        "diff",
+        "this_repo_line",
+        "upstream_line",
+        "this_repo_success_elapsed_seconds",
+        "upstream_success_elapsed_seconds",
+        "this_repo_attempts",
+        "upstream_attempts",
+        "this_repo_successful_attempts",
+        "upstream_successful_attempts",
+    ]
     with path.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=fields)
         writer.writeheader()
@@ -332,7 +365,7 @@ def write_report(
 ) -> None:
     mine_failures = [row for row in mine_rows if row.get("verdict") != "working"]
     upstream_failures = [row for row in upstream_rows if row.get("verdict") != "working"]
-    report_key_channels = key_channels_present_in(mine_rows)
+    report_key_channels = KEY_CHANNELS
     mine_key_statuses = key_channel_statuses(mine_rows, report_key_channels)
     upstream_key_statuses = key_channel_statuses(upstream_rows, report_key_channels)
     key_diffs = key_channel_diff(mine_rows, upstream_rows, report_key_channels)
@@ -371,10 +404,10 @@ def write_report(
                 f"{escape_cell(row['local_verdict'])} | {escape_cell(row['local_reason'])} |\n"
             )
 
-        handle.write("\n## This Repo Detailed Failures\n\n")
+        handle.write("\n## This Repo Detailed Issues\n\n")
         write_failure_table(handle, mine_failures)
 
-        handle.write("\n## LITUATUI/M3UPT Detailed Failures (Radios Excluded)\n\n")
+        handle.write("\n## LITUATUI/M3UPT Detailed Issues (Radios Excluded)\n\n")
         write_failure_table(handle, upstream_failures)
 
 

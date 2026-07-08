@@ -378,6 +378,70 @@ def check_entry(entry: Entry, timeout: float) -> dict[str, str]:
     }
 
 
+def format_seconds(value: float | None) -> str:
+    if value is None:
+        return ""
+    return f"{value:.2f}"
+
+
+def timed_check_entry(entry: Entry, timeout: float) -> dict[str, str]:
+    start = time.monotonic()
+    result = check_entry(entry, timeout)
+    elapsed = time.monotonic() - start
+    result["elapsed_seconds"] = format_seconds(elapsed)
+    result["success_elapsed_seconds"] = format_seconds(elapsed) if result.get("verdict") == "working" else ""
+    return result
+
+
+def summarize_attempt(row: dict[str, str], attempt: int) -> str:
+    elapsed = row.get("elapsed_seconds", "")
+    status = row.get("http_status", "")
+    pieces = [str(attempt), row.get("verdict", ""), row.get("reason", "")]
+    if status:
+        pieces.append(status)
+    if elapsed:
+        pieces.append(f"{elapsed}s")
+    return "/".join(piece for piece in pieces if piece)
+
+
+def check_entry_with_attempts(entry: Entry, timeout: float, attempts: int) -> dict[str, str]:
+    attempts = max(1, attempts)
+    start = time.monotonic()
+    results = [timed_check_entry(entry, timeout) for _ in range(attempts)]
+    total_elapsed = time.monotonic() - start
+    successes = [row for row in results if row.get("verdict") == "working"]
+    failures = [row for row in results if row.get("verdict") != "working"]
+    first_success = successes[0] if successes else None
+    last_result = results[-1]
+    selected = dict(first_success or last_result)
+    success_times = [float(row["success_elapsed_seconds"]) for row in successes if row.get("success_elapsed_seconds")]
+
+    selected["attempts"] = str(attempts)
+    selected["successful_attempts"] = str(len(successes))
+    selected["failed_attempts"] = str(len(failures))
+    selected["elapsed_seconds"] = format_seconds(total_elapsed)
+    selected["success_elapsed_seconds"] = format_seconds(min(success_times)) if success_times else ""
+    selected["attempt_results"] = "; ".join(summarize_attempt(row, index + 1) for index, row in enumerate(results))
+
+    if successes and failures:
+        failure_counts = Counter(row.get("reason", "") or "unknown" for row in failures)
+        failure_summary = ", ".join(f"{reason}:{count}" for reason, count in failure_counts.most_common())
+        selected["verdict"] = "flaky"
+        selected["reason"] = "inconsistent_results"
+        selected["detail"] = (
+            f"{len(successes)}/{attempts} attempts working; failures: {failure_summary}; "
+            f"first success: {first_success.get('detail', '') if first_success else ''}"
+        )
+        return selected
+
+    if successes:
+        selected["detail"] = f"{attempts}/{attempts} attempts working; {selected.get('detail', '')}"
+        return selected
+
+    selected["detail"] = f"0/{attempts} attempts working; {selected.get('detail', '')}"
+    return selected
+
+
 def write_reports(results: list[dict[str, str]], output_dir: Path, elapsed: float) -> tuple[Path, Path]:
     output_dir.mkdir(parents=True, exist_ok=True)
     csv_path = output_dir / "pt-iptv-channel-audit.csv"
@@ -392,9 +456,15 @@ def write_reports(results: list[dict[str, str]], output_dir: Path, elapsed: floa
         "verdict",
         "reason",
         "http_status",
+        "success_elapsed_seconds",
+        "elapsed_seconds",
+        "attempts",
+        "successful_attempts",
+        "failed_attempts",
         "detail",
         "url",
         "final_url",
+        "attempt_results",
     ]
 
     with csv_path.open("w", encoding="utf-8", newline="") as handle:
@@ -405,17 +475,23 @@ def write_reports(results: list[dict[str, str]], output_dir: Path, elapsed: floa
 
     verdict_counts = Counter(row["verdict"] for row in results)
     reason_counts = Counter(row["reason"] for row in results)
-    not_ok = [row for row in results if row["verdict"] != "working"]
+    flaky = [row for row in results if row["verdict"] == "flaky"]
+    not_ok = [row for row in results if row["verdict"] not in {"working", "flaky"}]
     ok = [row for row in results if row["verdict"] == "working"]
 
     def table_rows(rows: list[dict[str, str]]) -> list[str]:
-        lines = ["| # | Line | Channel | Group | Verdict | Reason | HTTP | Detail |", "|---:|---:|---|---|---|---|---:|---|"]
+        lines = [
+            "| # | Line | Channel | Group | Verdict | Reason | HTTP | Success s | Attempts | Detail |",
+            "|---:|---:|---|---|---|---|---:|---:|---:|---|",
+        ]
         for row in rows:
             detail = row.get("detail", "").replace("|", "\\|")[:120]
             channel = row.get("name", "").replace("|", "\\|")
             group = row.get("group", "").replace("|", "\\|")
+            attempts_summary = f"{row.get('successful_attempts','')}/{row.get('attempts','')}"
             lines.append(
-                f"| {row['index']} | {row['line']} | {channel} | {group} | {row['verdict']} | {row['reason']} | {row.get('http_status','')} | {detail} |"
+                f"| {row['index']} | {row['line']} | {channel} | {group} | {row['verdict']} | {row['reason']} | "
+                f"{row.get('http_status','')} | {row.get('success_elapsed_seconds','')} | {attempts_summary} | {detail} |"
             )
         return lines
 
@@ -432,7 +508,9 @@ def write_reports(results: list[dict[str, str]], output_dir: Path, elapsed: floa
         handle.write("| Reason | Count |\n|---|---:|\n")
         for reason, count in reason_counts.most_common():
             handle.write(f"| {reason} | {count} |\n")
-        handle.write("\n## Not Working Or Missing URL\n\n")
+        handle.write("\n## Flaky\n\n")
+        handle.write("\n".join(table_rows(flaky)))
+        handle.write("\n\n## Not Working Or Missing URL\n\n")
         handle.write("\n".join(table_rows(not_ok)))
         handle.write("\n\n## Working\n\n")
         handle.write("\n".join(table_rows(ok)))
@@ -447,6 +525,7 @@ def main() -> int:
     parser.add_argument("--output-dir", required=True, type=Path)
     parser.add_argument("--workers", type=int, default=64)
     parser.add_argument("--timeout", type=float, default=6.0)
+    parser.add_argument("--attempts", type=int, default=1, help="Number of sequential checks per entry. Mixed results are reported as flaky.")
     parser.add_argument("--exclude-radio", action="store_true", help="Skip entries marked as radio stations")
     args = parser.parse_args()
 
@@ -460,7 +539,7 @@ def main() -> int:
     results: list[dict[str, str]] = []
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=args.workers) as executor:
-        future_map = {executor.submit(check_entry, entry, args.timeout): entry for entry in entries}
+        future_map = {executor.submit(check_entry_with_attempts, entry, args.timeout, args.attempts): entry for entry in entries}
         completed = 0
         for future in concurrent.futures.as_completed(future_map):
             completed += 1
@@ -479,8 +558,14 @@ def main() -> int:
                         "verdict": "not_working",
                         "reason": "audit_exception",
                         "http_status": "",
+                        "success_elapsed_seconds": "",
+                        "elapsed_seconds": "",
+                        "attempts": str(max(1, args.attempts)),
+                        "successful_attempts": "0",
+                        "failed_attempts": str(max(1, args.attempts)),
                         "detail": str(exc),
                         "final_url": entry.url or "",
+                        "attempt_results": "",
                     }
                 )
             if completed % 50 == 0 or completed == len(entries):

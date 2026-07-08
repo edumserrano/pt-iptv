@@ -14,7 +14,11 @@ on:
       timeout:
         description: Per-request timeout in seconds
         required: true
-        default: "8"
+        default: "20"
+      attempts:
+        description: Sequential attempts per stream; mixed results are reported as flaky
+        required: true
+        default: "3"
   schedule:
     - cron: "17 */5 * * *"
   push:
@@ -54,11 +58,12 @@ jobs:
         )
       }}
     runs-on: ubuntu-latest
-    timeout-minutes: 35
+    timeout-minutes: 60
     env:
       PLAYLIST: ${{ inputs.playlist || 'M3U/M3UPT.m3u' }}
       WORKERS: ${{ inputs.workers || '32' }}
-      REQUEST_TIMEOUT: ${{ inputs.timeout || '8' }}
+      REQUEST_TIMEOUT: ${{ inputs.timeout || '20' }}
+      ATTEMPTS: ${{ inputs.attempts || '3' }}
       REPORT_DIR: reports/stream-health
       UPSTREAM_PLAYLIST_URL: https://raw.githubusercontent.com/LITUATUI/M3UPT/main/M3U/M3UPT.m3u
 
@@ -80,7 +85,8 @@ jobs:
             --playlist "$PLAYLIST" \
             --output-dir "$REPORT_DIR/this-repo" \
             --workers "$WORKERS" \
-            --timeout "$REQUEST_TIMEOUT"
+            --timeout "$REQUEST_TIMEOUT" \
+            --attempts "$ATTEMPTS"
 
       - name: Download upstream LITUATUI playlist
         run: |
@@ -96,6 +102,7 @@ jobs:
             --output-dir "$REPORT_DIR/lituatui-m3upt" \
             --workers "$WORKERS" \
             --timeout "$REQUEST_TIMEOUT" \
+            --attempts "$ATTEMPTS" \
             --exclude-radio
 
       - name: Build combined comparison report
@@ -196,7 +203,7 @@ jobs:
             exit 0
           fi
 
-          awk '/^## This Repo Detailed Failures/{exit} {print}' "$report" >> "$GITHUB_STEP_SUMMARY"
+          awk '/^## This Repo Detailed Issues/{exit} {print}' "$report" >> "$GITHUB_STEP_SUMMARY"
           {
             echo
             echo "## Full Report"
