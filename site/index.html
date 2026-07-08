@@ -1,0 +1,883 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PT IPTV Playlist Browser</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230f766e'/%3E%3Cpath d='M18 20h28v24H18z' fill='white'/%3E%3Cpath d='M24 28h16v4H24zm0 8h10v4H24z' fill='%230f766e'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f8fb;
+      --panel: #ffffff;
+      --panel-soft: #f1f5f9;
+      --text: #111827;
+      --muted: #5f6b7a;
+      --border: #d7dee8;
+      --accent: #0f766e;
+      --accent-strong: #0b5d56;
+      --warn: #a16207;
+      --bad: #b42318;
+      --good: #047857;
+      --code: #eef2f7;
+      --shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        linear-gradient(180deg, #edf4ff 0, rgba(237, 244, 255, 0) 320px),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    a {
+      color: var(--accent-strong);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    button {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--panel);
+      color: var(--text);
+      cursor: pointer;
+      min-height: 36px;
+      padding: 7px 10px;
+    }
+
+    button:hover {
+      border-color: #aeb9c8;
+      background: #f8fafc;
+    }
+
+    button.primary {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #fff;
+    }
+
+    button.primary:hover {
+      background: var(--accent-strong);
+    }
+
+    .shell {
+      width: min(1480px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 24px 0 40px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 10px 0 18px;
+    }
+
+    .title {
+      display: grid;
+      gap: 4px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(24px, 3vw, 34px);
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      max-width: 760px;
+    }
+
+    .link-strip {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    .link-strip code {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      padding: 5px 8px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--code);
+      color: #263244;
+      white-space: nowrap;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(130px, 1fr));
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .stat {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.86);
+      box-shadow: var(--shadow);
+      padding: 12px;
+    }
+
+    .stat .label {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+
+    .stat .value {
+      display: block;
+      margin-top: 4px;
+      font-size: 24px;
+      line-height: 1;
+      font-weight: 700;
+    }
+
+    .filters {
+      display: grid;
+      grid-template-columns: minmax(220px, 1fr) 190px 160px 160px auto;
+      gap: 10px;
+      align-items: center;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--panel);
+      padding: 12px;
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 2;
+    }
+
+    .filters input,
+    .filters select {
+      width: 100%;
+      min-height: 38px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--text);
+      padding: 8px 10px;
+    }
+
+    .filters input:focus,
+    .filters select:focus {
+      outline: 2px solid rgba(15, 118, 110, 0.16);
+      border-color: var(--accent);
+    }
+
+    .status {
+      min-height: 42px;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .grid {
+      margin-top: 14px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 12px;
+    }
+
+    .channel {
+      display: grid;
+      grid-template-columns: 54px minmax(0, 1fr);
+      gap: 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--panel);
+      padding: 12px;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.05);
+      min-width: 0;
+    }
+
+    .logo {
+      width: 54px;
+      height: 54px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--panel-soft);
+      object-fit: contain;
+      padding: 5px;
+    }
+
+    .logo.fallback {
+      display: grid;
+      place-items: center;
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    .channel-main {
+      min-width: 0;
+      display: grid;
+      gap: 8px;
+    }
+
+    .channel-title {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .name {
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 1.25;
+      overflow-wrap: anywhere;
+    }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 22px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: #f8fafc;
+      color: #364153;
+      padding: 2px 8px;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .badge.good {
+      border-color: rgba(4, 120, 87, 0.28);
+      background: rgba(4, 120, 87, 0.08);
+      color: var(--good);
+    }
+
+    .badge.warn {
+      border-color: rgba(161, 98, 7, 0.28);
+      background: rgba(161, 98, 7, 0.08);
+      color: var(--warn);
+    }
+
+    .description {
+      color: #3b4658;
+      min-height: 42px;
+    }
+
+    .meta {
+      display: grid;
+      gap: 4px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .meta code {
+      background: var(--code);
+      border-radius: 6px;
+      padding: 1px 5px;
+      overflow-wrap: anywhere;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 2px;
+    }
+
+    .empty {
+      border: 1px dashed #b8c4d3;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.66);
+      color: var(--muted);
+      padding: 28px;
+      text-align: center;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (max-width: 920px) {
+      .topbar {
+        flex-direction: column;
+      }
+
+      .link-strip {
+        justify-content: flex-start;
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, minmax(130px, 1fr));
+      }
+
+      .filters {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .filters button {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .shell {
+        width: min(100vw - 20px, 1480px);
+        padding-top: 12px;
+      }
+
+      .stats,
+      .filters,
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .channel {
+        grid-template-columns: 44px minmax(0, 1fr);
+      }
+
+      .logo {
+        width: 44px;
+        height: 44px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="topbar" aria-labelledby="page-title">
+      <div class="title">
+        <h1 id="page-title">PT IPTV Playlist Browser</h1>
+        <div class="subtitle" id="load-note">Loading the current playlist from this published site.</div>
+      </div>
+      <div class="link-strip" aria-label="Published links">
+        <code id="playlist-link">playlist: p.m3u</code>
+        <code id="epg-link">epg: e.xml.xz</code>
+      </div>
+    </section>
+
+    <section class="stats" aria-label="Playlist statistics">
+      <div class="stat"><span class="label">Entries</span><span class="value" id="stat-total">0</span></div>
+      <div class="stat"><span class="label">Playable URLs</span><span class="value" id="stat-playable">0</span></div>
+      <div class="stat"><span class="label">Groups</span><span class="value" id="stat-groups">0</span></div>
+      <div class="stat"><span class="label">Alternates</span><span class="value" id="stat-alts">0</span></div>
+      <div class="stat"><span class="label">Missing URLs</span><span class="value" id="stat-missing">0</span></div>
+    </section>
+
+    <section class="filters" aria-label="Filters">
+      <label class="sr-only" for="search">Search channels</label>
+      <input id="search" type="search" autocomplete="off" placeholder="Search name, tvg-id, group, host, or description">
+
+      <label class="sr-only" for="group-filter">Group</label>
+      <select id="group-filter">
+        <option value="">All groups</option>
+      </select>
+
+      <label class="sr-only" for="type-filter">Type</label>
+      <select id="type-filter">
+        <option value="">All entries</option>
+        <option value="playable">Playable URL</option>
+        <option value="missing">Missing URL</option>
+        <option value="alternate">Alternates</option>
+        <option value="media">On-demand media</option>
+      </select>
+
+      <label class="sr-only" for="sort-filter">Sort</label>
+      <select id="sort-filter">
+        <option value="playlist">Playlist order</option>
+        <option value="name">Name</option>
+        <option value="group">Group</option>
+        <option value="host">Source host</option>
+      </select>
+
+      <button id="reset" type="button">Reset</button>
+    </section>
+
+    <div class="status" id="status" role="status"></div>
+    <section class="grid" id="channels" aria-label="Playlist entries"></section>
+  </main>
+
+  <script>
+    const playlistCandidates = [
+      "playlist.m3u",
+      "p.m3u",
+      "M3U/M3UPT.m3u",
+      "../M3U/M3UPT.m3u"
+    ];
+
+    const state = {
+      entries: [],
+      filtered: [],
+      playlistUrl: "",
+      origin: location.origin === "null" ? "" : location.origin
+    };
+
+    const el = {
+      loadNote: document.getElementById("load-note"),
+      playlistLink: document.getElementById("playlist-link"),
+      epgLink: document.getElementById("epg-link"),
+      total: document.getElementById("stat-total"),
+      playable: document.getElementById("stat-playable"),
+      groups: document.getElementById("stat-groups"),
+      alts: document.getElementById("stat-alts"),
+      missing: document.getElementById("stat-missing"),
+      search: document.getElementById("search"),
+      group: document.getElementById("group-filter"),
+      type: document.getElementById("type-filter"),
+      sort: document.getElementById("sort-filter"),
+      reset: document.getElementById("reset"),
+      status: document.getElementById("status"),
+      channels: document.getElementById("channels")
+    };
+
+    function parseAttrs(line) {
+      const attrs = {};
+      const attrRe = /([\w-]+)="([^"]*)"/g;
+      let match;
+      while ((match = attrRe.exec(line)) !== null) {
+        attrs[match[1]] = match[2];
+      }
+      return attrs;
+    }
+
+    function parsePlaylist(text) {
+      const lines = text.replace(/^\uFEFF/, "").split(/\r?\n/);
+      const entries = [];
+      let current = null;
+
+      function finish() {
+        if (!current) return;
+        current.description = describeEntry(current);
+        current.searchText = [
+          current.name,
+          current.group,
+          current.tvgId,
+          current.host,
+          current.url,
+          current.description
+        ].join(" ").toLowerCase();
+        entries.push(current);
+        current = null;
+      }
+
+      lines.forEach((rawLine, lineIndex) => {
+        const line = rawLine.trim();
+        if (!line) return;
+
+        if (line.startsWith("#EXTINF:")) {
+          finish();
+          const attrs = parseAttrs(line);
+          const comma = line.lastIndexOf(",");
+          const name = comma >= 0 ? line.slice(comma + 1).trim() : "Unnamed entry";
+          current = {
+            index: entries.length + 1,
+            line: lineIndex + 1,
+            name,
+            group: attrs["group-title"] || "Ungrouped",
+            tvgId: attrs["tvg-id"] || "",
+            logo: attrs["tvg-logo"] || "",
+            media: String(attrs.media || "").toLowerCase() === "true",
+            radio: String(attrs.radio || "").toLowerCase() === "true",
+            headers: [],
+            url: "",
+            host: "",
+            isAlt: /\(\s*alt\b/i.test(name),
+            attrs
+          };
+          return;
+        }
+
+        if (!current) return;
+
+        if (line.startsWith("#EXTVLCOPT:")) {
+          current.headers.push(line.replace("#EXTVLCOPT:", ""));
+          return;
+        }
+
+        if (!line.startsWith("#") && !current.url) {
+          current.url = line;
+          current.host = hostFromUrl(line);
+        }
+      });
+
+      finish();
+      return entries;
+    }
+
+    function hostFromUrl(value) {
+      if (!value) return "";
+      try {
+        const url = new URL(value.split("|")[0]);
+        return url.hostname.replace(/^www\./, "");
+      } catch {
+        return "";
+      }
+    }
+
+    function baseChannelName(name) {
+      return name.replace(/\s+\(Alt\s+\d+\)\s*$/i, "").trim();
+    }
+
+    function describeEntry(entry) {
+      const name = entry.name;
+      const group = entry.group || "Ungrouped";
+      const host = entry.host;
+      const id = entry.tvgId;
+
+      if (!entry.url) {
+        return `No active URL is currently listed for ${name}. It is kept in the playlist as a placeholder or disabled entry.`;
+      }
+
+      if (entry.isAlt) {
+        return `Alternative stream for ${baseChannelName(name)}, kept as a fallback under the same channel id${host ? ` from ${host}` : ""}.`;
+      }
+
+      if (entry.media) {
+        return `On-demand media item in the ${group} collection${host ? `, served from ${host}` : ""}.`;
+      }
+
+      if (/beachcam/i.test(group) || /beachcam/i.test(name)) {
+        return `Live beach or surf camera stream${host ? ` from ${host}` : ""}.`;
+      }
+
+      if (/^RTP/i.test(name) || /^RTP/i.test(id) || /rtp\.pt$/i.test(host)) {
+        return `Portuguese RTP channel stream${host ? ` delivered from ${host}` : ""}.`;
+      }
+
+      if (/TVI|CNNPortugal|VPlusTVI/i.test(id) || /iol\.pt$/i.test(host)) {
+        return `Media Capital/IOL live stream with tokens refreshed by the repository workflow.`;
+      }
+
+      if (/SIC/i.test(id) || /sic|impresa|kaltura/i.test(host)) {
+        return `SIC or Impresa-family stream using the playlist metadata and provider CDN.`;
+      }
+
+      if (/France|BFM|TV5|LEquipe/i.test(id + " " + name)) {
+        return `French-language TV channel entry${host ? ` served from ${host}` : ""}.`;
+      }
+
+      if (/News|Noticias|Not[ií]cias/i.test(group + " " + name + " " + id)) {
+        return `News channel stream${host ? ` from ${host}` : ""}.`;
+      }
+
+      if (/Sports?|Desporto/i.test(group + " " + name)) {
+        return `Sports channel entry${host ? ` from ${host}` : ""}.`;
+      }
+
+      if (/youtube|youtu\.be/i.test(host)) {
+        return `Video or live stream hosted on YouTube.`;
+      }
+
+      if (/githubusercontent|github\.com/i.test(host)) {
+        return `Playlist sidecar or mirrored M3U hosted on GitHub.`;
+      }
+
+      if (/cloudfront|akamai|akamaized|fastly|amagi|cdn|hls/i.test(host)) {
+        return `CDN-backed live stream${host ? ` from ${host}` : ""}.`;
+      }
+
+      return `${group} playlist entry${host ? ` served from ${host}` : ""}.`;
+    }
+
+    async function loadPlaylist() {
+      let lastError = "";
+      for (const candidate of playlistCandidates) {
+        try {
+          const response = await fetch(candidate, { cache: "no-store" });
+          if (!response.ok) {
+            lastError = `${candidate}: HTTP ${response.status}`;
+            continue;
+          }
+          const text = await response.text();
+          state.playlistUrl = new URL(candidate, location.href).href;
+          state.entries = parsePlaylist(text);
+          return;
+        } catch (error) {
+          lastError = `${candidate}: ${error.message}`;
+        }
+      }
+      throw new Error(lastError || "Could not load playlist");
+    }
+
+    function setPublishedLinks() {
+      const base = location.href.replace(/\/[^/]*$/, "/");
+      const playlist = new URL("p.m3u", base).href;
+      const epg = new URL("e.xml.xz", base).href;
+      el.playlistLink.textContent = `playlist: ${playlist}`;
+      el.epgLink.textContent = `epg: ${epg}`;
+      el.playlistLink.title = playlist;
+      el.epgLink.title = epg;
+    }
+
+    function updateStats() {
+      const entries = state.entries;
+      const groups = new Set(entries.map((entry) => entry.group).filter(Boolean));
+      el.total.textContent = entries.length.toLocaleString();
+      el.playable.textContent = entries.filter((entry) => entry.url).length.toLocaleString();
+      el.groups.textContent = groups.size.toLocaleString();
+      el.alts.textContent = entries.filter((entry) => entry.isAlt).length.toLocaleString();
+      el.missing.textContent = entries.filter((entry) => !entry.url).length.toLocaleString();
+    }
+
+    function populateGroupFilter() {
+      const groups = [...new Set(state.entries.map((entry) => entry.group || "Ungrouped"))]
+        .sort((a, b) => a.localeCompare(b));
+      for (const group of groups) {
+        const option = document.createElement("option");
+        option.value = group;
+        option.textContent = group;
+        el.group.append(option);
+      }
+    }
+
+    function applyFilters() {
+      const query = el.search.value.trim().toLowerCase();
+      const group = el.group.value;
+      const type = el.type.value;
+      const sort = el.sort.value;
+
+      let rows = state.entries.filter((entry) => {
+        if (query && !entry.searchText.includes(query)) return false;
+        if (group && entry.group !== group) return false;
+        if (type === "playable" && !entry.url) return false;
+        if (type === "missing" && entry.url) return false;
+        if (type === "alternate" && !entry.isAlt) return false;
+        if (type === "media" && !entry.media) return false;
+        return true;
+      });
+
+      rows = [...rows].sort((a, b) => {
+        if (sort === "name") return a.name.localeCompare(b.name) || a.index - b.index;
+        if (sort === "group") return a.group.localeCompare(b.group) || a.name.localeCompare(b.name);
+        if (sort === "host") return a.host.localeCompare(b.host) || a.name.localeCompare(b.name);
+        return a.index - b.index;
+      });
+
+      state.filtered = rows;
+      render();
+    }
+
+    function badge(text, className = "") {
+      const span = document.createElement("span");
+      span.className = `badge ${className}`.trim();
+      span.textContent = text;
+      return span;
+    }
+
+    function createLogo(entry) {
+      if (entry.logo) {
+        const img = document.createElement("img");
+        img.className = "logo";
+        img.alt = "";
+        img.loading = "lazy";
+        img.src = entry.logo;
+        img.onerror = () => {
+          const fallback = logoFallback(entry);
+          img.replaceWith(fallback);
+        };
+        return img;
+      }
+      return logoFallback(entry);
+    }
+
+    function logoFallback(entry) {
+      const div = document.createElement("div");
+      div.className = "logo fallback";
+      const initials = entry.name
+        .split(/\s+/)
+        .filter(Boolean)
+        .slice(0, 2)
+        .map((part) => part[0])
+        .join("")
+        .toUpperCase() || "?";
+      div.textContent = initials;
+      return div;
+    }
+
+    function copyText(value, button) {
+      if (!value) return;
+      navigator.clipboard.writeText(value).then(() => {
+        const original = button.textContent;
+        button.textContent = "Copied";
+        window.setTimeout(() => {
+          button.textContent = original;
+        }, 900);
+      }).catch(() => {
+        window.prompt("Copy this value", value);
+      });
+    }
+
+    function render() {
+      const rows = state.filtered;
+      el.status.textContent = `${rows.length.toLocaleString()} entries shown from ${state.entries.length.toLocaleString()} total. Source: ${state.playlistUrl || "not loaded"}`;
+      el.channels.textContent = "";
+
+      if (!rows.length) {
+        const empty = document.createElement("div");
+        empty.className = "empty";
+        empty.textContent = "No entries match the current filters.";
+        el.channels.append(empty);
+        return;
+      }
+
+      const fragment = document.createDocumentFragment();
+      for (const entry of rows) {
+        const card = document.createElement("article");
+        card.className = "channel";
+        card.append(createLogo(entry));
+
+        const main = document.createElement("div");
+        main.className = "channel-main";
+
+        const title = document.createElement("div");
+        title.className = "channel-title";
+        const name = document.createElement("div");
+        name.className = "name";
+        name.textContent = entry.name;
+        title.append(name);
+        title.append(badge(`#${entry.index}`));
+        main.append(title);
+
+        const badges = document.createElement("div");
+        badges.className = "badges";
+        badges.append(badge(entry.url ? "playable URL" : "missing URL", entry.url ? "good" : "warn"));
+        if (entry.isAlt) badges.append(badge("alternate", "good"));
+        if (entry.media) badges.append(badge("media"));
+        if (entry.radio) badges.append(badge("radio"));
+        badges.append(badge(entry.group || "Ungrouped"));
+        main.append(badges);
+
+        const description = document.createElement("div");
+        description.className = "description";
+        description.textContent = entry.description;
+        main.append(description);
+
+        const meta = document.createElement("div");
+        meta.className = "meta";
+        const tvg = document.createElement("div");
+        tvg.innerHTML = `tvg-id: <code>${escapeHtml(entry.tvgId || "none")}</code>`;
+        const host = document.createElement("div");
+        host.innerHTML = `source: <code>${escapeHtml(entry.host || "none")}</code>`;
+        meta.append(tvg, host);
+        main.append(meta);
+
+        const actions = document.createElement("div");
+        actions.className = "actions";
+        if (entry.url) {
+          const open = document.createElement("a");
+          open.href = entry.url;
+          open.target = "_blank";
+          open.rel = "noreferrer";
+          const openButton = document.createElement("button");
+          openButton.type = "button";
+          openButton.textContent = "Open";
+          open.append(openButton);
+          actions.append(open);
+
+          const copy = document.createElement("button");
+          copy.type = "button";
+          copy.textContent = "Copy URL";
+          copy.addEventListener("click", () => copyText(entry.url, copy));
+          actions.append(copy);
+        }
+
+        const copyInfo = document.createElement("button");
+        copyInfo.type = "button";
+        copyInfo.textContent = "Copy Info";
+        copyInfo.addEventListener("click", () => copyText([
+          entry.name,
+          `tvg-id: ${entry.tvgId || "none"}`,
+          `group: ${entry.group}`,
+          `url: ${entry.url || "none"}`,
+          `description: ${entry.description}`
+        ].join("\n"), copyInfo));
+        actions.append(copyInfo);
+        main.append(actions);
+
+        card.append(main);
+        fragment.append(card);
+      }
+      el.channels.append(fragment);
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;");
+    }
+
+    function bindEvents() {
+      [el.search, el.group, el.type, el.sort].forEach((input) => {
+        input.addEventListener("input", applyFilters);
+      });
+      el.reset.addEventListener("click", () => {
+        el.search.value = "";
+        el.group.value = "";
+        el.type.value = "";
+        el.sort.value = "playlist";
+        applyFilters();
+      });
+    }
+
+    async function init() {
+      setPublishedLinks();
+      bindEvents();
+      try {
+        await loadPlaylist();
+        el.loadNote.textContent = `Loaded ${state.entries.length.toLocaleString()} entries from ${state.playlistUrl}.`;
+        updateStats();
+        populateGroupFilter();
+        applyFilters();
+      } catch (error) {
+        el.loadNote.textContent = "Could not load the playlist automatically.";
+        el.status.textContent = error.message;
+        const empty = document.createElement("div");
+        empty.className = "empty";
+        empty.textContent = "Open this page from GitHub Pages, or serve the repository over HTTP so the browser can fetch the M3U file.";
+        el.channels.append(empty);
+      }
+    }
+
+    init();
+  </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+name: Publish Playlist Site
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - M3U/**
+      - EPG/**
+      - site/**
+      - .github/workflows/pages.yml
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build Pages artifact
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Build static site
+        run: |
+          set -euo pipefail
+
+          rm -rf public
+          mkdir -p public/M3U public/EPG
+
+          cp -R site/. public/
+          cp M3U/M3UPT.m3u public/playlist.m3u
+          cp M3U/M3UPT.m3u public/p.m3u
+          cp M3U/M3UPT.m3u public/M3UPT.m3u
+          cp M3U/*.m3u8 public/M3U/
+          cp EPG/epg-m3upt.xml.xz public/e.xml.xz
+          cp EPG/epg-m3upt.xml.xz public/EPG/epg-m3upt.xml.xz
+          touch public/.nojekyll
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v6
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: public
+
+  deploy:
+    name: Deploy Pages site
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

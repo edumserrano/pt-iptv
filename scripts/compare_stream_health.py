@@ -39,6 +39,31 @@ KEY_CHANNELS = [
         "tvg_ids": {"tvi.pt"},
         "names": {"tvi"},
     },
+    {
+        "label": "Sport TV 1",
+        "tvg_ids": {"sporttv1.pt", "sporttv.pt"},
+        "names": {"sport tv 1", "sport tv1", "sporttv 1", "sporttv1"},
+    },
+    {
+        "label": "Sport TV 2",
+        "tvg_ids": {"sporttv2.pt"},
+        "names": {"sport tv 2", "sport tv2", "sporttv 2", "sporttv2"},
+    },
+    {
+        "label": "Sport TV 3",
+        "tvg_ids": {"sporttv3.pt"},
+        "names": {"sport tv 3", "sport tv3", "sporttv 3", "sporttv3"},
+    },
+    {
+        "label": "Sport TV 4",
+        "tvg_ids": {"sporttv4.pt"},
+        "names": {"sport tv 4", "sport tv4", "sporttv 4", "sporttv4"},
+    },
+    {
+        "label": "Sport TV 5",
+        "tvg_ids": {"sporttv5.pt"},
+        "names": {"sport tv 5", "sport tv5", "sporttv 5", "sporttv5"},
+    },
 ]
 
 
