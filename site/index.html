@@ -4,23 +4,27 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>PT IPTV Playlist Browser</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230f766e'/%3E%3Cpath d='M18 20h28v24H18z' fill='white'/%3E%3Cpath d='M24 28h16v4H24zm0 8h10v4H24z' fill='%230f766e'/%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23070a10'/%3E%3Cpath d='M17 19h30v26H17z' fill='%232dd4bf'/%3E%3Cpath d='M23 27h18v4H23zm0 8h11v4H23z' fill='%23070a10'/%3E%3C/svg%3E">
   <style>
     :root {
-      color-scheme: light;
-      --bg: #f6f8fb;
-      --panel: #ffffff;
-      --panel-soft: #f1f5f9;
-      --text: #111827;
-      --muted: #5f6b7a;
-      --border: #d7dee8;
-      --accent: #0f766e;
-      --accent-strong: #0b5d56;
-      --warn: #a16207;
-      --bad: #b42318;
-      --good: #047857;
-      --code: #eef2f7;
-      --shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+      color-scheme: dark;
+      --bg: #070a10;
+      --panel: rgba(18, 24, 34, 0.88);
+      --panel-strong: rgba(24, 31, 43, 0.96);
+      --panel-soft: rgba(37, 47, 63, 0.68);
+      --text: #eef6f8;
+      --muted: #9ba9b7;
+      --border: rgba(148, 163, 184, 0.2);
+      --border-strong: rgba(148, 163, 184, 0.34);
+      --accent: #2dd4bf;
+      --accent-strong: #5eead4;
+      --accent-dark: #0f766e;
+      --warn: #fbbf24;
+      --bad: #fb7185;
+      --good: #34d399;
+      --code: rgba(8, 13, 22, 0.72);
+      --shadow: 0 24px 60px rgba(0, 0, 0, 0.34);
+      --ring: rgba(45, 212, 191, 0.28);
     }
 
     * {
@@ -31,7 +35,8 @@
       margin: 0;
       min-height: 100vh;
       background:
-        linear-gradient(180deg, #edf4ff 0, rgba(237, 244, 255, 0) 320px),
+        linear-gradient(180deg, rgba(45, 212, 191, 0.12) 0, rgba(45, 212, 191, 0) 360px),
+        linear-gradient(135deg, #070a10 0, #111827 48%, #07110f 100%),
         var(--bg);
       color: var(--text);
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -40,7 +45,7 @@
     }
 
     a {
-      color: var(--accent-strong);
+      color: var(--accent);
       text-decoration: none;
     }
 
@@ -57,16 +62,26 @@
     button {
       border: 1px solid var(--border);
       border-radius: 8px;
-      background: var(--panel);
+      background: rgba(20, 27, 38, 0.86);
       color: var(--text);
       cursor: pointer;
       min-height: 36px;
       padding: 7px 10px;
+      transition: background 140ms ease, border-color 140ms ease, color 140ms ease, transform 140ms ease;
     }
 
     button:hover {
-      border-color: #aeb9c8;
-      background: #f8fafc;
+      border-color: var(--border-strong);
+      background: rgba(35, 45, 60, 0.96);
+      transform: translateY(-1px);
+    }
+
+    button:focus-visible,
+    a:focus-visible,
+    input:focus-visible,
+    select:focus-visible {
+      outline: 2px solid var(--ring);
+      outline-offset: 2px;
     }
 
     button:disabled {
@@ -77,22 +92,24 @@
     button:disabled:hover {
       border-color: var(--border);
       background: var(--panel);
+      transform: none;
     }
 
     button.primary {
-      border-color: var(--accent);
-      background: var(--accent);
-      color: #fff;
+      border-color: rgba(94, 234, 212, 0.72);
+      background: linear-gradient(180deg, var(--accent) 0, var(--accent-dark) 100%);
+      color: #031211;
+      font-weight: 700;
     }
 
     button.primary:hover {
-      background: var(--accent-strong);
+      background: linear-gradient(180deg, var(--accent-strong) 0, var(--accent-dark) 100%);
     }
 
     .shell {
       width: min(1480px, calc(100vw - 32px));
       margin: 0 auto;
-      padding: 24px 0 40px;
+      padding: 28px 0 44px;
     }
 
     .topbar {
@@ -113,6 +130,7 @@
       font-size: clamp(24px, 3vw, 34px);
       line-height: 1.1;
       letter-spacing: 0;
+      color: #f8fbff;
     }
 
     .subtitle {
@@ -142,7 +160,7 @@
       border: 1px solid var(--border);
       border-radius: 8px 0 0 8px;
       background: var(--code);
-      color: #263244;
+      color: #c7d5df;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -171,8 +189,8 @@
 
     .icon-button.copied {
       border-color: var(--good);
-      background: var(--good);
-      color: #fff;
+      background: rgba(52, 211, 153, 0.9);
+      color: #042015;
     }
 
     .stats {
@@ -185,9 +203,10 @@
     .stat {
       border: 1px solid var(--border);
       border-radius: 8px;
-      background: rgba(255, 255, 255, 0.86);
+      background: linear-gradient(180deg, rgba(31, 41, 55, 0.86) 0, rgba(17, 24, 39, 0.88) 100%);
       box-shadow: var(--shadow);
       padding: 12px;
+      backdrop-filter: blur(18px);
     }
 
     .stat .label {
@@ -202,6 +221,24 @@
       font-size: 24px;
       line-height: 1;
       font-weight: 700;
+      color: #f8fbff;
+    }
+
+    .stat:nth-child(1) .value,
+    .stat:nth-child(3) .value {
+      color: var(--accent-strong);
+    }
+
+    .stat:nth-child(2) .value {
+      color: var(--good);
+    }
+
+    .stat:nth-child(4) .value {
+      color: var(--warn);
+    }
+
+    .stat:nth-child(5) .value {
+      color: var(--bad);
     }
 
     .player {
@@ -211,10 +248,11 @@
       align-items: stretch;
       border: 1px solid var(--border);
       border-radius: 8px;
-      background: var(--panel);
+      background: linear-gradient(135deg, rgba(22, 31, 43, 0.96) 0, rgba(12, 17, 25, 0.96) 100%);
       box-shadow: var(--shadow);
       padding: 12px;
       margin-bottom: 14px;
+      backdrop-filter: blur(18px);
     }
 
     .player-video-wrap {
@@ -222,8 +260,10 @@
       align-items: center;
       min-width: 0;
       border-radius: 8px;
-      background: #0f172a;
+      border: 1px solid rgba(148, 163, 184, 0.14);
+      background: #02050a;
       overflow: hidden;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
     }
 
     .player-video {
@@ -231,7 +271,7 @@
       width: 100%;
       aspect-ratio: 16 / 9;
       max-height: 520px;
-      background: #0f172a;
+      background: #02050a;
     }
 
     .player-info {
@@ -242,7 +282,7 @@
     }
 
     .player-kicker {
-      color: var(--muted);
+      color: var(--accent);
       font-size: 12px;
       font-weight: 700;
       text-transform: uppercase;
@@ -265,27 +305,27 @@
       min-height: 44px;
       border: 1px solid var(--border);
       border-radius: 8px;
-      background: #f8fafc;
+      background: rgba(8, 13, 22, 0.62);
       color: var(--muted);
       padding: 10px;
       overflow-wrap: anywhere;
     }
 
     .player-status.good {
-      border-color: rgba(4, 120, 87, 0.28);
-      background: rgba(4, 120, 87, 0.08);
+      border-color: rgba(52, 211, 153, 0.34);
+      background: rgba(52, 211, 153, 0.1);
       color: var(--good);
     }
 
     .player-status.warn {
-      border-color: rgba(161, 98, 7, 0.28);
-      background: rgba(161, 98, 7, 0.08);
+      border-color: rgba(251, 191, 36, 0.34);
+      background: rgba(251, 191, 36, 0.1);
       color: var(--warn);
     }
 
     .player-status.bad {
-      border-color: rgba(180, 35, 24, 0.28);
-      background: rgba(180, 35, 24, 0.08);
+      border-color: rgba(251, 113, 133, 0.34);
+      background: rgba(251, 113, 133, 0.1);
       color: var(--bad);
     }
 
@@ -302,12 +342,13 @@
       align-items: center;
       border: 1px solid var(--border);
       border-radius: 8px;
-      background: var(--panel);
+      background: rgba(12, 17, 25, 0.82);
       padding: 12px;
       box-shadow: var(--shadow);
       position: sticky;
       top: 0;
       z-index: 2;
+      backdrop-filter: blur(22px);
     }
 
     .filters input,
@@ -316,14 +357,23 @@
       min-height: 38px;
       border: 1px solid var(--border);
       border-radius: 8px;
-      background: #fff;
+      background: rgba(8, 13, 22, 0.76);
       color: var(--text);
       padding: 8px 10px;
     }
 
+    .filters input::placeholder {
+      color: #6f7d8d;
+    }
+
+    .filters select option {
+      background: #111827;
+      color: var(--text);
+    }
+
     .filters input:focus,
     .filters select:focus {
-      outline: 2px solid rgba(15, 118, 110, 0.16);
+      outline: 2px solid var(--ring);
       border-color: var(--accent);
     }
 
@@ -334,6 +384,7 @@
       align-items: center;
       gap: 8px;
       flex-wrap: wrap;
+      padding-inline: 2px;
     }
 
     .grid {
@@ -349,15 +400,22 @@
       gap: 12px;
       border: 1px solid var(--border);
       border-radius: 8px;
-      background: var(--panel);
+      background: rgba(17, 24, 34, 0.86);
       padding: 12px;
-      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.05);
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.22);
       min-width: 0;
+      transition: border-color 140ms ease, background 140ms ease, box-shadow 140ms ease, transform 140ms ease;
+    }
+
+    .channel:hover {
+      border-color: var(--border-strong);
+      background: rgba(24, 33, 46, 0.96);
+      transform: translateY(-1px);
     }
 
     .channel.active {
-      border-color: rgba(15, 118, 110, 0.58);
-      box-shadow: 0 10px 24px rgba(15, 118, 110, 0.14);
+      border-color: rgba(45, 212, 191, 0.58);
+      box-shadow: 0 22px 48px rgba(45, 212, 191, 0.12);
     }
 
     .logo {
@@ -368,6 +426,7 @@
       background: var(--panel-soft);
       object-fit: contain;
       padding: 5px;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
     }
 
     .logo.fallback {
@@ -397,6 +456,7 @@
       font-size: 16px;
       line-height: 1.25;
       overflow-wrap: anywhere;
+      color: #f8fbff;
     }
 
     .badges {
@@ -411,27 +471,27 @@
       min-height: 22px;
       border-radius: 999px;
       border: 1px solid var(--border);
-      background: #f8fafc;
-      color: #364153;
+      background: rgba(8, 13, 22, 0.58);
+      color: #c6d2dc;
       padding: 2px 8px;
       font-size: 12px;
       white-space: nowrap;
     }
 
     .badge.good {
-      border-color: rgba(4, 120, 87, 0.28);
-      background: rgba(4, 120, 87, 0.08);
+      border-color: rgba(52, 211, 153, 0.34);
+      background: rgba(52, 211, 153, 0.1);
       color: var(--good);
     }
 
     .badge.warn {
-      border-color: rgba(161, 98, 7, 0.28);
-      background: rgba(161, 98, 7, 0.08);
+      border-color: rgba(251, 191, 36, 0.34);
+      background: rgba(251, 191, 36, 0.1);
       color: var(--warn);
     }
 
     .description {
-      color: #3b4658;
+      color: #b5c1cc;
       min-height: 42px;
     }
 
@@ -444,6 +504,7 @@
 
     .meta code {
       background: var(--code);
+      color: #cbd5e1;
       border-radius: 6px;
       padding: 1px 5px;
       overflow-wrap: anywhere;
@@ -457,9 +518,9 @@
     }
 
     .empty {
-      border: 1px dashed #b8c4d3;
+      border: 1px dashed rgba(148, 163, 184, 0.36);
       border-radius: 8px;
-      background: rgba(255, 255, 255, 0.66);
+      background: rgba(17, 24, 34, 0.72);
       color: var(--muted);
       padding: 28px;
       text-align: center;
@@ -470,15 +531,17 @@
       display: grid;
       place-items: center;
       padding: 24px;
+      background: linear-gradient(180deg, rgba(45, 212, 191, 0.1) 0, rgba(45, 212, 191, 0) 340px);
     }
 
     .pass-panel {
       width: min(420px, 100%);
       border: 1px solid var(--border);
       border-radius: 8px;
-      background: rgba(255, 255, 255, 0.94);
+      background: linear-gradient(180deg, rgba(24, 31, 43, 0.96) 0, rgba(12, 17, 25, 0.96) 100%);
       box-shadow: var(--shadow);
       padding: 24px;
+      backdrop-filter: blur(18px);
     }
 
     .pass-panel h1 {
@@ -502,11 +565,13 @@
       min-height: 42px;
       border: 1px solid var(--border);
       border-radius: 8px;
+      background: rgba(8, 13, 22, 0.76);
+      color: var(--text);
       padding: 9px 10px;
     }
 
     .pass-field input:focus {
-      outline: 2px solid rgba(15, 118, 110, 0.16);
+      outline: 2px solid var(--ring);
       border-color: var(--accent);
     }
 
@@ -571,10 +636,29 @@
         padding-top: 12px;
       }
 
+      .topbar {
+        gap: 14px;
+      }
+
+      .published-link {
+        width: 100%;
+      }
+
+      .link-strip,
+      .published-link code {
+        width: 100%;
+      }
+
       .stats,
       .filters,
       .grid {
         grid-template-columns: 1fr;
+      }
+
+      .player,
+      .filters,
+      .channel {
+        padding: 10px;
       }
 
       .channel {
