@@ -18,6 +18,8 @@ AFFECTED_PLAYLIST_TVG_IDS = {
     "CNNPortugal.pt": "CNN Portugal",
     "TVIInternacional.pt": "TVI Internacional",
     "VPlusTVI.pt": "V+ TVI",
+    "TVIFiccao.pt": "TVI Ficção",
+    "TVIReality.pt": "TVI Reality",
 }
 
 AFFECTED_SIDECARS = {
@@ -25,6 +27,8 @@ AFFECTED_SIDECARS = {
     "M3U/CNN_Portugal.m3u8": "CNN Portugal sidecar",
     "M3U/TVI_Internacional.m3u8": "TVI Internacional sidecar",
     "M3U/Vmais_TVI.m3u8": "V+ TVI sidecar",
+    "M3U/TVI_Ficcao.m3u8": "TVI Ficção sidecar",
+    "M3U/TVI_Reality.m3u8": "TVI Reality sidecar",
 }
 
 
