@@ -160,6 +160,7 @@ jobs:
         if: always()
         env:
           ARTIFACT_URL: ${{ steps.upload-report.outputs.artifact-url }}
+          UPSTREAM_FIX_COUNT: ${{ steps.upstream_fixes.outputs.changed_count }}
         run: |
           report="$REPORT_DIR/pt-iptv-stream-health-report.md"
           if [ ! -f "$report" ]; then
@@ -180,5 +181,3 @@ jobs:
               echo "[Open artifact]($ARTIFACT_URL)"
             fi
           } >> "$GITHUB_STEP_SUMMARY"
-        env:
-          UPSTREAM_FIX_COUNT: ${{ steps.upstream_fixes.outputs.changed_count }}
