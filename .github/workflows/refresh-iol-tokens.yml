@@ -108,7 +108,18 @@ jobs:
             pr_url="$(gh pr create --base main --head "$branch" --title "$title" --body-file "$body_file")"
           fi
 
-          gh pr merge "$pr_url" --auto --squash --delete-branch
+          echo "IOL token refresh PR: $pr_url" >> "$GITHUB_STEP_SUMMARY"
+          if gh pr merge "$pr_url" --auto --squash --delete-branch; then
+            echo "Auto squash merge requested for $pr_url" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "::notice title=Auto-merge unavailable::GitHub rejected auto-merge for $pr_url. Trying an immediate squash merge instead."
+            if gh pr merge "$pr_url" --squash --delete-branch; then
+              echo "Squash merged $pr_url immediately." >> "$GITHUB_STEP_SUMMARY"
+            else
+              echo "::warning title=Unable to squash merge IOL token refresh PR::Created or updated $pr_url, but GitHub rejected both auto-merge and immediate squash merge."
+              echo "Squash merge could not be completed for $pr_url" >> "$GITHUB_STEP_SUMMARY"
+            fi
+          fi
         env:
           BROKEN_BEFORE: ${{ steps.before.outputs.broken_names }}
 
