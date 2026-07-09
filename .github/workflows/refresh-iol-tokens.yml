@@ -52,7 +52,26 @@ jobs:
         shell: pwsh
         run: ./scripts/Update-IolToken.ps1
 
-      - name: Check IOL streams after refresh
+      - name: Check IOL streams after refresh candidate
+        if: steps.before.outputs.broken_count != '0'
+        id: after_candidate
+        run: |
+          python scripts/check_iol_streams.py \
+            --playlist M3U/M3UPT.m3u \
+            --output-dir reports/iol-token-refresh/after-candidate \
+            --timeout 8
+
+      - name: Restore regressed IOL stream updates
+        if: steps.before.outputs.broken_count != '0'
+        id: restore_regressions
+        run: |
+          python scripts/guard_iol_token_refresh.py \
+            --before reports/iol-token-refresh/before/iol-token-stream-check.csv \
+            --after reports/iol-token-refresh/after-candidate/iol-token-stream-check.csv \
+            --playlist M3U/M3UPT.m3u \
+            --restore-regressions
+
+      - name: Check IOL streams after guarded refresh
         if: steps.before.outputs.broken_count != '0'
         id: after
         run: |
@@ -60,6 +79,15 @@ jobs:
             --playlist M3U/M3UPT.m3u \
             --output-dir reports/iol-token-refresh/after \
             --timeout 8
+
+      - name: Compare IOL refresh results
+        if: steps.before.outputs.broken_count != '0'
+        id: comparison
+        run: |
+          python scripts/guard_iol_token_refresh.py \
+            --before reports/iol-token-refresh/before/iol-token-stream-check.csv \
+            --after reports/iol-token-refresh/after/iol-token-stream-check.csv \
+            --playlist M3U/M3UPT.m3u
 
       - name: Detect token changes
         if: steps.before.outputs.broken_count != '0'
@@ -72,7 +100,7 @@ jobs:
           fi
 
       - name: Create or update PR and enable auto-merge
-        if: steps.before.outputs.broken_count != '0' && steps.after.outputs.broken_count == '0' && steps.changes.outputs.changed == 'true'
+        if: steps.before.outputs.broken_count != '0' && steps.comparison.outputs.pr_ready == 'true' && steps.changes.outputs.changed == 'true'
         run: |
           set -euo pipefail
 
@@ -86,8 +114,17 @@ jobs:
           Broken before refresh:
           ${BROKEN_BEFORE}
 
+          Fixed by refresh:
+          ${FIXED_BY_REFRESH}
+
+          Still broken after refresh:
+          ${STILL_BROKEN_AFTER:-none}
+
+          New failures with unchanged source URL:
+          ${UNCHANGED_REGRESSED:-none}
+
           Verification after refresh:
-          all affected IOL streams are working.
+          no locally updated stream regressed, and at least one changed stream was fixed.
 
           This PR was created automatically by the Refresh IOL Tokens workflow.
           BODY
@@ -122,6 +159,9 @@ jobs:
           fi
         env:
           BROKEN_BEFORE: ${{ steps.before.outputs.broken_names }}
+          FIXED_BY_REFRESH: ${{ steps.comparison.outputs.updated_fixed_names }}
+          STILL_BROKEN_AFTER: ${{ steps.comparison.outputs.still_broken_names }}
+          UNCHANGED_REGRESSED: ${{ steps.comparison.outputs.unchanged_regressed_names }}
 
       - name: Upload IOL refresh check reports
         if: always()
@@ -141,10 +181,18 @@ jobs:
             echo "- Broken before refresh: ${BROKEN_BEFORE_COUNT:-0}"
             echo "- Broken streams before refresh: ${BROKEN_BEFORE_NAMES:-}"
             echo "- Broken after refresh: ${BROKEN_AFTER_COUNT:-not-run}"
+            echo "- Fixed changed streams: ${UPDATED_FIXED_NAMES:-}"
+            echo "- Locally updated streams that regressed: ${UPDATED_REGRESSED_NAMES:-}"
+            echo "- Regressed streams with unchanged source URL: ${UNCHANGED_REGRESSED_NAMES:-}"
+            echo "- Restored regressed updates: ${RESTORED_REGRESSED_NAMES:-}"
             echo "- Token files changed: ${TOKEN_FILES_CHANGED:-not-run}"
           } >> "$GITHUB_STEP_SUMMARY"
         env:
           BROKEN_BEFORE_COUNT: ${{ steps.before.outputs.broken_count }}
           BROKEN_BEFORE_NAMES: ${{ steps.before.outputs.broken_names }}
           BROKEN_AFTER_COUNT: ${{ steps.after.outputs.broken_count }}
+          UPDATED_FIXED_NAMES: ${{ steps.comparison.outputs.updated_fixed_names }}
+          UPDATED_REGRESSED_NAMES: ${{ steps.comparison.outputs.updated_regressed_names }}
+          UNCHANGED_REGRESSED_NAMES: ${{ steps.comparison.outputs.unchanged_regressed_names }}
+          RESTORED_REGRESSED_NAMES: ${{ steps.restore_regressions.outputs.restored_regressed_names }}
           TOKEN_FILES_CHANGED: ${{ steps.changes.outputs.changed }}
