@@ -23,14 +23,22 @@ $vmaisUrl = "https://video-auth2.iol.pt/live_vmais/live_vmais/edge_servers/vmais
 $tviFiccaoUrl = "https://video-auth1.iol.pt/live_tvi_ficcao/live_tvi_ficcao/edge_servers/tvificcao-720p/chunks.m3u8?wmsAuthSign=$token"
 $tviRealityUrl = "https://video-auth4.iol.pt/live_tvi_reality/live_tvi_reality/edge_servers/tvireality-720_passthrough/chunks.m3u8?wmsAuthSign=$token"
 
+$publicBase = 'https://raw.githubusercontent.com/edumserrano/pt-iptv/main'
+$tviSidecarUrl = "$publicBase/M3U/TVI.m3u8"
+$cnnSidecarUrl = "$publicBase/M3U/CNN_Portugal.m3u8"
+$tviInternacionalSidecarUrl = "$publicBase/M3U/TVI_Internacional.m3u8"
+$vmaisSidecarUrl = "$publicBase/M3U/Vmais_TVI.m3u8"
+$tviFiccaoSidecarUrl = "$publicBase/M3U/TVI_Ficcao.m3u8"
+$tviRealitySidecarUrl = "$publicBase/M3U/TVI_Reality.m3u8"
+
 $playlistPath = Join-Path $root 'M3U/M3UPT.m3u'
 $playlist = Get-Content -Raw -LiteralPath $playlistPath
-$playlist = $playlist -replace 'https://video-auth6\.iol\.pt/live_tvi/live_tvi/edge_servers/tvi-720p/chunks\.m3u8\?wmsAuthSign=[^\r\n]+', $tviUrl
-$playlist = $playlist -replace 'https://video-auth7\.iol\.pt/live_cnn/live_cnn/edge_servers/cnn-720p/chunks\.m3u8\?wmsAuthSign=[^\r\n]+', $cnnUrl
-$playlist = $playlist -replace 'https://(?:github\.com/LITUATUI/M3UPT/raw/main/M3U/TVI_Internacional\.m3u8|video-auth6\.iol\.pt/live_tvi_internacional/live_tvi_internacional/playlist\.m3u8\?wmsAuthSign=[^\r\n]+)', $tviInternacionalUrl
-$playlist = $playlist -replace 'https://(?:github\.com/LITUATUI/M3UPT/raw/main/M3U/Vmais_TVI\.m3u8|video-auth2\.iol\.pt/live_vmais/live_vmais/edge_servers/vmais-720p/playlist\.m3u8\?wmsAuthSign=[^\r\n]+)', $vmaisUrl
-$playlist = $playlist -replace 'https://(?:github\.com/LITUATUI/M3UPT/raw/main/M3U/TVI_Ficcao\.m3u8|raw\.githubusercontent\.com/LITUATUI/M3UPT/main/M3U/TVI_Ficcao\.m3u8|video-auth1\.iol\.pt/live_tvi_ficcao/live_tvi_ficcao/edge_servers/tvificcao-720p/chunks\.m3u8\?wmsAuthSign=[^\r\n]+)', $tviFiccaoUrl
-$playlist = $playlist -replace 'https://(?:github\.com/LITUATUI/M3UPT/raw/main/M3U/TVI_Reality\.m3u8|raw\.githubusercontent\.com/LITUATUI/M3UPT/main/M3U/TVI_Reality\.m3u8|video-auth4\.iol\.pt/live_tvi_reality/live_tvi_reality/edge_servers/tvireality-720_passthrough/chunks\.m3u8\?wmsAuthSign=[^\r\n]+)', $tviRealityUrl
+$playlist = $playlist -replace 'https://(?:edumserrano\.github\.io/pt-iptv/M3U/TVI\.m3u8|raw\.githubusercontent\.com/edumserrano/pt-iptv/main/M3U/TVI\.m3u8|github\.com/edumserrano/pt-iptv/raw/main/M3U/TVI\.m3u8|github\.com/LITUATUI/M3UPT/raw/main/M3U/TVI\.m3u8|raw\.githubusercontent\.com/LITUATUI/M3UPT/main/M3U/TVI\.m3u8|video-auth6\.iol\.pt/live_tvi/live_tvi/edge_servers/tvi-720p/chunks\.m3u8\?wmsAuthSign=[^\r\n]+)', $tviSidecarUrl
+$playlist = $playlist -replace 'https://(?:edumserrano\.github\.io/pt-iptv/M3U/CNN_Portugal\.m3u8|raw\.githubusercontent\.com/edumserrano/pt-iptv/main/M3U/CNN_Portugal\.m3u8|github\.com/edumserrano/pt-iptv/raw/main/M3U/CNN_Portugal\.m3u8|github\.com/LITUATUI/M3UPT/raw/main/M3U/CNN_Portugal\.m3u8|raw\.githubusercontent\.com/LITUATUI/M3UPT/main/M3U/CNN_Portugal\.m3u8|video-auth7\.iol\.pt/live_cnn/live_cnn/edge_servers/cnn-720p/chunks\.m3u8\?wmsAuthSign=[^\r\n]+)', $cnnSidecarUrl
+$playlist = $playlist -replace 'https://(?:edumserrano\.github\.io/pt-iptv/M3U/TVI_Internacional\.m3u8|raw\.githubusercontent\.com/edumserrano/pt-iptv/main/M3U/TVI_Internacional\.m3u8|github\.com/edumserrano/pt-iptv/raw/main/M3U/TVI_Internacional\.m3u8|github\.com/LITUATUI/M3UPT/raw/main/M3U/TVI_Internacional\.m3u8|raw\.githubusercontent\.com/LITUATUI/M3UPT/main/M3U/TVI_Internacional\.m3u8|video-auth6\.iol\.pt/live_tvi_internacional/live_tvi_internacional/playlist\.m3u8\?wmsAuthSign=[^\r\n]+)', $tviInternacionalSidecarUrl
+$playlist = $playlist -replace 'https://(?:edumserrano\.github\.io/pt-iptv/M3U/Vmais_TVI\.m3u8|raw\.githubusercontent\.com/edumserrano/pt-iptv/main/M3U/Vmais_TVI\.m3u8|github\.com/edumserrano/pt-iptv/raw/main/M3U/Vmais_TVI\.m3u8|github\.com/LITUATUI/M3UPT/raw/main/M3U/Vmais_TVI\.m3u8|raw\.githubusercontent\.com/LITUATUI/M3UPT/main/M3U/Vmais_TVI\.m3u8|video-auth2\.iol\.pt/live_vmais/live_vmais/edge_servers/vmais-720p/playlist\.m3u8\?wmsAuthSign=[^\r\n]+)', $vmaisSidecarUrl
+$playlist = $playlist -replace 'https://(?:edumserrano\.github\.io/pt-iptv/M3U/TVI_Ficcao\.m3u8|raw\.githubusercontent\.com/edumserrano/pt-iptv/main/M3U/TVI_Ficcao\.m3u8|github\.com/edumserrano/pt-iptv/raw/main/M3U/TVI_Ficcao\.m3u8|github\.com/LITUATUI/M3UPT/raw/main/M3U/TVI_Ficcao\.m3u8|raw\.githubusercontent\.com/LITUATUI/M3UPT/main/M3U/TVI_Ficcao\.m3u8|video-auth1\.iol\.pt/live_tvi_ficcao/live_tvi_ficcao/edge_servers/tvificcao-720p/chunks\.m3u8\?wmsAuthSign=[^\r\n]+)', $tviFiccaoSidecarUrl
+$playlist = $playlist -replace 'https://(?:edumserrano\.github\.io/pt-iptv/M3U/TVI_Reality\.m3u8|raw\.githubusercontent\.com/edumserrano/pt-iptv/main/M3U/TVI_Reality\.m3u8|github\.com/edumserrano/pt-iptv/raw/main/M3U/TVI_Reality\.m3u8|github\.com/LITUATUI/M3UPT/raw/main/M3U/TVI_Reality\.m3u8|raw\.githubusercontent\.com/LITUATUI/M3UPT/main/M3U/TVI_Reality\.m3u8|video-auth4\.iol\.pt/live_tvi_reality/live_tvi_reality/edge_servers/tvireality-720_passthrough/chunks\.m3u8\?wmsAuthSign=[^\r\n]+)', $tviRealitySidecarUrl
 Set-Content -LiteralPath $playlistPath -Value $playlist -Encoding utf8NoBOM
 
 $tviSidecar = @(

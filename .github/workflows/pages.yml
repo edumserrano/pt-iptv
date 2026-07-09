@@ -8,6 +8,7 @@ on:
     paths:
       - M3U/**
       - EPG/**
+      - logos/**
       - site/**
       - .github/workflows/pages.yml
 
@@ -33,13 +34,14 @@ jobs:
           set -euo pipefail
 
           rm -rf public
-          mkdir -p public/M3U public/EPG
+          mkdir -p public/M3U public/EPG public/logos
 
           cp -R site/. public/
           cp M3U/M3UPT.m3u public/playlist.m3u
           cp M3U/M3UPT.m3u public/p.m3u
           cp M3U/M3UPT.m3u public/M3UPT.m3u
           cp M3U/*.m3u8 public/M3U/
+          cp -R logos/. public/logos/
           cp EPG/epg-m3upt.xml.xz public/e.xml.xz
           cp EPG/epg-m3upt.xml.xz public/EPG/epg-m3upt.xml.xz
           touch public/.nojekyll

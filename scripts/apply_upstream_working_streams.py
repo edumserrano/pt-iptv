@@ -5,6 +5,7 @@ import csv
 import os
 import re
 import unicodedata
+import urllib.parse
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -49,6 +50,35 @@ def first_stream_url(lines: list[str]) -> str:
         if stripped and not stripped.startswith("#"):
             return stripped
     return ""
+
+
+LOCAL_IOL_SIDECAR_PATHS = {
+    "pt-iptv/M3U/TVI.m3u8",
+    "pt-iptv/M3U/CNN_Portugal.m3u8",
+    "pt-iptv/M3U/TVI_Internacional.m3u8",
+    "pt-iptv/M3U/Vmais_TVI.m3u8",
+    "pt-iptv/M3U/TVI_Ficcao.m3u8",
+    "pt-iptv/M3U/TVI_Reality.m3u8",
+}
+LOCAL_IOL_REPO_PATHS = {item.removeprefix("pt-iptv/") for item in LOCAL_IOL_SIDECAR_PATHS}
+
+
+def is_local_iol_sidecar_url(url: str) -> bool:
+    parsed = urllib.parse.urlsplit(url or "")
+    path = urllib.parse.unquote(parsed.path).lstrip("/")
+    return (
+        (parsed.netloc == "edumserrano.github.io" and path in LOCAL_IOL_SIDECAR_PATHS)
+        or (
+            parsed.netloc == "raw.githubusercontent.com"
+            and path.startswith("edumserrano/pt-iptv/main/")
+            and path.removeprefix("edumserrano/pt-iptv/main/") in LOCAL_IOL_REPO_PATHS
+        )
+        or (
+            parsed.netloc == "github.com"
+            and path.startswith("edumserrano/pt-iptv/raw/main/")
+            and path.removeprefix("edumserrano/pt-iptv/raw/main/") in LOCAL_IOL_REPO_PATHS
+        )
+    )
 
 
 def parse_blocks(path: Path) -> tuple[list[str], list[Block]]:
@@ -196,6 +226,9 @@ def apply_updates(
             continue
         if not upstream_block.url:
             report_rows.append({**base, "status": "skipped", "reason": "upstream URL missing"})
+            continue
+        if is_local_iol_sidecar_url(local_block.url):
+            report_rows.append({**base, "status": "skipped", "reason": "local IOL sidecar is managed by token refresh"})
             continue
         if local_block.url == upstream_block.url:
             report_rows.append({**base, "status": "skipped", "reason": "same URL; likely transient failure"})

@@ -1,6 +1,6 @@
-# M3UPT fixed TVI/CNN playlist
+# PT IPTV playlist
 
-Minimal copy of the upstream `LITUATUI/M3UPT` playlist with the broken TVI and CNN Portugal stream URLs corrected.
+Self-contained copy of the upstream `LITUATUI/M3UPT` playlist with local logo assets and locally hosted IOL sidecar manifests for the TVI/CNN family.
 
 Raw playlist URL:
 
@@ -22,11 +22,11 @@ https://edumserrano.github.io/pt-iptv/e.xml.xz
 https://edumserrano.github.io/pt-iptv/
 ```
 
-The Pages workflow publishes `p.m3u` and `e.xml.xz` from the current repository contents, so those URLs stay stable while the playlist and EPG behind them are refreshed by normal commits and automation.
+The Pages workflow publishes `p.m3u`, `e.xml.xz`, `M3U/*.m3u8`, and `logos/*` from the current repository contents, so those URLs stay stable while the playlist, sidecar manifests, EPG, and mirrored logo assets behind them are refreshed by normal commits and automation.
 
 Note: GitHub Pages output can be publicly reachable even when repository visibility changes, depending on the repository plan and Pages settings. Treat anything published through the Pages workflow as public.
 
-The TVI/CNN URLs use IOL `wmsAuthSign` tokens, which expire after 1440 minutes. Refresh them before pushing with:
+The IOL sidecar manifests use `wmsAuthSign` tokens, which expire after 1440 minutes. Refresh them before pushing with:
 
 ```powershell
 .\scripts\Update-IolToken.ps1

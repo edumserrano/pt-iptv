@@ -1,42 +1,42 @@
 #EXTM3U url-tvg="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/EPG/epg-m3upt.xml.xz"
-#EXTINF:-1 tvg-id="RTP1.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/RTP1.png",RTP 1
+#EXTINF:-1 tvg-id="RTP1.pt" tvg-logo="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/logos/RTP1.png",RTP 1
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #EXTVLCOPT:http-origin=https://www.rtp.pt
 #EXTVLCOPT:http-referrer=https://www.rtp.pt/play/direto/rtp1
 https://streaming-live.rtp.pt/liverepeater/rtp1HD.smil/playlist.m3u8
 
-#EXTINF:-1 tvg-id="RTP1.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/RTP1.png",RTP 1 (Alt 1)
+#EXTINF:-1 tvg-id="RTP1.pt" tvg-logo="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/logos/RTP1.png",RTP 1 (Alt 1)
 https://streaming-live.rtp.pt/liverepeater/smil:rtp1HD.smil/playlist.m3u8
 
-#EXTINF:-1 tvg-id="RTP2.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/RTP2.png",RTP 2
+#EXTINF:-1 tvg-id="RTP2.pt" tvg-logo="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/logos/RTP2.png",RTP 2
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #EXTVLCOPT:http-origin=https://www.rtp.pt
 #EXTVLCOPT:http-referrer=https://www.rtp.pt/play/direto/rtp2
 https://streaming-live.rtp.pt/liverepeater/rtp2HD.smil/playlist.m3u8
 
-#EXTINF:-1 tvg-id="RTP2.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/RTP2.png",RTP 2 (Alt 1)
+#EXTINF:-1 tvg-id="RTP2.pt" tvg-logo="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/logos/RTP2.png",RTP 2 (Alt 1)
 https://streaming-live.rtp.pt/liverepeater/smil:rtp2HD.smil/playlist.m3u8
 
-#EXTINF:-1 tvg-id="RTP2.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/RTP2.png",RTP 2 (Alt 2)
+#EXTINF:-1 tvg-id="RTP2.pt" tvg-logo="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/logos/RTP2.png",RTP 2 (Alt 2)
 https://streaming-live.rtp.pt/liverepeater/rtp2.smil/playlist.m3u8
 
-#EXTINF:-1 tvg-id="SIC.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/SIC.png",SIC
+#EXTINF:-1 tvg-id="SIC.pt" tvg-logo="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/logos/SIC.png",SIC
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #EXTVLCOPT:http-origin=https://sic.pt
 #EXTVLCOPT:http-referrer=https://sic.pt/
 https://sic.live.impresa.pt/sic1080p.m3u8
 
-#EXTINF:-1 tvg-id="SIC.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/SIC.png",SIC (Alt 1)
+#EXTINF:-1 tvg-id="SIC.pt" tvg-logo="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/logos/SIC.png",SIC (Alt 1)
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #EXTVLCOPT:http-origin=https://sic.pt
 #EXTVLCOPT:http-referrer=https://sic.pt/direto
 https://sic.live.impresa.pt/sic540p.m3u8
 
-#EXTINF:-1 tvg-id="TVI.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/TVI.png",TVI
+#EXTINF:-1 tvg-id="TVI.pt" tvg-logo="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/logos/TVI.png",TVI
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #EXTVLCOPT:http-origin=https://tviplayer.iol.pt
 #EXTVLCOPT:http-referrer=https://tviplayer.iol.pt
-https://github.com/LITUATUI/M3UPT/raw/main/M3U/TVI.m3u8
+https://raw.githubusercontent.com/edumserrano/pt-iptv/main/M3U/TVI.m3u8
 
 #EXTINF:-1 tvg-id="LEquipe.fr" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/9/9b/La_cha%C3%AEne_l%27Equipe_-_logo_2016.png",L'Equipe
 https://dq37unyetkpcz.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-m04j89j7k5gtp/LEquipe_FR.m3u8
@@ -50,128 +50,128 @@ https://stream1.freetv.fun/44dbc17b1d7857cadb04b9ead123e35573c4604fff2c62dd049a4
 #EXTINF:-1 tvg-name="SPORT TV 5 PT" tvg-id="" tvg-country="Portugal" tvg-language="Portuguese" tvg-logo="https://commons.wikimedia.org/wiki/Special:Redirect/file/Sport_TV5_(2023).svg",sport tv 5 pt
 https://stream1.freetv.fun/2dbaa5d301da88750d278333efda31f9adc75fe94f13364dcc46da4378cb7b87.ctv
 
-#EXTINF:-1 tvg-id="RTPNoticias.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/RTP-Notícias.png",RTP Notícias
+#EXTINF:-1 tvg-id="RTPNoticias.pt" tvg-logo="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/logos/RTP-Noticias.png",RTP Notícias
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #EXTVLCOPT:http-origin=https://www.rtp.pt
 #EXTVLCOPT:http-referrer=https://www.rtp.pt/play/direto/rtp3
 https://streaming-live.rtp.pt/livetvhlsDVR/rtpnHDdvr.smil/playlist.m3u8
 
-#EXTINF:-1 tvg-id="RTPNoticias.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/RTP-Notícias.png",RTP Notícias (Alt 1)
+#EXTINF:-1 tvg-id="RTPNoticias.pt" tvg-logo="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/logos/RTP-Noticias.png",RTP Notícias (Alt 1)
 https://streaming-live.rtp.pt/liverepeater/smil:rtpnHD.smil/playlist.m3u8
 
-#EXTINF:-1 tvg-id="RTPNoticias.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/RTP-Notícias.png",RTP Notícias (Alt 2)
+#EXTINF:-1 tvg-id="RTPNoticias.pt" tvg-logo="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/logos/RTP-Noticias.png",RTP Notícias (Alt 2)
 https://streaming-live.rtp.pt/livetvhlsDVR/rtpndvr.smil/playlist.m3u8
 
-#EXTINF:-1 tvg-id="SICNoticias.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/SIC-Notícias.png",SIC Notícias
+#EXTINF:-1 tvg-id="SICNoticias.pt" tvg-logo="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/logos/SIC-Noticias.png",SIC Notícias
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #EXTVLCOPT:http-origin=https://sicnoticias.pt
 #EXTVLCOPT:http-referrer=https://sicnoticias.pt/
 https://cdnapisec.kaltura.com/p/4526593/sp/4526593/playManifest/entryId/1_j8ztwihx/deliveryProfileId/672/protocol/https/format/applehttp/a.m3u8
 
-#EXTINF:-1 tvg-id="CNNPortugal.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/CNN-Portugal.png",CNN Portugal
+#EXTINF:-1 tvg-id="CNNPortugal.pt" tvg-logo="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/logos/CNN-Portugal.png",CNN Portugal
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #EXTVLCOPT:http-origin=https://tviplayer.iol.pt
 #EXTVLCOPT:http-referrer=https://tviplayer.iol.pt
-https://github.com/LITUATUI/M3UPT/raw/main/M3U/CNN_Portugal.m3u8
+https://raw.githubusercontent.com/edumserrano/pt-iptv/main/M3U/CNN_Portugal.m3u8
 
-#EXTINF:-1 tvg-id="CNNBrasil.br" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/CNN-Brasil.png",CNN Brasil
+#EXTINF:-1 tvg-id="CNNBrasil.br" tvg-logo="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/logos/CNN-Brasil.png",CNN Brasil
 https://d25usgadhphvwi.cloudfront.net/hls/main.m3u8
 
-#EXTINF:-1 tvg-id="EuronewsPortuguese.fr" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/euronews-logo-225x225.png",Euronews PT
+#EXTINF:-1 tvg-id="EuronewsPortuguese.fr" tvg-logo="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/logos/euronews-logo-225x225.png",Euronews PT
 https://6e52fb8b.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/UmxheHhUVi1ldV9FdXJvbmV3c1BvcnR1Z3Vlc19ITFM/playlist.m3u8
 
-#EXTINF:-1 tvg-id="ARTV.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/ARTV.png",ARTV
+#EXTINF:-1 tvg-id="ARTV.pt" tvg-logo="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/logos/ARTV.png",ARTV
 https://playout175.livextend.cloud/livenlin4/_definst_/2liveartvpub2/playlist.m3u8
 
-#EXTINF:-1 tvg-id="RTPMemoria.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/RTP-Memória.png",RTP Memória
+#EXTINF:-1 tvg-id="RTPMemoria.pt" tvg-logo="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/logos/RTP-Memoria.png",RTP Memória
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #EXTVLCOPT:http-origin=https://www.rtp.pt
 #EXTVLCOPT:http-referrer=https://www.rtp.pt/play/direto/rtpmemoria
 https://streaming-live.rtp.pt/liverepeater/smil:rtpmem.smil/playlist.m3u8
 
-#EXTINF:-1 tvg-id="RTPAcores.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/RTP-Açores.png",RTP Açores
+#EXTINF:-1 tvg-id="RTPAcores.pt" tvg-logo="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/logos/RTP-Acores.png",RTP Açores
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #EXTVLCOPT:http-origin=https://www.rtp.pt
 #EXTVLCOPT:http-referrer=https://www.rtp.pt/play/direto/rtpacores
 https://streaming-live.rtp.pt/liverepeater/rtpacoresHD.smil/playlist.m3u8
 
-#EXTINF:-1 tvg-id="RTPAcores.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/RTP-Açores.png",RTP Açores (Alt 1)
+#EXTINF:-1 tvg-id="RTPAcores.pt" tvg-logo="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/logos/RTP-Acores.png",RTP Açores (Alt 1)
 https://streaming-live.rtp.pt/liverepeater/smil:rtpacoresHD.smil/playlist.m3u8
 
-#EXTINF:-1 tvg-id="RTPAcores.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/RTP-Açores.png",RTP Açores (Alt 2)
+#EXTINF:-1 tvg-id="RTPAcores.pt" tvg-logo="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/logos/RTP-Acores.png",RTP Açores (Alt 2)
 https://streaming-live.rtp.pt/liverepeater/smil:rtpacores.smil/playlist.m3u8
 
-#EXTINF:-1 tvg-id="RTPMadeira.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/RTP-Madeira.png",RTP Madeira
+#EXTINF:-1 tvg-id="RTPMadeira.pt" tvg-logo="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/logos/RTP-Madeira.png",RTP Madeira
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #EXTVLCOPT:http-origin=https://www.rtp.pt
 #EXTVLCOPT:http-referrer=https://www.rtp.pt/play/direto/rtmadeira
 https://streaming-live.rtp.pt/liverepeater/rtpmadeira.smil/playlist.m3u8
 
-#EXTINF:-1 tvg-id="RTPMadeira.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/RTP-Madeira.png",RTP Madeira (Alt 1)
+#EXTINF:-1 tvg-id="RTPMadeira.pt" tvg-logo="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/logos/RTP-Madeira.png",RTP Madeira (Alt 1)
 https://streaming-live.rtp.pt/liverepeater/smil:rtpmadeira.smil/playlist.m3u8
 
-#EXTINF:-1 tvg-id="RTPAfrica.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/RTP-África.png",RTP África
+#EXTINF:-1 tvg-id="RTPAfrica.pt" tvg-logo="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/logos/RTP-Africa.png",RTP África
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #EXTVLCOPT:http-origin=https://www.rtp.pt
 #EXTVLCOPT:http-referrer=https://www.rtp.pt/play/direto/rtpafrica
 https://streaming-live.rtp.pt/liverepeater/rtpafrica.smil/playlist.m3u8
 
-#EXTINF:-1 tvg-id="RTPAfrica.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/RTP-África.png",RTP África (Alt 1)
+#EXTINF:-1 tvg-id="RTPAfrica.pt" tvg-logo="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/logos/RTP-Africa.png",RTP África (Alt 1)
 https://streaming-live.rtp.pt/liverepeater/smil:rtpafrica.smil/playlist.m3u8
 
-#EXTINF:-1 tvg-id="RTPInternacional.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/RTP-Mundo.png",RTP Mundo
+#EXTINF:-1 tvg-id="RTPInternacional.pt" tvg-logo="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/logos/RTP-Mundo.png",RTP Mundo
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #EXTVLCOPT:http-origin=https://www.rtp.pt
 #EXTVLCOPT:http-referrer=https://www.rtp.pt/play/direto/rtpinternacional
 https://streaming-live.rtp.pt/liverepeater/rtpi.smil/playlist.m3u8
 
-#EXTINF:-1 tvg-id="RTPInternacional.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/RTP-Mundo.png",RTP Mundo (Alt 1)
+#EXTINF:-1 tvg-id="RTPInternacional.pt" tvg-logo="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/logos/RTP-Mundo.png",RTP Mundo (Alt 1)
 https://streaming-live.rtp.pt/liverepeater/smil:rtpi.smil/playlist.m3u8
 
-#EXTINF:-1 tvg-id="TVIInternacional.pt" tvg-logo="https://github.com/LITUATUI/M3UPT/raw/main/logos/TVI-Internacional.png",TVI Internacional
+#EXTINF:-1 tvg-id="TVIInternacional.pt" tvg-logo="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/logos/TVI-Internacional.png",TVI Internacional
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
-https://video-auth6.iol.pt/live_tvi_internacional/live_tvi_internacional/playlist.m3u8?wmsAuthSign=c2VydmVyX3RpbWU9Ny85LzIwMjYgODo1MzoyMSBQTSZoYXNoX3ZhbHVlPXVMaG80emx2NWNRakdjV09Qck5rNUE9PSZ2YWxpZG1pbnV0ZXM9MTQ0MCZpZD01YmM2YjVkOS0xNjljLTQwMjAtOTZhMy1hMjFiZTcxYTVhMzA=
+https://raw.githubusercontent.com/edumserrano/pt-iptv/main/M3U/TVI_Internacional.m3u8
 
-#EXTINF:-1 tvg-id="TVIAfrica.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/TVI_África.png",TVI África
+#EXTINF:-1 tvg-id="TVIAfrica.pt" tvg-logo="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/logos/TVI-Africa.png",TVI África
 #https://video-auth4.iol.pt/live_tvi_africa/live_tvi_africa/edge_servers/tviafrica-480p/playlist.m3u8
 
-#EXTINF:-1 tvg-id="VPlusTVI.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/vmaistvi.png",V+ TVI
+#EXTINF:-1 tvg-id="VPlusTVI.pt" tvg-logo="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/logos/vmaistvi.png",V+ TVI
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #EXTVLCOPT:http-origin=https://tviplayer.iol.pt
 #EXTVLCOPT:http-referrer=https://tviplayer.iol.pt
-https://video-auth2.iol.pt/live_vmais/live_vmais/edge_servers/vmais-720p/playlist.m3u8?wmsAuthSign=c2VydmVyX3RpbWU9Ny85LzIwMjYgODo1MzoyMSBQTSZoYXNoX3ZhbHVlPXVMaG80emx2NWNRakdjV09Qck5rNUE9PSZ2YWxpZG1pbnV0ZXM9MTQ0MCZpZD01YmM2YjVkOS0xNjljLTQwMjAtOTZhMy1hMjFiZTcxYTVhMzA=
+https://raw.githubusercontent.com/edumserrano/pt-iptv/main/M3U/Vmais_TVI.m3u8
 
-#EXTINF:-1 tvg-id="TVIFiccao.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/TVI-Ficção.png",TVI Ficção
+#EXTINF:-1 tvg-id="TVIFiccao.pt" tvg-logo="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/logos/TVI-Ficcao.png",TVI Ficção
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #EXTVLCOPT:http-origin=https://tviplayer.iol.pt
 #EXTVLCOPT:http-referrer=https://tviplayer.iol.pt
-https://video-auth1.iol.pt/live_tvi_ficcao/live_tvi_ficcao/edge_servers/tvificcao-720p/chunks.m3u8?wmsAuthSign=c2VydmVyX3RpbWU9Ny85LzIwMjYgODo1MzoyMSBQTSZoYXNoX3ZhbHVlPXVMaG80emx2NWNRakdjV09Qck5rNUE9PSZ2YWxpZG1pbnV0ZXM9MTQ0MCZpZD01YmM2YjVkOS0xNjljLTQwMjAtOTZhMy1hMjFiZTcxYTVhMzA=
+https://raw.githubusercontent.com/edumserrano/pt-iptv/main/M3U/TVI_Ficcao.m3u8
 
-#EXTINF:-1 tvg-id="TVIReality.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/TVI-Reality.png",TVI Reality
+#EXTINF:-1 tvg-id="TVIReality.pt" tvg-logo="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/logos/TVI-Reality.png",TVI Reality
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #EXTVLCOPT:http-origin=https://tviplayer.iol.pt
 #EXTVLCOPT:http-referrer=https://tviplayer.iol.pt
-https://video-auth4.iol.pt/live_tvi_reality/live_tvi_reality/edge_servers/tvireality-720_passthrough/chunks.m3u8?wmsAuthSign=c2VydmVyX3RpbWU9Ny85LzIwMjYgODo1MzoyMSBQTSZoYXNoX3ZhbHVlPXVMaG80emx2NWNRakdjV09Qck5rNUE9PSZ2YWxpZG1pbnV0ZXM9MTQ0MCZpZD01YmM2YjVkOS0xNjljLTQwMjAtOTZhMy1hMjFiZTcxYTVhMzA=
+https://raw.githubusercontent.com/edumserrano/pt-iptv/main/M3U/TVI_Reality.m3u8
 
-#EXTINF:-1 tvg-id="SICReplay.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/SIC-Replay.png",SIC Replay
+#EXTINF:-1 tvg-id="SICReplay.pt" tvg-logo="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/logos/SIC-Replay.png",SIC Replay
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #EXTVLCOPT:http-origin=https://sic.pt
 #EXTVLCOPT:http-referrer=https://opto.sic.pt/
 https://production-fast-sic.content.okast.tv/fa2e8c4385712f9a7dce4ff2dcebac2e/channels/d9070446-8448-455e-8075-773b1ba12562/d47eae0f-ad77-414a-9a1d-2a6628ba18c3/media_.m3u8
 
-#EXTINF:-1 tvg-id="SICAltaDefinicao.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/SIC-Alta-Definição.png",SIC Alta Definição
+#EXTINF:-1 tvg-id="SICAltaDefinicao.pt" tvg-logo="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/logos/SIC-Alta-Definicao.png",SIC Alta Definição
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #EXTVLCOPT:http-origin=https://sic.pt
 #EXTVLCOPT:http-referrer=https://opto.sic.pt/
 https://production-fast-sic.content.okast.tv/fa2e8c4385712f9aa54bbe52b1bd9b6b/channels/d9070446-8448-455e-8075-773b1ba12562/fc831b20-f252-4e7d-8cc5-2d05f4d43c1c/media_.m3u8
 
-#EXTINF:-1 tvg-id="PortoCanal.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/Porto-Canal.png",Porto Canal
+#EXTINF:-1 tvg-id="PortoCanal.pt" tvg-logo="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/logos/Porto-Canal.png",Porto Canal
 https://pull-live-156-1.global.ssl.fastly.net/pc5865dc25400thmb-ea6bf03b14fa318f7133/pc1-jhrgyuoqe5865db-68tkgb14fa318f7133f03.smil/playlist.m3u8
 
-#EXTINF:-1 tvg-id="PortoCanal.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/Porto-Canal.png",Porto Canal (Alt 1)
+#EXTINF:-1 tvg-id="PortoCanal.pt" tvg-logo="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/logos/Porto-Canal.png",Porto Canal (Alt 1)
 https://pull-live-156-1.global.ssl.fastly.net/pc5865dc25400thmb-ea6bf03b14fa318f7133/smil:pc1-jhrgyuoqe5865db-68tkgb14fa318f7133f03.smil/playlist.m3u8
 
-#EXTINF:-1 tvg-id="Famatv.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/Fama-TV.jpg",Fama TV
+#EXTINF:-1 tvg-id="Famatv.pt" tvg-logo="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/logos/Fama-TV.jpg",Fama TV
 https://tv2.fastcast4u.com:3310/live/famatvlive.m3u8
 
 #EXTINF:-1 tvg-id="RFPtv.pt" tvg-logo="https://www.rfptv.pt/storage/479/config/MYvhCGImba3MPCwmRu2pZgGkFhy2L6tkTLsSO3LN.png",RFPtv
@@ -180,67 +180,67 @@ https://video03.logicahost.com.br/rfptv/rfptv/playlist.m3u8
 #EXTINF:-1 tvg-logo="https://assimeportugal.com/wp-content/uploads/2020/10/lg-assim.png",Assim é Portugal
 https://video04.logicahost.com.br/assimeportugal/assimeportugal/playlist.m3u8
 
-#EXTINF:-1 tvg-id="RecordTVEuropa.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/Record-TV.png",RecordTV Europa
+#EXTINF:-1 tvg-id="RecordTVEuropa.pt" tvg-logo="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/logos/Record-TV.png",RecordTV Europa
 #https://viamotionhsi.netplus.ch/live/eds/rederecordinternacional/browser-HLS8/rederecordinternacional.m3u8
 
 #EXTINF:-1 tvg-id="TheJamieOliverChannel.us" tvg-logo="https://i.imgur.com/4v93XUB.png",The Jamie Oliver Channel
 https://jamieoliver-xumo.amagi.tv/playlist.m3u8
 
-#EXTINF:-1 tvg-id="EuronewsPortuguese.fr" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/Euronews.png",Euronews EN
+#EXTINF:-1 tvg-id="EuronewsPortuguese.fr" tvg-logo="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/logos/Euronews.png",Euronews EN
 https://jmp2.uk/plu-5ca1da6c593a5d78f0e7edce.m3u8
 
-#EXTINF:-1 tvg-id="EuronewsPortuguese.fr" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/euronews-logo-225x225.png",Euronews FR
+#EXTINF:-1 tvg-id="EuronewsPortuguese.fr" tvg-logo="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/logos/euronews-logo-225x225.png",Euronews FR
 https://2f6c5bf4.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/UmxheHhUVi1ldV9FdXJvbmV3c0ZyYW5jYWlzX0hMUw/playlist.m3u8
 
-#EXTINF:-1 tvg-id="BBCNews.uk" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/BBC-World-News.png",BBC News
+#EXTINF:-1 tvg-id="BBCNews.uk" tvg-logo="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/logos/BBC-World-News.png",BBC News
 https://vs-hls-push-ww-live.akamaized.net/x=4/i=urn:bbc:pips:service:bbc_news_channel_hd/t=3840/v=pv14/b=5070016/main.m3u8
 
-#EXTINF:-1 tvg-id="SkyNewsInternational.uk" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/Sky-News.png",Sky News
+#EXTINF:-1 tvg-id="SkyNewsInternational.uk" tvg-logo="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/logos/Sky-News.png",Sky News
 https://linear417-gb-hls1-prd-ak.cdn.skycdp.com/100e/Content/HLS_001_1080_30/Live/channel(skynews)/index_1080-30.m3u8
 
-#EXTINF:-1 tvg-id="CNNInternationalEurope.us" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/CNN.png",CNN
+#EXTINF:-1 tvg-id="CNNInternationalEurope.us" tvg-logo="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/logos/CNN.png",CNN
 https://d3bp6dwmpbdajl.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-ury0meh5m4nzm/index.m3u8
 
 #EXTINF:-1 tvg-id="FoxNewsChannel.us" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Fox_News_Channel_logo.svg/512px-Fox_News_Channel_logo.svg.png",Fox News
 #https://stream.livenewsplay.com:9443/hls/foxnews/foxsd.m3u8
 
-#EXTINF:-1 tvg-id="LiveNOWfromFOX.us" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/LiveNOW_from_Fox.webp",LiveNOW from Fox
+#EXTINF:-1 tvg-id="LiveNOWfromFOX.us" tvg-logo="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/logos/LiveNOW_from_Fox.webp",LiveNOW from Fox
 #https://d3tlzddkbbpp5n.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-9uzjfw11uj9nn/LiveNOW_from_FOX.m3u8
 
-#EXTINF:-1 tvg-id="ABCNewsLive.us" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/ABC-News.png",ABC News Live
+#EXTINF:-1 tvg-id="ABCNewsLive.us" tvg-logo="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/logos/ABC-News.png",ABC News Live
 #https://content.uplynk.com/channel/3324f2467c414329b3b0cc5cd987b6be.m3u8
 
-#EXTINF:-1 tvg-id="CBSNews247.us" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/CBSN.png",CBS News
+#EXTINF:-1 tvg-id="CBSNews247.us" tvg-logo="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/logos/CBSN.png",CBS News
 https://cbsn-us.cbsnstream.cbsnews.com/out/v1/55a8648e8f134e82a470f83d562deeca/master.m3u8
 
-#EXTINF:-1 tvg-id="NBCNewsNOW.us" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/NBC-News-Now.png",NBC News Now
+#EXTINF:-1 tvg-id="NBCNewsNOW.us" tvg-logo="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/logos/NBC-News-Now.png",NBC News Now
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=52e6281b1d3c364c872497e8058977b1:11d6e9a2abb2e241804148713531f64d
 https://live-oneapp-prd-news.akamaized.net/Content/CMAF_OL2-CTR-4s/Live/channel(nnn)/master.m3u8
 
-#EXTINF:-1 tvg-id="BloombergTVEurope.uk" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/Bloomberg.png",Bloomberg TV Europe
+#EXTINF:-1 tvg-id="BloombergTVEurope.uk" tvg-logo="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/logos/Bloomberg.png",Bloomberg TV Europe
 #https://86ebec83.wurl.com/manifest/f36d25e7e52f1ba8d7e56eb859c636563214f541/UmFrdXRlblRWLWV1X0Jsb29tYmVyZ1RWUGx1c19ITFM/664c4e83-13c7-4898-ada9-80b89d4c2d2c/5.m3u8
 https://86ebec83.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/UmFrdXRlblRWLWV1X0Jsb29tYmVyZ1RWUGx1c19ITFM/playlist.m3u8
 
-#EXTINF:-1 tvg-id="BloombergTVEurope.uk" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/Bloomberg.png",Bloomberg TV Brasil
+#EXTINF:-1 tvg-id="BloombergTVEurope.uk" tvg-logo="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/logos/Bloomberg.png",Bloomberg TV Brasil
 #https://bloomberg-bloomberg-3-br.samsung.wurl.com/manifest/playlist.m3u8
 
-#EXTINF:-1 tvg-id="BloombergTVEurope.uk" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/Bloomberg.png",Bloomberg TV
+#EXTINF:-1 tvg-id="BloombergTVEurope.uk" tvg-logo="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/logos/Bloomberg.png",Bloomberg TV
 https://liveprodusphoenixeast.akamaized.net/USPhx-HD/Channel-TX-USPhx-AWS-virginia-1/Source-USPhx-16k-1-s6lk2-BP-07-03-0Yn1cQZHOtP_live.m3u8
 
-#EXTINF:-1 tvg-id="TVE24h.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/TVE-24h.png",TVE 24h
+#EXTINF:-1 tvg-id="TVE24h.pt" tvg-logo="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/logos/TVE-24h.png",TVE 24h
 https://rtvelivestream.rtve.es/rtvesec/24h/24h_main_dvr.m3u8
 
-#EXTINF:-1 tvg-id="RadioSines.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/Rádio-Sines.png",Rádio Sines
+#EXTINF:-1 tvg-id="RadioSines.pt" tvg-logo="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/logos/Radio-Sines.png",Rádio Sines
 https://load-balancer.azotosolutions.com/cdnedge19/smil:live19.smil/playlist.m3u8
 
 #EXTINF:-1 tvg-id="FIFAPlus.uk" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/9/9c/FIFA%2B_%282025%29.svg",FIFA+
 https://f7ccf7fc.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/UmFrdXRlblRWLXB0X0ZJRkFQbHVzUG9ydHVndWVzZV9ITFM/playlist.m3u8
 
-#EXTINF:-1 tvg-id="KuriakosTV.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/canal-kuriakos-tv-logo-256x256.png",Kuriakos TV
+#EXTINF:-1 tvg-id="KuriakosTV.pt" tvg-logo="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/logos/canal-kuriakos-tv-logo-256x256.png",Kuriakos TV
 https://w1.manasat.com/ktv/ktv.smil/playlist.m3u8
 
-#EXTINF:-1 tvg-id="KuriakosTV.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/canal-kuriakos-tv-logo-256x256.png",Kuriakos TV (Alt 1)
+#EXTINF:-1 tvg-id="KuriakosTV.pt" tvg-logo="https://raw.githubusercontent.com/edumserrano/pt-iptv/main/logos/canal-kuriakos-tv-logo-256x256.png",Kuriakos TV (Alt 1)
 https://w1.manasat.com/ktv/smil:ktv.smil/playlist.m3u8
 
 #EXTINF:-1 tvg-id="KuriakosCine.pt" tvg-logo="https://kuriakos-cine.com/wp-content/uploads/2022/11/Logo_cine.png",Kuriakos Cine
