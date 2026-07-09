@@ -130,7 +130,7 @@ https://streaming-live.rtp.pt/liverepeater/smil:rtpi.smil/playlist.m3u8
 
 #EXTINF:-1 tvg-id="TVIInternacional.pt" tvg-logo="https://github.com/LITUATUI/M3UPT/raw/main/logos/TVI-Internacional.png",TVI Internacional
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
-https://github.com/LITUATUI/M3UPT/raw/main/M3U/TVI_Internacional.m3u8
+https://video-auth6.iol.pt/live_tvi_internacional/live_tvi_internacional/playlist.m3u8?wmsAuthSign=c2VydmVyX3RpbWU9Ny85LzIwMjYgNDozMzoyNCBQTSZoYXNoX3ZhbHVlPXcySTVWdmx5NEFYQ0Q5ZDhyMVFhT0E9PSZ2YWxpZG1pbnV0ZXM9MTQ0MCZpZD1lY2FiMjVhMy1mZjQ4LTQ1NTctYTJjZi1lZWE3MTdkZDcxNDk=
 
 #EXTINF:-1 tvg-id="TVIAfrica.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/TVI_África.png",TVI África
 #https://video-auth4.iol.pt/live_tvi_africa/live_tvi_africa/edge_servers/tviafrica-480p/playlist.m3u8
@@ -139,19 +139,19 @@ https://github.com/LITUATUI/M3UPT/raw/main/M3U/TVI_Internacional.m3u8
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #EXTVLCOPT:http-origin=https://tviplayer.iol.pt
 #EXTVLCOPT:http-referrer=https://tviplayer.iol.pt
-https://github.com/LITUATUI/M3UPT/raw/main/M3U/Vmais_TVI.m3u8
+https://video-auth2.iol.pt/live_vmais/live_vmais/edge_servers/vmais-720p/playlist.m3u8?wmsAuthSign=c2VydmVyX3RpbWU9Ny85LzIwMjYgNDozMzoyNCBQTSZoYXNoX3ZhbHVlPXcySTVWdmx5NEFYQ0Q5ZDhyMVFhT0E9PSZ2YWxpZG1pbnV0ZXM9MTQ0MCZpZD1lY2FiMjVhMy1mZjQ4LTQ1NTctYTJjZi1lZWE3MTdkZDcxNDk=
 
 #EXTINF:-1 tvg-id="TVIFiccao.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/TVI-Ficção.png",TVI Ficção
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #EXTVLCOPT:http-origin=https://tviplayer.iol.pt
 #EXTVLCOPT:http-referrer=https://tviplayer.iol.pt
-https://github.com/LITUATUI/M3UPT/raw/main/M3U/TVI_Ficcao.m3u8
+https://video-auth1.iol.pt/live_tvi_ficcao/live_tvi_ficcao/edge_servers/tvificcao-720p/chunks.m3u8?wmsAuthSign=c2VydmVyX3RpbWU9Ny85LzIwMjYgNDozMzoyNCBQTSZoYXNoX3ZhbHVlPXcySTVWdmx5NEFYQ0Q5ZDhyMVFhT0E9PSZ2YWxpZG1pbnV0ZXM9MTQ0MCZpZD1lY2FiMjVhMy1mZjQ4LTQ1NTctYTJjZi1lZWE3MTdkZDcxNDk=
 
 #EXTINF:-1 tvg-id="TVIReality.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/TVI-Reality.png",TVI Reality
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
 #EXTVLCOPT:http-origin=https://tviplayer.iol.pt
 #EXTVLCOPT:http-referrer=https://tviplayer.iol.pt
-https://github.com/LITUATUI/M3UPT/raw/main/M3U/TVI_Reality.m3u8
+https://video-auth4.iol.pt/live_tvi_reality/live_tvi_reality/edge_servers/tvireality-720_passthrough/chunks.m3u8?wmsAuthSign=c2VydmVyX3RpbWU9Ny85LzIwMjYgNDozMzoyNCBQTSZoYXNoX3ZhbHVlPXcySTVWdmx5NEFYQ0Q5ZDhyMVFhT0E9PSZ2YWxpZG1pbnV0ZXM9MTQ0MCZpZD1lY2FiMjVhMy1mZjQ4LTQ1NTctYTJjZi1lZWE3MTdkZDcxNDk=
 
 #EXTINF:-1 tvg-id="SICReplay.pt" tvg-logo="https://raw.githubusercontent.com/LITUATUI/M3UPT/main/logos/SIC-Replay.png",SIC Replay
 #EXTVLCOPT:http-user-agent="Mozilla/5.0 (X11; Linux x86_64; rv:152.0) Gecko/20100101 Firefox/152.0"
@@ -254,3 +254,4 @@ https://w2.manasat.com/kkids/kkids.smil/playlist.m3u8
 
 #EXTINF:-1 tvg-id="KuriakosKids.pt" tvg-logo="https://kuriakos-kids.com/wp-content/uploads/2023/06/KuriakosKids_curvas.jpg",Kuriakos Kids (Alt 1)
 https://w2.manasat.com/kkids/smil:kkids.smil/playlist.m3u8
+
