@@ -101,6 +101,7 @@ jobs:
           fi
 
       - name: Create or update PR and enable auto-merge
+        id: iol_pr
         if: steps.before.outputs.broken_count != '0' && steps.comparison.outputs.pr_ready == 'true' && steps.changes.outputs.changed == 'true'
         run: |
           set -euo pipefail
@@ -146,6 +147,7 @@ jobs:
             pr_url="$(gh pr create --base main --head "$branch" --title "$title" --body-file "$body_file")"
           fi
 
+          echo "url=$pr_url" >> "$GITHUB_OUTPUT"
           echo "IOL token refresh PR: $pr_url" >> "$GITHUB_STEP_SUMMARY"
           if gh pr merge "$pr_url" --auto --squash --delete-branch; then
             echo "Auto squash merge requested for $pr_url" >> "$GITHUB_STEP_SUMMARY"
@@ -188,6 +190,14 @@ jobs:
             echo "- Restored regressed updates: ${RESTORED_REGRESSED_NAMES:-}"
             echo "- Token files changed: ${TOKEN_FILES_CHANGED:-not-run}"
             echo
+            echo "## Pull Request"
+            echo
+            if [ -n "$IOL_REFRESH_PR_URL" ]; then
+              echo "[Open IOL token refresh PR]($IOL_REFRESH_PR_URL)"
+            else
+              echo "No PR created."
+            fi
+            echo
             echo "### Stream Status"
             echo
           } >> "$GITHUB_STEP_SUMMARY"
@@ -215,3 +225,4 @@ jobs:
           UNCHANGED_REGRESSED_NAMES: ${{ steps.comparison.outputs.unchanged_regressed_names }}
           RESTORED_REGRESSED_NAMES: ${{ steps.restore_regressions.outputs.restored_regressed_names }}
           TOKEN_FILES_CHANGED: ${{ steps.changes.outputs.changed }}
+          IOL_REFRESH_PR_URL: ${{ steps.iol_pr.outputs.url }}

@@ -124,6 +124,7 @@ jobs:
             --output-dir "$REPORT_DIR/upstream-auto-update"
 
       - name: Create or update upstream fixes PR
+        id: upstream_pr
         if: github.event_name != 'pull_request' && steps.upstream_fixes.outputs.changed_count != '0'
         run: |
           set -euo pipefail
@@ -164,6 +165,7 @@ jobs:
             fi
           fi
 
+          echo "url=$pr_url" >> "$GITHUB_OUTPUT"
           echo "Upstream fixes PR: $pr_url" >> "$GITHUB_STEP_SUMMARY"
           if gh pr merge "$pr_url" --auto --squash --delete-branch; then
             echo "Auto squash merge requested for $pr_url" >> "$GITHUB_STEP_SUMMARY"
@@ -196,7 +198,19 @@ jobs:
         env:
           ARTIFACT_URL: ${{ steps.upload-report.outputs.artifact-url }}
           UPSTREAM_FIX_COUNT: ${{ steps.upstream_fixes.outputs.changed_count }}
+          UPSTREAM_FIXES_PR_URL: ${{ steps.upstream_pr.outputs.url }}
         run: |
+          {
+            echo "## Pull Request"
+            echo
+            if [ -n "$UPSTREAM_FIXES_PR_URL" ]; then
+              echo "[Open upstream fixes PR]($UPSTREAM_FIXES_PR_URL)"
+            else
+              echo "No PR created."
+            fi
+            echo
+          } >> "$GITHUB_STEP_SUMMARY"
+
           report="$REPORT_DIR/pt-iptv-stream-health-report.md"
           if [ ! -f "$report" ]; then
             echo "No stream health report was generated." >> "$GITHUB_STEP_SUMMARY"
