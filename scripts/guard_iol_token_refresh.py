@@ -27,6 +27,23 @@ def names(rows: list[dict[str, str]]) -> str:
     return ", ".join(row.get("name", "") for row in rows)
 
 
+def markdown_cell(value: str) -> str:
+    return value.replace("\n", " ").replace("|", "\\|")
+
+
+def status_label(row: dict[str, str] | None) -> str:
+    return "working" if is_working(row) else "not working"
+
+
+def print_status_table(before_rows: dict[str, dict[str, str]], after_rows: dict[str, dict[str, str]]) -> None:
+    print("| Stream | status now | status after pr |")
+    print("|---|---|---|")
+    for key, before in before_rows.items():
+        after = after_rows.get(key)
+        name = markdown_cell(before.get("name", key))
+        print(f"| {name} | {status_label(before)} | {status_label(after)} |")
+
+
 def append_github_output(values: dict[str, str]) -> None:
     output_path = os.environ.get("GITHUB_OUTPUT")
     if not output_path:
@@ -103,12 +120,17 @@ def main() -> int:
     parser.add_argument("--playlist", type=Path, default=Path("M3U/M3UPT.m3u"))
     parser.add_argument("--repo-root", type=Path, default=Path("."))
     parser.add_argument("--restore-regressions", action="store_true")
+    parser.add_argument("--summary-table", action="store_true")
     args = parser.parse_args()
 
     repo_root = args.repo_root.resolve()
     playlist_path = args.playlist if args.playlist.is_absolute() else repo_root / args.playlist
     before_rows = read_report(args.before)
     after_rows = read_report(args.after)
+
+    if args.summary_table:
+        print_status_table(before_rows, after_rows)
+        return 0
 
     fixed: list[dict[str, str]] = []
     updated_fixed: list[dict[str, str]] = []

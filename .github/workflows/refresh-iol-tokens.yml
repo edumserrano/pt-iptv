@@ -12,6 +12,7 @@ on:
       - scripts/Update-IolToken.ps1
       - scripts/audit_streams.py
       - scripts/check_iol_streams.py
+      - scripts/guard_iol_token_refresh.py
       - .github/workflows/refresh-iol-tokens.yml
 
 permissions:
@@ -186,7 +187,25 @@ jobs:
             echo "- Regressed streams with unchanged source URL: ${UNCHANGED_REGRESSED_NAMES:-}"
             echo "- Restored regressed updates: ${RESTORED_REGRESSED_NAMES:-}"
             echo "- Token files changed: ${TOKEN_FILES_CHANGED:-not-run}"
+            echo
+            echo "### Stream Status"
+            echo
           } >> "$GITHUB_STEP_SUMMARY"
+
+          before_report="reports/iol-token-refresh/before/iol-token-stream-check.csv"
+          after_report="reports/iol-token-refresh/after/iol-token-stream-check.csv"
+          if [ ! -f "$after_report" ]; then
+            after_report="$before_report"
+          fi
+
+          if [ -f "$before_report" ]; then
+            python scripts/guard_iol_token_refresh.py \
+              --before "$before_report" \
+              --after "$after_report" \
+              --summary-table >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "_No stream status report was generated._" >> "$GITHUB_STEP_SUMMARY"
+          fi
         env:
           BROKEN_BEFORE_COUNT: ${{ steps.before.outputs.broken_count }}
           BROKEN_BEFORE_NAMES: ${{ steps.before.outputs.broken_names }}
