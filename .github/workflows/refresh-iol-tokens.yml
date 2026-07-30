@@ -3,7 +3,7 @@ name: Refresh IOL Tokens
 on:
   workflow_dispatch:
   schedule:
-    - cron: "42 */5 * * *"
+    - cron: "0 * * * *"
   push:
     branches:
       - main
