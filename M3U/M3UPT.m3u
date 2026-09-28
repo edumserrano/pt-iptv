@@ -45,6 +45,9 @@ https://raw.githubusercontent.com/edumserrano/pt-iptv/main/M3U/TVI.m3u8
 https://dq37unyetkpcz.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-m04j89j7k5gtp/LEquipe_FR.m3u8
 
 #EXTINF:-1 tvg-id="TF1.fr",TF1
+http://5.180.164.197:8080/TF1/index.m3u8
+
+#EXTINF:-1 tvg-id="TF1.fr",TF1 (Alt 1)
 http://151.80.18.177:86/TF1_HD/index.m3u8
 
 #EXTINF:-1 tvg-name="SPORT TV 3 PT" tvg-id="" tvg-country="Portugal" tvg-language="Portuguese" tvg-logo="https://commons.wikimedia.org/wiki/Special:Redirect/file/Sport_TV3_(2023).svg",sport tv 3 pt
